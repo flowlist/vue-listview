@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@flowlist/js-core": "^1.0.3",
+    "intersection-observer": "^0.11.0",
     "vue": "^2.6.11",
     "vuex": "^3.4.0"
   },
@@ -26,6 +27,7 @@
     "core-js": "^3.6.5",
     "eslint": "^7.6.0",
     "eslint-plugin-vue": "^6.2.2",
+    "faker": "^4.1.0",
     "vue-router": "^3.3.4",
     "vue-template-compiler": "^2.6.11"
   }
