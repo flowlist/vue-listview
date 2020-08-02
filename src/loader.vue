@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { getObserver } from './utils'
+import { checkInView, getObserver } from './utils'
 
 export default {
   name: 'FlowLoader',
@@ -166,17 +166,24 @@ export default {
     debug: {
       type: Boolean,
       default: false
+    },
+    namespace: {
+      type: String,
+      default: 'flow'
+    },
+    uniqueKey: {
+      type: String,
+      default: 'id'
     }
   },
   data() {
     return {
-      firstBind: true,
-      throttle: false
+      firstBind: true
     }
   },
   computed: {
     source() {
-      return this.$store.getters['flow/getFlow'](this.params)
+      return this.$store.getters[`${this.namespace}/getFlow`](this.params)
     },
     params() {
       return {
@@ -197,9 +204,6 @@ export default {
       return this.type === 'jump'
     },
     observer() {
-      if (this.$isServer || this.useRect) {
-        return null
-      }
       return getObserver
     }
   },
@@ -228,12 +232,8 @@ export default {
   },
   beforeDestroy() {
     this._debug('beforeDestroy')
-    if (this.observer) {
-      this.observer.unobserve(this.$refs.state)
-      this.observer.disconnect()
-    } else {
-      off(getScrollParentDom(this.$el), 'scroll', this._onScreenScroll)
-    }
+    this.observer.unobserve(this.$refs.state)
+    this.observer.disconnect()
   },
   methods: {
     modify({ key, value }) {
@@ -249,7 +249,7 @@ export default {
         }
       )
     },
-    update({ id, key, value, changing }) {
+    update({ id, key, value }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -258,13 +258,12 @@ export default {
             method: 'update',
             id,
             key,
-            value,
-            changing
+            value
           }
         }
       )
     },
-    delete(id, key, changing) {
+    delete({ id, key }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -272,13 +271,12 @@ export default {
           ...{
             method: 'delete',
             id,
-            key,
-            changing
+            key
           }
         }
       )
     },
-    prepend(value, key, changing) {
+    prepend({ key, value }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -286,13 +284,12 @@ export default {
           ...{
             method: isArray(value) ? 'merge' : 'unshift',
             key,
-            value,
-            changing
+            value
           }
         }
       )
     },
-    append(value, key, changing) {
+    append({ key, value }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -300,13 +297,12 @@ export default {
           ...{
             method: isArray(value) ? 'concat' : 'push',
             key,
-            value,
-            changing
+            value
           }
         }
       )
     },
-    patch(value, key, changing) {
+    patch({ key, value }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -314,13 +310,12 @@ export default {
           ...{
             method: 'patch',
             key,
-            value,
-            changing
+            value
           }
         }
       )
     },
-    insertBefore({ id, value, key, changing }) {
+    insertBefore({ id, value, key }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -329,13 +324,12 @@ export default {
             method: 'insert-before',
             id,
             key,
-            value,
-            changing
+            value
           }
         }
       )
     },
-    insertAfter({ id, value, key, changing }) {
+    insertAfter({ id, value, key }) {
       this.$store.commit(
         'flow/UPDATE_DATA',
         {
@@ -344,17 +338,10 @@ export default {
             method: 'insert-after',
             id,
             key,
-            value,
-            changing
+            value
           }
         }
       )
-    },
-    getResource(key = 'extra') {
-      if (!this.source) {
-        return
-      }
-      return this.source[key]
     },
     jump(page) {
       const query = { ...this.params.query }
@@ -480,15 +467,14 @@ export default {
         return
       }
       const stateDom = this.$refs.state
-      if (stateDom && checkInView(stateDom, this.preload)) {
-        this.initData()
+      if (!stateDom) {
+        return
       }
-      if (this.observer) {
-        stateDom.__flow_handler__ = this._fetchDataFunc.bind(this)
-        this.observer.observe(stateDom)
-      } else {
-        on(getScrollParentDom(this.$el), 'scroll', this._onScreenScroll)
-      }
+      // if (checkInView(stateDom, this.preload)) {
+      //   this.initData()
+      // }
+      stateDom.__lazy_handler__ = this._fetchDataFunc.bind(this)
+      this.observer.observe(stateDom)
     },
     _retryData() {
       if (!this.retryOnError) {
@@ -539,13 +525,9 @@ export default {
         this.source.nothing ||
         (this.isPagination && this.source.fetched)
       ) {
-        if (this.observer) {
-          const stateDom = this.$refs.state
-          delete stateDom.__flow_handler__
-          this.observer.unobserve(stateDom)
-        } else {
-          off(getScrollParentDom(this.$el), 'scroll', this._onScreenScroll)
-        }
+        const stateDom = this.$refs.state
+        delete stateDom.__lazy_handler__
+        this.observer.unobserve(stateDom)
         return
       }
       const fetcher = () => {
@@ -565,21 +547,6 @@ export default {
           fetcher()
         }
       }
-    },
-    _onScreenScroll(event, force = false) {
-      this._debug('scroll')
-      if (!force) {
-        if (this.throttle) {
-          return
-        }
-        this.throttle = true
-        setTimeout(() => {
-          this.throttle = false
-          this._onScreenScroll(null, true)
-        }, 200)
-        return
-      }
-      this._fetchDataFunc()
     },
     _debug(message) {
       if (!this.debug) {
