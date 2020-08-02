@@ -871,6 +871,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@flowlist/js-core@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.0.3.tgz#ccfc59c2c9342f2fcc58ab626cffb12ebaf3168d"
+  integrity sha512-K+k4WnC1/Eu/nFoBJs0IlrNRzvDVwIdkHB3FOPt/ijupQhTIgahAFRCziW7HBvl0NrYi7aOXAgH3/BP1HgNXaA==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -9566,6 +9571,11 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-router@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"
+  integrity sha512-SdKRBeoXUjaZ9R/8AyxsdTqkOfMcI5tWxPZOUX5Ie1BTL5rPSZ0O++pbiZCeYeythiZIdLEfkDiQPKIaWk5hDg==
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
