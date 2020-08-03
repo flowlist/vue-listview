@@ -3,22 +3,47 @@
 
 <template>
   <div id="index-show">
-    index
+    <FlowLoader
+      func="getListByPage"
+      type="page"
+      :query="query"
+      :callback="handlePageLoaded"
+      :auto="3"
+    >
+      <ul
+        slot-scope="{ flow }"
+        class="demo-list"
+      >
+        <li
+          v-for="(item, index) in flow"
+          :key="item.id"
+        >
+          <div :style="{ backgroundColor: item.style.color }">
+            count：{{ index + 1 }}，id：{{ item.id }}
+          </div>
+        </li>
+      </ul>
+    </FlowLoader>
   </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-  components: {},
-  props: {},
   data() {
     return {}
   },
-  computed: {},
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {}
+  computed: {
+    query() {
+      return {
+        count: 10
+      }
+    }
+  },
+  methods: {
+    handlePageLoaded(res) {
+      console.log('callback', res)
+    }
+  }
 }
 </script>

@@ -109,6 +109,7 @@
 
 <script>
 import { checkInView, getObserver } from './utils'
+import { utils } from '@flowlist/js-core'
 
 export default {
   name: 'FlowLoader',
@@ -450,7 +451,7 @@ export default {
       if (!this.source) {
         return
       }
-      this.$store.commit('flow/INIT_STATE', generateFieldName(this.func, this.type, this.query))
+      this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
     },
     forceCallback() {
       this._fireSSRCallback(true)
@@ -459,7 +460,7 @@ export default {
       if (this.source) {
         return
       }
-      this.$store.commit('flow/INIT_STATE', generateFieldName(this.func, this.type, this.query))
+      this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
     },
     _initFlowLoader() {
       this._initState()
@@ -552,9 +553,8 @@ export default {
       if (!this.debug) {
         return
       }
-      const field = `[${generateFieldName(this.func, this.type, this.query)}]`
-      console.log(field, 'life cycle', message) // eslint-disable-line
-      console.log(field, 'check in view', checkInView(this.$refs.state, this.preload)) // eslint-disable-line
+      console.log('life cycle', message) // eslint-disable-line
+      console.log('check in view', checkInView(this.$refs.state, this.preload)) // eslint-disable-line
     }
   }
 }
