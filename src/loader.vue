@@ -238,108 +238,47 @@ export default {
   },
   methods: {
     push({ key, value }) {
-      this._listMethod({
-        key,
-        value,
-        method: 'push'
-      })
+      this._listMethod({ key, value, method: 'push' })
     },
     reset({ key, value }) {
-      this._listMethod({
-        key,
-        value,
-        method: 'reset'
-      })
+      this._listMethod({ key, value, method: 'reset' })
     },
     patch({ key, value }) {
-      this._itemMethod({
-        id,
-        key,
-        value,
-        method: 'patch'
-      })
+      this._itemMethod({ key, value, method: 'patch' })
     },
     unshift({ key, value }) {
-      this._listMethod({
-        key,
-        value,
-        method: 'unshift'
-      })
+      this._listMethod({ key, value, method: 'unshift' })
     },
     delete({ id, key }) {
-      this._itemMethod({
-        id,
-        key,
-        method: 'delete'
-      })
+      this._itemMethod({ id, key, method: 'delete' })
     },
     update({ id, key, value }) {
-      this._itemMethod({
-        id,
-        key,
-        value,
-        method: 'update'
-      })
+      this._itemMethod({ id, key, value, method: 'update' })
     },
     insertAfter({ id, key, value }) {
-      this._itemMethod({
-        id,
-        key,
-        value,
-        method: 'insert-after'
-      })
+      this._itemMethod({ id, key, value, method: 'insert-after' })
     },
     insertBefore({ id, key, value }) {
-      this._itemMethod({
-        id,
-        key,
-        value,
-        method: 'insert-before'
-      })
+      this._itemMethod({ id, key, value, method: 'insert-before' })
     },
-    jump(page) {
-      const query = { ...this.params.query }
-      query.page = page
+    jump({ page }) {
       return this.$store.dispatch(
-        'flow/loadMore',
+        `${this.namespace}/loadMore`,
         {
           ...this.params,
-          ...{ query }
+          query: { ...this.query, page }
         }
       )
-    },
-    refresh(reload = false) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(async () => {
-          const query = { ...this.params.query }
-          query.__refresh__ = true
-          query.__reload__ = reload
-          try {
-            await this.$store.dispatch(
-              'flow/initData',
-              {
-                ...this.params,
-                ...{ query }
-              }
-            )
-            this._initFlowLoader()
-            resolve()
-          } catch (e) {
-            reject()
-          }
-        })
-      })
     },
     initData(obj = {}) {
       return new Promise((resolve, reject) => {
         this.$nextTick(async () => {
-          const query = { ...this.params.query, ...obj }
           try {
             await this.$store.dispatch(
-              'flow/initData',
+              `${this.namespace}/initData`,
               {
                 ...this.params,
-                ...{ query }
+                query: { ...this.query, ...obj }
               }
             )
             // 如果列表的数据没有撑满页面，就继续请求更多
@@ -357,54 +296,54 @@ export default {
         })
       })
     },
-    loadBefore(obj = {}, force = false) {
+    loadBefore(obj = {}, errorRetry = false) {
+      return this.loadMore({ ...obj, is_up: 1 }, errorRetry)
+    },
+    loadMore(obj = {}, errorRetry = false) {
       if (this.isPagination) {
         return
       }
-      const query = { ...this.params.query, ...obj }
-      query.is_up = 1
+      const query = { ...this.query, is_up: 0, ...obj }
       return this.$store.dispatch(
-        'flow/loadMore',
+        `${this.namespace}/loadMore`,
         {
           ...this.params,
-          ...{
-            query,
-            force
-          }
+          query,
+          errorRetry
         }
       )
     },
-    loadMore(obj = {}, force = false) {
-      if (this.isPagination) {
-        return
-      }
-      const query = { ...this.params.query, ...obj }
-      query.is_up = 0
-      return this.$store.dispatch(
-        'flow/loadMore',
-        {
-          ...this.params,
-          ...{
-            query,
-            force
+    refresh({ showLoading = true }) {
+      return new Promise((resolve, reject) => {
+        this.$nextTick(async () => {
+          const query = { ...this.query }
+          query.__refresh__ = true
+          query.__reload__ = !showLoading
+          try {
+            await this.$store.dispatch(
+              `${this.namespace}/initData`,
+              {
+                ...this.params,
+                query
+              }
+            )
+            this._initFlowLoader()
+            resolve()
+          } catch (e) {
+            reject()
           }
-        }
-      )
+        })
+      })
     },
-    retry() {
+    retry({ showLoading = true }) {
       if (this.source.fetched) {
         return this.loadMore()
       } else {
         return this.initData({
-          __refresh__: true
+          __refresh__: true,
+          __reload__: !showLoading
         })
       }
-    },
-    clear() {
-      if (!this.source) {
-        return
-      }
-      this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
     },
     forceCallback() {
       this._fireSSRCallback(true)
@@ -414,11 +353,10 @@ export default {
         `${this.namespace}/UPDATE_DATA`,
         {
           ...this.params,
-          ...{
-            key,
-            value,
-            method
-          }
+          key,
+          value,
+          method,
+          uniqueKey: this.uniqueKey
         }
       )
     },
@@ -427,12 +365,11 @@ export default {
         `${this.namespace}/UPDATE_DATA`,
         {
           ...this.params,
-          ...{
-            id,
-            key,
-            value,
-            method
-          }
+          id,
+          key,
+          value,
+          method,
+          uniqueKey: this.uniqueKey
         }
       )
     },
@@ -479,7 +416,7 @@ export default {
         this.callback({
           params: generateRequestParams(
             { fetched: false },
-            this.params.query,
+            this.query,
             this.type
           ),
           data: {
