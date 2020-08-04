@@ -233,116 +233,69 @@ export default {
   },
   beforeDestroy() {
     this._debug('beforeDestroy')
-    this.observer.unobserve(this.$refs.state)
+    this.observer.unobserve(this.$refs && this.$refs.state)
     this.observer.disconnect()
   },
   methods: {
-    modify({ key, value }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'modify',
-            key,
-            value
-          }
-        }
-      )
+    push({ key, value }) {
+      this._listMethod({
+        key,
+        value,
+        method: 'push'
+      })
     },
-    update({ id, key, value }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'update',
-            id,
-            key,
-            value
-          }
-        }
-      )
-    },
-    delete({ id, key }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'delete',
-            id,
-            key
-          }
-        }
-      )
-    },
-    prepend({ key, value }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: isArray(value) ? 'merge' : 'unshift',
-            key,
-            value
-          }
-        }
-      )
-    },
-    append({ key, value }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: isArray(value) ? 'concat' : 'push',
-            key,
-            value
-          }
-        }
-      )
+    reset({ key, value }) {
+      this._listMethod({
+        key,
+        value,
+        method: 'reset'
+      })
     },
     patch({ key, value }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'patch',
-            key,
-            value
-          }
-        }
-      )
+      this._itemMethod({
+        id,
+        key,
+        value,
+        method: 'patch'
+      })
     },
-    insertBefore({ id, value, key }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'insert-before',
-            id,
-            key,
-            value
-          }
-        }
-      )
+    unshift({ key, value }) {
+      this._listMethod({
+        key,
+        value,
+        method: 'unshift'
+      })
     },
-    insertAfter({ id, value, key }) {
-      this.$store.commit(
-        'flow/UPDATE_DATA',
-        {
-          ...this.params,
-          ...{
-            method: 'insert-after',
-            id,
-            key,
-            value
-          }
-        }
-      )
+    delete({ id, key }) {
+      this._itemMethod({
+        id,
+        key,
+        method: 'delete'
+      })
+    },
+    update({ id, key, value }) {
+      this._itemMethod({
+        id,
+        key,
+        value,
+        method: 'update'
+      })
+    },
+    insertAfter({ id, key, value }) {
+      this._itemMethod({
+        id,
+        key,
+        value,
+        method: 'insert-after'
+      })
+    },
+    insertBefore({ id, key, value }) {
+      this._itemMethod({
+        id,
+        key,
+        value,
+        method: 'insert-before'
+      })
     },
     jump(page) {
       const query = { ...this.params.query }
@@ -455,6 +408,33 @@ export default {
     },
     forceCallback() {
       this._fireSSRCallback(true)
+    },
+    _listMethod({ method, key, value }) {
+      this.$store.commit(
+        `${this.namespace}/UPDATE_DATA`,
+        {
+          ...this.params,
+          ...{
+            key,
+            value,
+            method
+          }
+        }
+      )
+    },
+    _itemMethod({ method, id, key, value }) {
+      this.$store.commit(
+        `${this.namespace}/UPDATE_DATA`,
+        {
+          ...this.params,
+          ...{
+            id,
+            key,
+            value,
+            method
+          }
+        }
+      )
     },
     _initState() {
       if (this.source) {
