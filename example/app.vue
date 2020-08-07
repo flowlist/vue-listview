@@ -1,9 +1,24 @@
-<style lang="scss">
+<style>
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#app > section {
+  width: 600px;
+  margin: 0 auto;
+}
 </style>
 
 <template>
   <div id="app">
-    <RouterView />
+    <header />
+    <section>
+      <RouterView />
+    </section>
   </div>
 </template>
 
