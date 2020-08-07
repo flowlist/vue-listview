@@ -7,13 +7,13 @@ export default ({ api }) => {
     state: () => ({}),
     actions: {
       initData({ state }, { func, type, query, uniqueKey, callback, cacheTimeout }) {
-        initData({
+        return initData({
           getter: getter(state), setter: setter(state), cache,
           api, func, type, query, uniqueKey, callback, cacheTimeout
         })
       },
       loadMore({ state }, { type, func, query, uniqueKey, errorRetry, callback, cacheTimeout }) {
-        loadMore({
+        return loadMore({
           getter: getter(state), setter: setter(state), cache,
           api, func, type, query, uniqueKey, errorRetry, callback, cacheTimeout
         })

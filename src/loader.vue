@@ -281,14 +281,7 @@ export default {
                 query: { ...this.query, ...obj }
               }
             )
-            // 如果列表的数据没有撑满页面，就继续请求更多
-            if (
-              this.isAuth &&
-              this.$refs.state &&
-              checkInView(this.$refs.state, this.preload)
-            ) {
-              this.loadMore()
-            }
+            this._detectLoadMore()
             resolve()
           } catch (e) {
             reject()
@@ -378,6 +371,16 @@ export default {
         return
       }
       this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
+    },
+    _detectLoadMore() {
+      // 如果列表的数据没有撑满页面，就继续请求更多
+      if (
+        this.isAuto &&
+        this.$refs.state &&
+        checkInView(this.$refs.state, this.preload)
+      ) {
+        this.loadMore()
+      }
     },
     _initFlowLoader() {
       this._initState()
