@@ -1,5 +1,8 @@
 <template>
-  <div class="flow-loader">
+  <div
+    class="flow-loader"
+    style="position:relative"
+  >
     <template v-if="source">
       <!--  flow header  -->
       <slot
@@ -18,18 +21,12 @@
         :source="source"
         name="footer"
       />
-    </template>
-    <!--  flow state  -->
-    <div
-      ref="state"
-      class="flow-loader-state"
-      :style="{ textAlign: 'center', minHeight: '1px' }"
-    >
-      <template v-if="source">
+      <!--  flow state  -->
+      <div class="flow-loader__state">
         <!--   error   -->
         <div
           v-if="source.error"
-          class="flow-loader-state-error"
+          class="flow-loader__state--error"
           @click="_retryData"
         >
           <slot
@@ -50,7 +47,7 @@
         <!--   loading   -->
         <div
           v-else-if="source.loading"
-          class="flow-loader-state-loading"
+          class="flow-loader__state--loading"
         >
           <slot
             v-if="useFirstLoading && !source.result.length"
@@ -68,7 +65,7 @@
         <!--   nothing   -->
         <div
           v-else-if="source.nothing"
-          class="flow-loader-state-nothing"
+          class="flow-loader__state--nothing"
         >
           <slot name="nothing">
             <span>这里什么都没有</span>
@@ -77,7 +74,7 @@
         <!--   no-more   -->
         <div
           v-else-if="source.noMore"
-          class="flow-loader-state-no-more"
+          class="flow-loader__state--no-more"
         >
           <slot
             v-if="displayNoMore"
@@ -87,29 +84,32 @@
           </slot>
         </div>
         <!--   normal   -->
-        <template v-else-if="!isPagination">
-          <div
-            v-if="isAuto"
-            class="flow-loader-state-shim"
-          />
-          <div
-            v-else
-            class="flow-loader-state-load"
-            @click="loadMore()"
-          >
+        <div
+          v-else-if="!isPagination"
+          class="flow-loader__state--load"
+          @click="loadMore()"
+        >
+          <div v-if="!isAuto">
             <slot name="load">
               点击加载更多
             </slot>
           </div>
-        </template>
-      </template>
-    </div>
+        </div>
+      </div>
+    </template>
+    <div
+      v-if="!$isServer"
+      ref="shim"
+      :style="shimStyle"
+      class="flow-loader__shim"
+    />
   </div>
 </template>
 
 <script>
+import { utils, ENUM } from '@flowlist/js-core'
 import { checkInView, getObserver } from './utils'
-import { utils } from '@flowlist/js-core'
+import './polyfill'
 
 export default {
   name: 'FlowLoader',
@@ -121,8 +121,7 @@ export default {
     type: {
       required: true,
       type: String,
-      validator: val =>
-        ~['page', 'jump', 'seenIds', 'sinceId'].indexOf(val)
+      validator: val => ~ENUM.FETCH_TYPE_ARRAY.indexOf(val)
     },
     query: {
       type: Object,
@@ -174,7 +173,11 @@ export default {
     },
     uniqueKey: {
       type: String,
-      default: 'id'
+      default: ENUM.DEFAULT_UNIQUE_KEY_NAME
+    },
+    scrollX: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -202,10 +205,33 @@ export default {
       return this.auto === -1 || this.auto > this.source.page
     },
     isPagination() {
-      return this.type === 'jump'
+      return this.type === ENUM.FETCH_TYPE.PAGINATION
     },
     observer() {
       return getObserver
+    },
+    shimStyle() {
+      const result = {
+        zIndex: -1,
+        userSelect: 'none',
+        position: 'absolute',
+        pointerEvents: 'none',
+        background: 'transparent'
+      }
+
+      if (this.scrollX) {
+        result.right = 0
+        result.top = 0
+        result.width = `${this.preload}px`
+        result.height = '100%'
+      } else {
+        result.left = 0
+        result.bottom = 0
+        result.width = '100%'
+        result.height = `${this.preload}px`
+      }
+
+      return result
     }
   },
   watch: {
@@ -215,8 +241,8 @@ export default {
           return
         }
         this.$nextTick(() => {
-          this._debug('query change')
           setTimeout(() => {
+            this._initState()
             this._initFlowLoader()
           }, 0)
         })
@@ -225,41 +251,38 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this._fireSSRCallback()
-      this._initFlowLoader()
-    })
-    this._debug('mounted')
+    this._fireSSRCallback()
+    this._initState()
+    this._initFlowLoader()
   },
   beforeDestroy() {
-    this._debug('beforeDestroy')
-    this.observer.unobserve(this.$refs && this.$refs.state)
+    this.observer.unobserve(this.$refs && this.$refs.shim)
     this.observer.disconnect()
   },
   methods: {
     push({ key, value }) {
-      this._listMethod({ key, value, method: 'push' })
+      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
     },
     reset({ key, value }) {
-      this._listMethod({ key, value, method: 'reset' })
+      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
     },
     patch({ key, value }) {
-      this._itemMethod({ key, value, method: 'patch' })
+      this._itemMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
     unshift({ key, value }) {
-      this._listMethod({ key, value, method: 'unshift' })
+      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
     },
     delete({ id, key }) {
-      this._itemMethod({ id, key, method: 'delete' })
+      this._itemMethod({ id, key, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
     update({ id, key, value }) {
-      this._itemMethod({ id, key, value, method: 'update' })
+      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
     insertAfter({ id, key, value }) {
-      this._itemMethod({ id, key, value, method: 'insert-after' })
+      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
     },
     insertBefore({ id, key, value }) {
-      this._itemMethod({ id, key, value, method: 'insert-before' })
+      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
     },
     jump({ page }) {
       return this.$store.dispatch(
@@ -284,7 +307,7 @@ export default {
             this._detectLoadMore()
             resolve()
           } catch (e) {
-            reject()
+            reject(e)
           }
         })
       })
@@ -293,18 +316,23 @@ export default {
       return this.loadMore({ ...obj, is_up: 1 }, errorRetry)
     },
     loadMore(obj = {}, errorRetry = false) {
-      if (this.isPagination) {
-        return
-      }
-      const query = { ...this.query, is_up: 0, ...obj }
-      return this.$store.dispatch(
-        `${this.namespace}/loadMore`,
-        {
-          ...this.params,
-          query,
-          errorRetry
+      return new Promise(async (resolve, reject) => {
+        const query = { ...this.query, is_up: 0, ...obj }
+        try {
+          await this.$store.dispatch(
+            `${this.namespace}/loadMore`,
+            {
+              ...this.params,
+              query,
+              errorRetry
+            }
+          )
+          this._detectLoadMore()
+          resolve()
+        } catch (e) {
+          reject(e)
         }
-      )
+      })
     },
     refresh({ showLoading = true }) {
       return new Promise((resolve, reject) => {
@@ -323,7 +351,7 @@ export default {
             this._initFlowLoader()
             resolve()
           } catch (e) {
-            reject()
+            reject(e)
           }
         })
       })
@@ -337,9 +365,6 @@ export default {
           __reload__: !showLoading
         })
       }
-    },
-    forceCallback() {
-      this._fireSSRCallback(true)
     },
     _listMethod({ method, key, value }) {
       this.$store.commit(
@@ -376,105 +401,91 @@ export default {
       // 如果列表的数据没有撑满页面，就继续请求更多
       if (
         this.isAuto &&
-        this.$refs.state &&
-        checkInView(this.$refs.state, this.preload)
+        this.$refs.shim &&
+        checkInView(this.$refs.shim, this.preload)
       ) {
         this.loadMore()
       }
     },
-    _initFlowLoader() {
-      this._initState()
+    _initFlowLoader(loop = 0) {
       if (this.auto === 0) {
         return
       }
-      const stateDom = this.$refs.state
-      if (!stateDom) {
+      const shimDom = this.$refs.shim
+      if (!shimDom) {
+        if (loop < 10) {
+          setTimeout(() => {
+            this._initFlowLoader(loop + 1)
+          }, 100)
+        }
         return
       }
-      // if (checkInView(stateDom, this.preload)) {
-      //   this.initData()
-      // }
-      stateDom.__lazy_handler__ = this._fetchDataFunc.bind(this)
-      this.observer.observe(stateDom)
+      if (checkInView(shimDom, this.preload)) {
+        this.initData()
+      }
+      shimDom.__lazy_handler__ = this._fetchDataFunc.bind(this)
+      this.observer.observe(shimDom)
     },
     _retryData() {
       if (!this.retryOnError) {
         return
       }
-      if (this.source.fetched) {
-        this.loadMore()
-      } else {
-        this.initData({
-          __refresh__: true
-        })
-      }
+
+      this.source.fetched ? this.loadMore() : this.initData({
+        __refresh__: true
+      })
     },
-    _fireSSRCallback(force = false) {
-      if (!force && (!this.firstBind || !checkInView(this.$el, this.preload))) {
+    _fireSSRCallback() {
+      if (!this.firstBind) {
         return
       }
+
       this.firstBind = false
-      if (this.source && this.source.fetched) {
-        this.callback &&
-        this.callback({
-          params: generateRequestParams(
-            { fetched: false },
-            this.query,
-            this.type
-          ),
-          data: {
-            result: this.source.result,
-            extra: this.source.extra,
-            noMore: this.source.noMore,
-            total: this.source.total
-          },
-          refresh: false
-        })
+
+      if (!this.source || !this.source.fetched || !this.callback) {
+        return
       }
+
+      this.callback({
+        params: utils.generateRequestParams({
+          field: { fetched: false },
+          uniqueKey: this.uniqueKey,
+          query: this.query,
+          type: this.type
+        }),
+        data: {
+          result: this.source.result,
+          extra: this.source.extra,
+          noMore: this.source.noMore,
+          total: this.source.total
+        },
+        refresh: false
+      })
     },
     _fetchDataFunc() {
       if (!this.source) {
-        this._initState()
         return
       }
+
+      if (!this.isAuto) {
+        return
+      }
+
       if (this.source.loading || this.source.error) {
         return
       }
-      if (
-        !this.isAuto ||
-        this.source.noMore ||
-        this.source.nothing ||
-        (this.isPagination && this.source.fetched)
-      ) {
-        const stateDom = this.$refs.state
-        delete stateDom.__lazy_handler__
-        this.observer.unobserve(stateDom)
-        return
-      }
-      const fetcher = () => {
-        if (this.source.fetched) {
-          this.loadMore()
-        } else {
-          this.initData()
-        }
-      }
-      if (this.observer) {
-        fetcher()
-      } else {
-        if (!this.$refs.state) {
+
+      if (this.source.noMore || this.source.nothing || (this.isPagination && this.source.fetched)) {
+        const shimDom = this.$refs.shim
+        if (!shimDom) {
           return
         }
-        if (this.isAuto && checkInView(this.$refs.state, this.preload)) {
-          fetcher()
-        }
-      }
-    },
-    _debug(message) {
-      if (!this.debug) {
+        this.observer.unobserve(shimDom)
+        shimDom.__lazy_handler__ = undefined
         return
       }
-      console.log('life cycle', message) // eslint-disable-line
-      console.log('check in view', checkInView(this.$refs.state, this.preload)) // eslint-disable-line
+
+      this.source.fetched ? this.loadMore() : this.initData()
     }
   }
 }

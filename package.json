@@ -11,7 +11,7 @@
     "lint": "eslint --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.0.3",
+    "@flowlist/js-core": "^1.0.4",
     "intersection-observer": "^0.11.0",
     "vue": "^2.6.11",
     "vuex": "^3.4.0"
@@ -28,7 +28,9 @@
     "eslint": "^7.6.0",
     "eslint-plugin-vue": "^6.2.2",
     "faker": "^4.1.0",
-    "vue-router": "^3.4.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
+    "vue-router": "^3.4.2",
     "vue-template-compiler": "^2.6.11"
   }
 }

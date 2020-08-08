@@ -17,10 +17,9 @@
         <li
           v-for="(item, index) in flow"
           :key="item.id"
+          :style="{ backgroundColor: item.style.color }"
         >
-          <div :style="{ backgroundColor: item.style.color }">
-            count：{{ index + 1 }}，id：{{ item.id }}
-          </div>
+          count：{{ index + 1 }}，id：{{ item.id }}
         </li>
       </ul>
     </FlowLoader>
