@@ -8,7 +8,7 @@
       func="getObjectByPage"
       type="page"
       :query="query"
-      :callback="testPatch"
+      :success-callback="testPatch"
       :auto="1"
       unique-key="a"
     >

@@ -132,7 +132,12 @@ export default {
       default: -1,
       validator: val => val >= -1
     },
-    callback: {
+    successCallback: {
+      type: Function,
+      default: undefined,
+      validator: val => val === undefined || typeof val === 'function'
+    },
+    errorCallback: {
       type: Function,
       default: undefined,
       validator: val => val === undefined || typeof val === 'function'
@@ -194,7 +199,8 @@ export default {
         func: this.func,
         type: this.type,
         query: this.query,
-        callback: this.callback,
+        callback: this.successCallback,
+        uniqueKey: this.uniqueKey,
         cacheTimeout: this.$isServer ? 0 : this.cacheTimeout
       }
     },
@@ -294,66 +300,64 @@ export default {
       )
     },
     initData(obj = {}) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(async () => {
-          try {
-            await this.$store.dispatch(
-              `${this.namespace}/initData`,
-              {
-                ...this.params,
-                query: { ...this.query, ...obj }
-              }
-            )
-            this._detectLoadMore()
-            resolve()
-          } catch (e) {
-            reject(e)
-          }
-        })
+      return new Promise(async (resolve) => {
+        try {
+          await this.$store.dispatch(
+            `${this.namespace}/initData`,
+            {
+              ...this.params,
+              query: { ...this.query, ...obj }
+            }
+          )
+          this._detectLoadMore()
+          resolve()
+        } catch (e) {
+          this._handleAsyncError(e)
+          resolve()
+        }
       })
     },
-    loadBefore(obj = {}, errorRetry = false) {
-      return this.loadMore({ ...obj, is_up: 1 }, errorRetry)
-    },
-    loadMore(obj = {}, errorRetry = false) {
-      return new Promise(async (resolve, reject) => {
+    loadMore(obj = {}) {
+      return new Promise(async (resolve) => {
         const query = { ...this.query, is_up: 0, ...obj }
         try {
           await this.$store.dispatch(
             `${this.namespace}/loadMore`,
             {
               ...this.params,
-              query,
-              errorRetry
+              query
             }
           )
           this._detectLoadMore()
           resolve()
         } catch (e) {
-          reject(e)
+          this._handleAsyncError(e)
+          resolve()
         }
       })
     },
+    loadBefore(obj = {}) {
+      return this.loadMore({ ...obj, is_up: 1 })
+    },
     refresh({ showLoading = true }) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(async () => {
-          const query = { ...this.query }
-          query.__refresh__ = true
-          query.__reload__ = !showLoading
-          try {
-            await this.$store.dispatch(
-              `${this.namespace}/initData`,
-              {
-                ...this.params,
-                query
-              }
-            )
-            this._initFlowLoader()
-            resolve()
-          } catch (e) {
-            reject(e)
-          }
-        })
+      return new Promise(async (resolve) => {
+        const query = { ...this.query }
+        query.__refresh__ = true
+        query.__reload__ = !showLoading
+        try {
+          await this.$store.dispatch(
+            `${this.namespace}/initData`,
+            {
+              ...this.params,
+              query
+            }
+          )
+          this._initFlowLoader()
+          resolve()
+        } catch (e) {
+          this._handleAsyncError(e)
+          resolve()
+        }
       })
     },
     retry({ showLoading = true }) {
@@ -442,11 +446,11 @@ export default {
 
       this.firstBind = false
 
-      if (!this.source || !this.source.fetched || !this.callback) {
+      if (!this.source || !this.source.fetched || !this.successCallback) {
         return
       }
 
-      this.callback({
+      this.successCallback({
         params: utils.generateRequestParams({
           field: { fetched: false },
           uniqueKey: this.uniqueKey,
@@ -486,6 +490,14 @@ export default {
       }
 
       this.source.fetched ? this.loadMore() : this.initData()
+    },
+    _handleAsyncError(error) {
+      if (!this.errorCallback) {
+        return
+      }
+      this.errorCallback({
+        error
+      })
     }
   }
 }

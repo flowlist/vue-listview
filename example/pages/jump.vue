@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     load(page) {
-      this.$refs.loader.jump(page)
+      this.$refs.loader.jump({ page })
     }
   }
 }

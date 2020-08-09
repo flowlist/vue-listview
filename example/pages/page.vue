@@ -7,7 +7,7 @@
       func="getListByPage"
       type="page"
       :query="query"
-      :callback="handlePageLoaded"
+      :success-callback="handlePageLoaded"
       :auto="3"
     >
       <ul
