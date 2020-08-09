@@ -1,44 +1,101 @@
+<style lang="scss">
+#homepage {
+  padding: 40px 20px;
+
+  li {
+    margin: 12px 0;
+  }
+
+  a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    background-color: #f7f8fa;
+    color: #323233;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: #eef0f4;
+    }
+  }
+}
+</style>
+
 <template>
-  <div id="index-show">
-    <FlowLoader
-      func="getListByPage"
-      type="page"
-      :query="query"
-      :callback="handlePageLoaded"
-      :auto="3"
+  <ul id="homepage">
+    <li
+      v-for="(item, index) in headers"
+      :key="index"
     >
-      <ul
-        slot-scope="{ flow }"
-        class="demo-list"
-      >
-        <li
-          v-for="(item, index) in flow"
-          :key="item.id"
-          :style="{ backgroundColor: item.style.color }"
-        >
-          count：{{ index + 1 }}，id：{{ item.id }}
-        </li>
-      </ul>
-    </FlowLoader>
-  </div>
+      <NLink
+        :to="item.route"
+        v-text="item.name"
+      />
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'Homepage',
   data() {
     return {}
   },
   computed: {
-    query() {
-      return {
-        count: 10
-      }
-    }
-  },
-  methods: {
-    handlePageLoaded(res) {
-      console.log('callback', res)
+    headers() {
+      return [
+        {
+          name: '首页',
+          route: '/'
+        },
+        {
+          name: '页码翻页',
+          route: '/page'
+        },
+        {
+          name: '对象数组',
+          route: '/object'
+        },
+        {
+          name: '跳转翻页',
+          route: '/jump'
+        },
+        {
+          name: 'seenIds翻页',
+          route: '/seen_ids'
+        },
+        {
+          name: 'sinceId翻页',
+          route: '/since_id'
+        },
+        {
+          name: 'last_id翻页',
+          route: '/last_id'
+        },
+        {
+          name: '模拟异常',
+          route: '/error'
+        },
+        {
+          name: '首屏异常',
+          route: '/first-error'
+        },
+        {
+          name: '首屏加载',
+          route: '/first-loading'
+        },
+        {
+          name: '首屏为空',
+          route: '/nothing'
+        },
+        {
+          name: '动态列表',
+          route: '/comment'
+        }
+      ]
     }
   }
 }

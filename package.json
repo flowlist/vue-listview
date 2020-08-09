@@ -8,14 +8,14 @@
     "dist"
   ],
   "scripts": {
-    "doc:dev": "npm run generate:docs && npm run doc:run",
+    "doc:dev": "npm run doc:run",
     "doc:run": "cross-env NODE_ENV=development vuepress dev docs",
     "doc:build": "cross-env NODE_ENV=production vuepress build docs",
     "doc:generate": "nuxt generate",
     "pkg:dev": "cross-env NODE_ENV=development nodemon example/server/index.js --watch server",
     "pkg:build": "vue-cli-service build --target lib --name flowlist src/index.js",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "eslint --ignore-path .gitignore . --fix"
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
     "@flowlist/js-core": "^1.0.4",
@@ -27,6 +27,7 @@
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
+    "@vant/touch-emulator": "^1.2.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
@@ -43,6 +44,7 @@
     "koa": "^2.13.0",
     "nodemon": "^2.0.4",
     "nuxt": "^2.14.1",
+    "os": "^0.1.1",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "v-switcher": "^1.1.2",
