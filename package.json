@@ -30,6 +30,7 @@
     "faker": "^4.1.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
+    "v-switcher": "^1.1.2",
     "vue-router": "^3.4.2",
     "vue-template-compiler": "^2.6.11"
   }
