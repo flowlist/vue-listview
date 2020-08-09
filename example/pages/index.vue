@@ -1,6 +1,6 @@
 <style lang="scss">
 #homepage {
-  padding: 40px 20px;
+  padding: 20px;
 
   li {
     margin: 12px 0;
@@ -47,10 +47,6 @@ export default {
   computed: {
     headers() {
       return [
-        {
-          name: '首页',
-          route: '/'
-        },
         {
           name: '页码翻页',
           route: '/page'
