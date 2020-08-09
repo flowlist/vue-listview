@@ -81,7 +81,7 @@ a {
         :routable="true"
         align="start"
       >
-        <RouterLink
+        <NLink
           v-for="(item, index) in headers"
           :key="index"
           :slot="`tab-${index}`"
@@ -91,19 +91,14 @@ a {
       </VSwitcher>
     </header>
     <section>
-      <RouterView />
+      <Nuxt />
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  components: {},
-  props: {},
-  data() {
-    return {}
-  },
+  name: 'Layout',
   computed: {
     headers() {
       return [
@@ -157,10 +152,6 @@ export default {
         }
       ]
     }
-  },
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 }
 </script>

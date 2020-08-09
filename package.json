@@ -1,12 +1,19 @@
 {
   "name": "@flowlist/vue-vuex",
   "version": "0.0.1",
+  "gen_url": "//fe-mng.bilibili.co/v/van/h5/code-gen/",
+  "deploy_url": "//s1.hdslb.com/bfs/static/sakura-h5/",
+  "prefix_url": "/v/van/h5/",
   "files": [
     "dist"
   ],
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name flowlist src/index.js",
+    "doc:dev": "npm run generate:docs && npm run doc:run",
+    "doc:run": "cross-env NODE_ENV=development vuepress dev docs",
+    "doc:build": "cross-env NODE_ENV=production vuepress build docs",
+    "doc:generate": "nuxt generate",
+    "pkg:dev": "cross-env NODE_ENV=development nodemon example/server/index.js --watch server",
+    "pkg:build": "vue-cli-service build --target lib --name flowlist src/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "eslint --ignore-path .gitignore . --fix"
   },
@@ -17,6 +24,9 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/style-resources": "^1.0.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
@@ -25,13 +35,21 @@
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
     "eslint": "^7.6.0",
+    "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "faker": "^4.1.0",
+    "koa": "^2.13.0",
+    "nodemon": "^2.0.4",
+    "nuxt": "^2.14.1",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "v-switcher": "^1.1.2",
     "vue-router": "^3.4.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.5.3",
+    "vuepress-plugin-code-gen-box": "^0.0.9",
+    "vuepress-plugin-dehydrate": "^1.1.4"
   }
 }

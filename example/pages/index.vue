@@ -1,6 +1,3 @@
-<style lang="scss">
-</style>
-
 <template>
   <div id="index-show">
     <FlowLoader
