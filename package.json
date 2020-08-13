@@ -14,7 +14,8 @@
     "doc:generate": "nuxt generate",
     "pkg:dev": "cross-env NODE_ENV=development nodemon example/server/index.js --watch server",
     "pkg:build": "vue-cli-service build --target lib --name flowlist src/index.js",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "echo 1",
+    "deploy": "bash deploy.sh",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
