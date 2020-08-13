@@ -17,7 +17,6 @@ const getLocalIP = () => {
 module.exports = {
   title: pkg.name + ' ' + pkg.version,
   base: isProd ? pkg.prefix_url : '/',
-  // base: process.env.NODE_ENV === 'production' ? '/vue-mixin-store/' : '/',
   evergreen: true,
   define: {
     'process.env.LOCAL_IP': getLocalIP(),

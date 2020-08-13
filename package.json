@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "gen_url": "//fe-mng.bilibili.co/v/van/h5/code-gen/",
   "deploy_url": "//s1.hdslb.com/bfs/static/sakura-h5/",
-  "prefix_url": "/v/van/h5/",
+  "prefix_url": "/vue-vuex/",
   "files": [
     "dist"
   ],
