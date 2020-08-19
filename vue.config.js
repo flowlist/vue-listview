@@ -17,6 +17,9 @@ module.exports = {
     }
   },
   configureWebpack: {
+    output: {
+      libraryExport: 'default'
+    },
     plugins: [new webpack.BannerPlugin(banner)]
   }
 }
