@@ -79,7 +79,7 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    // publicPath: isDev ? '/_nuxt/' : pkg.deploy_url + 'code-gen/',
+    publicPath: isDev ? '/_nuxt/' : pkg.deploy_url,
     babel: {
       presets: [
         [
