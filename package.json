@@ -1,9 +1,9 @@
 {
   "name": "@flowlist/vue-vuex",
   "version": "0.0.5",
-  "gen_url": "/vue-vuex/code-gen/",
-  "deploy_url": "https://flowlist.github.io/vue-vuex/code-gen/",
-  "prefix_url": "/vue-vuex/",
+  "deploy_url": "https://flowlist.github.io",
+  "project_base_url": "/vue-vuex/",
+  "code_gen_prefix": "code-gen/",
   "main": "dist/flowlist.umd.min.js",
   "files": [
     "dist"

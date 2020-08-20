@@ -63,7 +63,7 @@ module.exports = {
   ],
 
   router: {
-    base: isDev ? '/' : pkg.prefix_url + 'code-gen/',
+    base: isDev ? '/' : `${pkg.project_base_url}${pkg.code_gen_prefix}`,
   },
   /*
    ** Nuxt.js modules
@@ -79,7 +79,7 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    publicPath: isDev ? '/_nuxt/' : pkg.deploy_url,
+    publicPath: isDev ? '/_nuxt/' : `${pkg.deploy_url}${pkg.project_base_url}${pkg.code_gen_prefix}`,
     babel: {
       presets: [
         [

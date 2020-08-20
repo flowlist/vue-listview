@@ -126,7 +126,7 @@ export default {
   computed: {
     url() {
       const isProd = process.env.NODE_ENV === 'production'
-      const host = isProd ? pkg.gen_url : `http://${process.env.LOCAL_IP}:9090/`
+      const host = isProd ? `${pkg.project_base_url}${pkg.code_gen_prefix}` : `http://${process.env.LOCAL_IP}:9090/`
       return `${host}${this.page}`
     }
   }

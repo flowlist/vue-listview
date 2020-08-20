@@ -16,7 +16,7 @@ const getLocalIP = () => {
 
 module.exports = {
   title: pkg.name + ' ' + pkg.version,
-  base: isProd ? pkg.prefix_url : '/',
+  base: isProd ? pkg.project_base_url : '/',
   evergreen: true,
   define: {
     'process.env.LOCAL_IP': getLocalIP(),
