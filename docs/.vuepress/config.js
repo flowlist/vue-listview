@@ -34,15 +34,7 @@ module.exports = {
   ],
   themeConfig: {
     sidebar: [
-      {
-        title: '介绍',
-        collapsable: false,
-        children: [
-          '/guide/start',
-          '/guide/theme',
-          '/guide/contributing',
-        ]
-      },
+      '/guide/start',
       {
         title: '安装',
         collapsable: false,
@@ -54,15 +46,20 @@ module.exports = {
       {
         title: '场景',
         collapsable: false,
-        children: []
+        children: [
+          'scene/jump',
+          'scene/page',
+          'scene/since_id',
+          'scene/seen_ids'
+        ]
       },
       {
-        title: '方法',
+        title: '参数',
         collapsable: false,
         children: []
       },
       {
-        title: '原理',
+        title: '方法',
         collapsable: false,
         children: []
       }

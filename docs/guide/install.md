@@ -7,7 +7,7 @@ yarn add @flowlist/vue-vuex
 npm i @flowlist/vue-vuex
 ```
 
-#### 引入模板容器
+#### 引入容器
 ```javascript
 // entry.js
 import Vue from 'vue'

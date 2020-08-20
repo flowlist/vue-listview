@@ -1,7 +1,7 @@
-### 接口定义
+### 接口层
 
 
-#### 接口层
+#### 接口导出
 ```javascript
 // api.js
 export const getListByPage = ({ page, count }) => {
@@ -24,7 +24,7 @@ export const getListBySeenIds = ({ seen_ids, count }) => {
 ```
 
 
-#### 数据格式
+#### 返回格式
 ```javascript
 export const getListByPage = ({ page, count }) => {
   return new Promise((resolve, reject) => {
