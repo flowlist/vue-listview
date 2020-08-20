@@ -7,6 +7,7 @@
       func="getListBySeenIds"
       type="seenIds"
       :query="query"
+      unique-key="data.number_id"
     >
       <ul
         slot-scope="{ flow }"
@@ -30,8 +31,7 @@ export default {
   data() {
     return {
       query: {
-        count: 10,
-        changing: 'data.number_id'
+        count: 10
       }
     }
   }

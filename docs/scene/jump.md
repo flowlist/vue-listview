@@ -24,6 +24,7 @@ export default {
       const { query } = this.$route
       return {
         id: query.id,
+        count: 10,
         page: query.page || 1 // 设置请求第一页
       }
     }
