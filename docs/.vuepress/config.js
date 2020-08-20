@@ -33,6 +33,36 @@ module.exports = {
     ]
   ],
   themeConfig: {
-    sidebar: []
+    sidebar: [
+      {
+        title: '介绍',
+        collapsable: false,
+        children: [
+          '/guide/start',
+          '/guide/theme',
+          '/guide/contributing',
+        ]
+      },
+      {
+        title: '安装',
+        collapsable: false,
+        children: []
+      },
+      {
+        title: '场景',
+        collapsable: false,
+        children: []
+      },
+      {
+        title: '方法',
+        collapsable: false,
+        children: []
+      },
+      {
+        title: '原理',
+        collapsable: false,
+        children: []
+      }
+    ]
   }
 }

@@ -1,7 +1,7 @@
 <style lang="scss">
 .phone-wrap {
   position: fixed;
-  top: 100px;
+  top: 70px;
   right: 25px;
   width: 384px;
   user-select: none;

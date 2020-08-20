@@ -160,17 +160,13 @@ export default {
     },
     preload: {
       type: Number,
-      default: 50,
+      default: 200,
       validator: val => val >= 0
     },
     cacheTimeout: {
       type: Number,
       default: 0,
       validator: val => val >= 0
-    },
-    debug: {
-      type: Boolean,
-      default: false
     },
     namespace: {
       type: String,
@@ -266,31 +262,31 @@ export default {
     this.observer.disconnect()
   },
   methods: {
-    push({ key, value }) {
+    push(key, value) {
       this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
     },
-    reset({ key, value }) {
+    reset(key, value) {
       this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
     },
-    patch({ key, value }) {
+    patch(key, value) {
       this._itemMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
-    unshift({ key, value }) {
+    unshift(key, value) {
       this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
     },
-    delete({ id, key }) {
+    delete(id, key) {
       this._itemMethod({ id, key, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
-    update({ id, key, value }) {
+    update(id, key, value) {
       this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
-    insertAfter({ id, key, value }) {
+    insertAfter(id, key, value) {
       this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
     },
-    insertBefore({ id, key, value }) {
+    insertBefore(id, key, value) {
       this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
     },
-    jump({ page }) {
+    jump(page) {
       return this.$store.dispatch(
         `${this.namespace}/loadMore`,
         {
