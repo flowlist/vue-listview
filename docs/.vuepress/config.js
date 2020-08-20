@@ -46,7 +46,10 @@ module.exports = {
       {
         title: '安装',
         collapsable: false,
-        children: []
+        children: [
+          '/guide/install',
+          '/guide/api'
+        ]
       },
       {
         title: '场景',

@@ -9,6 +9,7 @@ npm run test:unit
 #npm run build
 #npm publish
 npm run doc:build
+npm run doc:generate
 
 # cd 到构建输出的目录下
 cd docs/.vuepress/dist

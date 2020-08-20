@@ -1,8 +1,8 @@
 {
   "name": "@flowlist/vue-vuex",
   "version": "0.0.5",
-  "gen_url": "//fe-mng.bilibili.co/v/van/h5/code-gen/",
-  "deploy_url": "//s1.hdslb.com/bfs/static/sakura-h5/",
+  "gen_url": "/code-gen/",
+  "deploy_url": "/test/",
   "prefix_url": "/vue-vuex/",
   "main": "dist/flowlist.umd.min.js",
   "files": [
