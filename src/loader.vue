@@ -262,29 +262,29 @@ export default {
     this.observer.disconnect()
   },
   methods: {
-    push(key, value) {
-      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
-    },
     reset(key, value) {
       this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
     },
-    patch(key, value) {
-      this._itemMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
+    push(value) {
+      this._listMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
     },
-    unshift(key, value) {
-      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
+    unshift(value) {
+      this._listMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
+    },
+    insertBefore(id, value, key) {
+      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
+    },
+    insertAfter(id, value, key) {
+      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
+    },
+    patch(value, key) {
+      this._itemMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
     delete(id, key) {
       this._itemMethod({ id, key, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
-    update(id, key, value) {
+    update(id, value, key) {
       this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
-    },
-    insertAfter(id, key, value) {
-      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
-    },
-    insertBefore(id, key, value) {
-      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
     },
     jump(page) {
       return this.$store.dispatch(
@@ -335,7 +335,7 @@ export default {
     loadBefore(obj = {}) {
       return this.loadMore({ ...obj, is_up: 1 })
     },
-    refresh({ showLoading = true }) {
+    refresh(showLoading = true) {
       return new Promise(async (resolve) => {
         const query = { ...this.query }
         query.__refresh__ = true
@@ -356,7 +356,7 @@ export default {
         }
       })
     },
-    retry({ showLoading = true }) {
+    retry(showLoading = true) {
       if (this.source.fetched) {
         return this.loadMore()
       } else {
@@ -371,9 +371,9 @@ export default {
         `${this.namespace}/UPDATE_DATA`,
         {
           ...this.params,
-          key,
           value,
           method,
+          changeKey: key,
           uniqueKey: this.uniqueKey
         }
       )
@@ -384,10 +384,9 @@ export default {
         {
           ...this.params,
           id,
-          key,
           value,
           method,
-          uniqueKey: this.uniqueKey
+          uniqueKey: key || this.uniqueKey
         }
       )
     },

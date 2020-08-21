@@ -1,13 +1,7 @@
-### 参数
-
-#### flowStore(obj)
-| 参数 | type | required? | 作用 |
-| --- | --- | --- | --- |
-| api | object | Y | 把 API 层传进来，实现通过函数名传参调用接口 |
+### Props
 
 
-#### flowLoader
-| props | type | default | required? | 作用 |
+| name | type | default | required? | 作用 |
 | --- | --- | --- | --- | ---- |
 | func | string | - | Y | API 列表中的某个函数名，将会被调用 |
 | type | string | - | Y | 场景值的类型 |
@@ -25,16 +19,14 @@
 | successCallback | function | - | N | 请求成功后的 callback |
 | errorCallback | function | - | N | 请求失败后的 callback |
 
-#### props 详情
-
-##### query
+#### query
 最终透传给 API 的参数包括 query 以及 flowlist 自己维护的参数
 - 当 type 为 jump 时，无额外参数
 - 当 type 为 page 的时候，会自动维护 `page` 参数
 - 当 type 为 seenIds 时，自动维护 `seen_ids` 参数
 - 当 type 为 sinceId 时，自动维护 `since_id` 和 `is_up` 参数
 
-##### uniqueKey
+#### uniqueKey
 支持内层字段作为 key，如：
 ```json
 [
@@ -49,10 +41,10 @@
 ```
 此时`uniqueKey`为`data.id`
 
-##### cacheTimeout
+#### cacheTimeout
 缓存是通过`localStorage`实现的，因此不会在`server side`生效
 
-##### successCallback
+#### successCallback
 回调不会在`server side`执行，但如果是`SSR`则会在`mounted`里去执行，参数如下：
 ```json
 {
@@ -62,7 +54,7 @@
 }
 ```
 
-##### errorCallback
+#### errorCallback
 当在`client side`发起接口请求时执行到`reject`的回调，参数如下：
 ```json
 {

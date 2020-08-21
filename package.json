@@ -20,9 +20,9 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.0.4",
+    "@flowlist/js-core": "^1.0.5",
     "intersection-observer": "^0.11.0",
-    "vue": "^2.6.11",
+    "vue": "2.6.11",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "vue-router": "^3.4.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "2.6.11",
     "vuepress": "^1.5.3",
     "vuepress-plugin-code-gen-box": "^0.0.9",
     "vuepress-plugin-dehydrate": "^1.1.4"

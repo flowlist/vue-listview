@@ -53,12 +53,16 @@ module.exports = {
           'scene/seen_ids'
         ]
       },
-      '/guide/props',
+      '/guide/store',
       {
-        title: '方法',
+        title: '容器',
         collapsable: false,
-        children: []
-      }
+        children: [
+          '/loader/props',
+          '/loader/slots'
+        ]
+      },
+      '/loader/methods'
     ]
   }
 }
