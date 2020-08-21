@@ -154,7 +154,7 @@ export default {
       type: Boolean,
       default: false
     },
-    retryOnError: {
+    errorClickRetry: {
       type: Boolean,
       default: true
     },
@@ -427,7 +427,7 @@ export default {
       this.observer.observe(shimDom)
     },
     _retryData() {
-      if (!this.retryOnError) {
+      if (!this.errorClickRetry) {
         return
       }
 

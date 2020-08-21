@@ -53,11 +53,7 @@ module.exports = {
           'scene/seen_ids'
         ]
       },
-      {
-        title: '参数',
-        collapsable: false,
-        children: []
-      },
+      '/guide/props',
       {
         title: '方法',
         collapsable: false,
