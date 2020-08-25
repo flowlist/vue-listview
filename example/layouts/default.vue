@@ -162,10 +162,11 @@ a {
 }
 
 .demo-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   height: 100px;
-  line-height: 100px;
-  padding-left: 50px;
   margin: 15px 0;
   border-radius: 5px;
 }

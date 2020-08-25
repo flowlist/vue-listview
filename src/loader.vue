@@ -271,20 +271,20 @@ export default {
     unshift(value) {
       this._listMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
     },
-    insertBefore(id, value, key) {
-      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
+    insertBefore(id, value, uniqueKey) {
+      this._itemMethod({ id, uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
     },
-    insertAfter(id, value, key) {
-      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
+    insertAfter(id, value, uniqueKey) {
+      this._itemMethod({ id, uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
     },
-    patch(value, key) {
-      this._itemMethod({ key, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
+    patch(value, uniqueKey) {
+      this._itemMethod({ uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
-    delete(id, key) {
-      this._itemMethod({ id, key, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
+    delete(id, uniqueKey) {
+      this._itemMethod({ id, uniqueKey, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
-    update(id, value, key) {
-      this._itemMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
+    update(id, changeKey, value) {
+      this._itemMethod({ id, changeKey, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
     jump(page) {
       return this.$store.dispatch(
@@ -378,7 +378,7 @@ export default {
         }
       )
     },
-    _itemMethod({ method, id, key, value }) {
+    _itemMethod({ method, id, changeKey, uniqueKey, value }) {
       this.$store.commit(
         `${this.namespace}/UPDATE_DATA`,
         {
@@ -386,7 +386,8 @@ export default {
           id,
           value,
           method,
-          uniqueKey: key || this.uniqueKey
+          changeKey,
+          uniqueKey: uniqueKey || this.uniqueKey
         }
       )
     },

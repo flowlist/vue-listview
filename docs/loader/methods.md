@@ -53,6 +53,6 @@
 - 删除某一条数据
 - key 默认为 props 里的 `uniqueKey`
 
-#### update(id, value, key)
-- 更新某一条数据的值
-- key 默认为 props 里的 `uniqueKey`
+#### update(id, key, value)
+- 以`key-value`的形式去更新某一条数据里的值
+- `key`支持`.`分隔符深层查找

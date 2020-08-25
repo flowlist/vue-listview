@@ -14,12 +14,12 @@
         class="demo-list"
       >
         <li
-          v-for="(item, index) in flow"
+          v-for="item in flow"
           :key="item.id"
           :style="{ backgroundColor: item.style.color }"
           class="demo-item"
         >
-          count：{{ index + 1 }}，id：{{ item.data.number_id }}
+          <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
     </FlowLoader>

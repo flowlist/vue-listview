@@ -22,7 +22,7 @@
   "dependencies": {
     "@flowlist/js-core": "^1.0.5",
     "intersection-observer": "^0.11.0",
-    "vue": "2.6.11",
+    "vue": "2.6.12",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -42,17 +42,18 @@
     "eslint": "^7.7.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-vue": "^6.2.2",
-    "faker": "^4.1.0",
+    "faker": "^5.0.0",
     "koa": "^2.13.0",
     "nodemon": "^2.0.4",
     "nuxt": "^2.14.3",
     "os": "^0.1.1",
     "qrcode": "^1.4.4",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.3",
+    "sass-loader": "^10.0.0",
     "vue-router": "^3.4.3",
-    "vue-template-compiler": "2.6.11",
-    "vuepress": "^1.5.3",
+    "vue-server-renderer": "2.6.12",
+    "vue-template-compiler": "2.6.12",
+    "vuepress": "^1.5.4",
     "vuepress-plugin-code-gen-box": "^0.0.9",
     "vuepress-plugin-dehydrate": "^1.1.4"
   }
