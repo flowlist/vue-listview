@@ -263,28 +263,28 @@ export default {
   },
   methods: {
     reset(key, value) {
-      this._listMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
+      this._callMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
     },
     push(value) {
-      this._listMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
+      this._callMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_AFTER })
     },
     unshift(value) {
-      this._listMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
+      this._callMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_ADD_BEFORE })
     },
-    insertBefore(id, value, uniqueKey) {
-      this._itemMethod({ id, uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
+    patch(value) {
+      this._callMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
-    insertAfter(id, value, uniqueKey) {
-      this._itemMethod({ id, uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
+    insertBefore(id, value) {
+      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
     },
-    patch(value, uniqueKey) {
-      this._itemMethod({ uniqueKey, value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
+    insertAfter(id, value) {
+      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
     },
-    delete(id, uniqueKey) {
-      this._itemMethod({ id, uniqueKey, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
+    delete(id) {
+      this._callMethod({ id, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
-    update(id, changeKey, value) {
-      this._itemMethod({ id, changeKey, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
+    update(id, key, value) {
+      this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
     jump(page) {
       return this.$store.dispatch(
@@ -366,19 +366,7 @@ export default {
         })
       }
     },
-    _listMethod({ method, key, value }) {
-      this.$store.commit(
-        `${this.namespace}/UPDATE_DATA`,
-        {
-          ...this.params,
-          value,
-          method,
-          changeKey: key,
-          uniqueKey: this.uniqueKey
-        }
-      )
-    },
-    _itemMethod({ method, id, changeKey, uniqueKey, value }) {
+    _callMethod({ method, id, key, value }) {
       this.$store.commit(
         `${this.namespace}/UPDATE_DATA`,
         {
@@ -386,8 +374,8 @@ export default {
           id,
           value,
           method,
-          changeKey,
-          uniqueKey: uniqueKey || this.uniqueKey
+          changeKey: key,
+          uniqueKey: this.uniqueKey
         }
       )
     },

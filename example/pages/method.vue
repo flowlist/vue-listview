@@ -8,14 +8,16 @@
     type="page"
     :query="query"
     :auto="1"
+    :success-callback="handleSuccess"
     unique-key="data.number_id"
   >
     <template #header>
+      <br>
       <button @click="unshift(1)">
-        unshift一个object
+        unshift - object
       </button>
       <button @click="unshift(2)">
-        unshift一个array
+        unshift - array
       </button>
     </template>
     <ul
@@ -45,12 +47,21 @@
         </div>
       </li>
     </ul>
-    <template #footer>
+    <template #footer="{ source }">
       <button @click="push(1)">
-        push一个object
+        push - object
       </button>
       <button @click="push(2)">
-        push一个array
+        push - array
+      </button>
+      <button @click="patch(1)">
+        patch - object
+      </button>
+      <button @click="patch(2)">
+        patch - array
+      </button>
+      <button @click="reset">
+        reset - {{ source.total }}
       </button>
     </template>
   </FlowLoader>
@@ -63,11 +74,15 @@ export default {
   computed: {
     query() {
       return {
-        count: 10
+        count: 10,
+        loadedIds: []
       }
     }
   },
   methods: {
+    handleSuccess({ data }) {
+      this.loadedIds = data.result.map(_ => _.data.number_id)
+    },
     insertBefore(item) {
       this.$refs.loader.insertBefore(item.data.number_id, ItemFactory.get(1))
     },
@@ -85,6 +100,34 @@ export default {
     },
     push(count) {
       this.$refs.loader.push(ItemFactory.get(count))
+    },
+    patch(type) {
+      let data
+      if (type === 1) {
+        data = {}
+        this.loadedIds.forEach(id => {
+          data[id] = {
+            style: {
+              color: ItemFactory.getRandomColor()
+            }
+          }
+        })
+      } else {
+        data = this.loadedIds.map(id => {
+          return {
+            data: {
+              number_id: id
+            },
+            style: {
+              color: ItemFactory.getRandomColor()
+            }
+          }
+        })
+      }
+      this.$refs.loader.patch(data)
+    },
+    reset() {
+      this.$refs.loader.reset('total', Math.random())
     }
   }
 }

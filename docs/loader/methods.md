@@ -34,24 +34,20 @@
 #### unshift(\<object|array\>)
 - 向列表的头部追加元素
 
-#### reset(value, key)
+#### reset(key, value)
 - 重写数据源中的任意字段
 
-#### insertBefore(id, value, key)
+#### insertBefore(id, value)
 - 在某个元素之前插入内容
-- key 默认为 props 里的 `uniqueKey`
 
-#### insertAfter(id, value, key)
+#### insertAfter(id, value)
 - 在某个元素之后插入内容
-- key 默认为 props 里的 `uniqueKey`
 
-#### patch(value, key)
+#### patch(\<object|array\>)
 - 给数据打补丁
-- key 默认为 props 里的 `uniqueKey`
 
-#### delete(id, key)
+#### delete(id)
 - 删除某一条数据
-- key 默认为 props 里的 `uniqueKey`
 
 #### update(id, key, value)
 - 以`key-value`的形式去更新某一条数据里的值
