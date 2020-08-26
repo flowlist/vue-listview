@@ -52,10 +52,6 @@ export default {
           route: '/page'
         },
         {
-          name: '对象数组',
-          route: '/object'
-        },
-        {
           name: '跳转翻页',
           route: '/jump'
         },
@@ -66,10 +62,6 @@ export default {
         {
           name: 'sinceId翻页',
           route: '/since_id'
-        },
-        {
-          name: 'last_id翻页',
-          route: '/last_id'
         },
         {
           name: '模拟异常',
@@ -88,8 +80,8 @@ export default {
           route: '/nothing'
         },
         {
-          name: '动态列表',
-          route: '/comment'
+          name: '方法列表',
+          route: '/method'
         }
       ]
     }

@@ -1,5 +1,7 @@
 ### 方法
 
+<Phone page="method" />
+
 :::tip
 这些方法都通过 $refs 调用
 :::

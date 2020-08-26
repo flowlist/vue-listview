@@ -3,7 +3,7 @@ const isDev = nodeEnv === 'development'
 const pkg = require('./package')
 
 module.exports = {
-  mode: isDev ? 'universal' : 'spa',
+  mode: 'spa',
   generate: {
     dir: 'docs/.vuepress/dist/code-gen',
   },

@@ -3,9 +3,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   bottom: 0;
-  right: -15px;
-  padding-right: 15px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -191,7 +190,7 @@ a {
 
 <template>
   <div>
-    <header class="header-bar ios">
+    <div class="header-bar ios">
       <div
         v-if="showBack"
         class="back"
@@ -212,9 +211,9 @@ a {
           class="qrcode"
         />
       </div>
-    </header>
+    </div>
     <div class="header-shim" />
-    <nuxt />
+    <Nuxt />
   </div>
 </template>
 
@@ -234,7 +233,7 @@ export default {
       return this.$route.name !== 'index'
     },
     showBack() {
-      return this.$route.path.split('/').length > 2
+      return this.$route.path !== '/'
     },
     showQRIcon() {
       if (this.$isServer) {
@@ -252,7 +251,9 @@ export default {
   },
   methods: {
     back() {
-      this.$router.back()
+      this.$router.replace({
+        path: '/'
+      })
     },
     generateQR(loop = 0) {
       this.$meta().refresh()

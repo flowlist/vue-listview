@@ -59,7 +59,8 @@ module.exports = {
         collapsable: false,
         children: [
           '/loader/props',
-          '/loader/slots'
+          '/loader/slots',
+          '/loader/ssr'
         ]
       },
       '/loader/methods'
