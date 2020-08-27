@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-flowlist",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-flowlist/",
   "code_gen_prefix": "code-gen/",

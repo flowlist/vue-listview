@@ -98,7 +98,6 @@
       </div>
     </template>
     <div
-      v-if="!$isServer"
       ref="shim"
       :style="shimStyle"
       class="flow-loader__shim"
@@ -305,7 +304,9 @@ export default {
               query: { ...this.query, ...obj }
             }
           )
-          this._detectLoadMore()
+          this.$nextTick(() => {
+            this._detectLoadMore()
+          })
           resolve()
         } catch (e) {
           this._handleAsyncError(e)
@@ -324,7 +325,6 @@ export default {
               query
             }
           )
-          this._detectLoadMore()
           resolve()
         } catch (e) {
           this._handleAsyncError(e)
