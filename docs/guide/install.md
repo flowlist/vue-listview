@@ -2,16 +2,16 @@
 
 #### 引入包
 ```shell script
-yarn add @flowlist/vue-vuex
+yarn add @flowlist/vue-flowlist
 // or
-npm i @flowlist/vue-vuex
+npm i @flowlist/vue-flowlist
 ```
 
 #### 引入容器
 ```javascript
 // entry.js
 import Vue from 'vue'
-import { flowLoader } from '@flowlist/vue-vuex'
+import { flowLoader } from '@flowlist/vue-flowlist'
 
 Vue.component(flowLoader.name, flowLoader)
 ```
@@ -21,7 +21,7 @@ Vue.component(flowLoader.name, flowLoader)
 // store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { flowStore } from '@fliwlist/vue-vuex'
+import { flowStore } from '@fliwlist/vue-flowlist'
 import * as api from '~/api'
 
 Vue.use(Vuex)
@@ -44,7 +44,7 @@ export const strict = false
 ```
 `store --> flow.js`
 ```javascript
-import { flowStore } from '@fliwlist/vue-vuex'
+import { flowStore } from '@fliwlist/vue-flowlist'
 import * as api from '~/api'
 
 const flow = flowStore({ api })
