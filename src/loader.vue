@@ -386,6 +386,9 @@ export default {
       this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
     },
     _detectLoadMore() {
+      if (this.source.nothing || this.source.noMore || this.source.error) {
+        return
+      }
       // 如果列表的数据没有撑满页面，就继续请求更多
       if (
         this.isAuto &&
