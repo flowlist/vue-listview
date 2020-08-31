@@ -49,7 +49,10 @@
 - 给数据打补丁
 
 #### delete(id)
-- 删除某一条数据
+- 根据`unique-key`删除一条数据
+
+#### search(id)
+- 根据`unique-key`查询一条数据，返回值为索引结果
 
 #### update(id, key, value)
 - 以`key-value`的形式去更新某一条数据里的值

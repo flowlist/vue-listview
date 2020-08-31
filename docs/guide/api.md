@@ -45,4 +45,4 @@ export const getListByPage = ({ page, count }) => {
 ```
 
 - 接口请求的参数会由组件自动维护，你只需要确定不同的请求`场景`即可
-- 返回值中的`result`和`no_more`是必须的，`total`用于计数展示，`extra`会作为额外数据存储在`store`中，会在下一次请求的`_extra`参数中携带
+- 返回值中的`result`和`no_more`是必须的，`total`用于计数展示，`extra`会作为额外数据存储在`store`中，会在下一次请求的`extra`参数中携带

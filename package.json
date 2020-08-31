@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-flowlist",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-flowlist/",
   "code_gen_prefix": "code-gen/",
@@ -20,7 +20,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.0.5",
+    "@flowlist/js-core": "^1.0.6",
     "intersection-observer": "^0.11.0",
     "vue": "2.6.12",
     "vuex": "^3.4.0"
@@ -35,7 +35,7 @@
     "@vue/cli-plugin-unit-jest": "~4.5.4",
     "@vue/cli-plugin-vuex": "~4.5.4",
     "@vue/cli-service": "~4.5.4",
-    "@vue/test-utils": "^1.0.4",
+    "@vue/test-utils": "^1.0.5",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",

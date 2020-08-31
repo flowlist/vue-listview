@@ -981,10 +981,10 @@
   resolved "https://registry.npm.taobao.org/@csstools/convert-colors/download/@csstools/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha1-rUldxBsS511YjG24uYNPCPoTHrc=
 
-"@flowlist/js-core@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.0.5.tgz#100391ad3f7393b296d7a3559ec03a4304f3ee00"
-  integrity sha512-wt43dWcttucvsLTQOPcdrPiABaECoBqqYTQ45DkhtnPHXKounQJgQKIVdBAIQg4Ky1IqFZnZ9o4dWqjuEVFYiw==
+"@flowlist/js-core@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.npm.taobao.org/@flowlist/js-core/download/@flowlist/js-core-1.0.6.tgz?cache=0&sync_timestamp=1598853592088&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40flowlist%2Fjs-core%2Fdownload%2F%40flowlist%2Fjs-core-1.0.6.tgz#ad3de647ecea160da9f605d444ed563208ceac9d"
+  integrity sha1-rT3mR+zqFg2p9gXURO1WMgjOrJ0=
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -2167,10 +2167,10 @@
   resolved "https://registry.yarnpkg.com/@vue/preload-webpack-plugin/-/preload-webpack-plugin-1.1.2.tgz#ceb924b4ecb3b9c43871c7a429a02f8423e621ab"
   integrity sha512-LIZMuJk38pk9U9Ur4YzHjlIyMuxPlACdBIHH9/nGYVTsaGKOSnSuELiE8vS9wa+dJpIYspYUOqk+L1Q4pgHQHQ==
 
-"@vue/test-utils@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npm.taobao.org/@vue/test-utils/download/@vue/test-utils-1.0.4.tgz#6341caccdf72da5914a5168e680ea12550fba98a"
-  integrity sha1-Y0HKzN9y2lkUpRaOaA6hJVD7qYo=
+"@vue/test-utils@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/@vue/test-utils/download/@vue/test-utils-1.0.5.tgz#676e1f986bb93ddc869d9c6cf1c820183d64d92f"
+  integrity sha1-Z24fmGu5PdyGnZxs8cggGD1k2S8=
   dependencies:
     dom-event-types "^1.0.0"
     lodash "^4.17.15"

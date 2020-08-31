@@ -19,6 +19,9 @@
       <button @click="unshift(2)">
         unshift - array
       </button>
+      <button @click="search">
+        search
+      </button>
     </template>
     <ul
       slot-scope="{ flow }"
@@ -128,6 +131,11 @@ export default {
     },
     reset() {
       this.$refs.loader.reset('total', Math.random())
+    },
+    search() {
+      const id = window.prompt('请输入要搜索的 id')
+      const result = this.$refs.loader.search(id)
+      alert(JSON.stringify(result))
     }
   }
 }

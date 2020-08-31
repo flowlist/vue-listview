@@ -284,6 +284,12 @@ export default {
     delete(id) {
       this._callMethod({ id, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
     },
+    search(id) {
+      if (!this.source) {
+        return undefined
+      }
+      return utils.searchValueByKey(this.source.result, id, this.uniqueKey)
+    },
     update(id, key, value) {
       this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
