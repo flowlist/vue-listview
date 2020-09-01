@@ -33,6 +33,9 @@ module.exports = {
     ]
   ],
   themeConfig: {
+    nav: [
+      { text: 'Github', link: 'https://github.com/flowlist/vue-flowlist' },
+    ],
     sidebar: [
       '/guide/start',
       {
