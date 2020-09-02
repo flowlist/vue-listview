@@ -3,7 +3,7 @@
 <Phone page="jump" />
 
 :::tip
-静态分页列表常见于 PC 端
+TODO
 :::
 
 ```vue

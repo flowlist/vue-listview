@@ -27,8 +27,8 @@
 
 | Name | Type | Default | Description |
 | --- | --- | --- | ---- |
-| *func | string | - | A defined function name, injected from `vuex` |
-| *type | string | - | ListType |
+| `*`func | string | - | A defined function name, injected from `vuex` |
+| `*`type | string | - | ListType |
 | namespace | string | list | If you want to have multiple data store |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
 | query | object | - | 透传给 API 层的参数 |

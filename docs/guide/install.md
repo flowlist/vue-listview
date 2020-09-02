@@ -1,6 +1,6 @@
 ### Installation
 
-#### Import package
+#### Install package
 ```shell script
 yarn add @flowlist/vue-listview
 // or
