@@ -34,6 +34,7 @@ export default {
     users: [],
     page: 1
   }),
+
   methods: {
     fetchUsers() {
       getUsers({ page: this.page })
@@ -43,6 +44,7 @@ export default {
         })
     },
   },
+
   created() {
     this.fetchUsers()
   }
@@ -76,6 +78,7 @@ export default {
     users: [],
     page: 1
   }),
+
   methods: {
     fetchUsers() {
       if (this.loading) {
@@ -98,6 +101,7 @@ export default {
         })
     },
   },
+
   created() {
     this.fetchUsers()
   }
@@ -120,6 +124,7 @@ export default {
       <p v-if="state1.noMore">End...</p>
       <button @click="fetchList1" v-else>click load next page</button>
     </template>
+
     <template #tab-2>
       <p v-if="state2.error">Error: {{ state2.error.message }}</p>
       <p v-else-if="state2.loading">Loading...</p>
@@ -153,6 +158,7 @@ export default {
       page: 1
     }
   }),
+
   methods: {
     fetchList1() {
       if (this.state1.loading) {
@@ -195,6 +201,7 @@ export default {
         })
     },
   },
+
   created() {
     this.fetchList1()
   }
@@ -204,4 +211,14 @@ export default {
 
 ## Usage
 
-todo
+[document](https://flowlist.github.io/vue-listview/guide/install.html)
+
+## API Reference
+
+[props document](https://flowlist.github.io/vue-listview/loader/props.html)
+
+[slots document](https://flowlist.github.io/vue-listview/loader/slots.html)
+
+## License
+
+[MIT](https://github.com/flowlist/vue-listview/blob/master/LICENSE)

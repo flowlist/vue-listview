@@ -1,13 +1,13 @@
-### 依赖项
+### Dependencies
 
-#### 引入包
+#### Import package
 ```shell script
 yarn add @flowlist/vue-listview
 // or
 npm i @flowlist/vue-listview
 ```
 
-#### 引入容器
+#### Import component
 ```javascript
 // entry.js
 import Vue from 'vue'
@@ -16,7 +16,7 @@ import { ListView } from '@flowlist/vue-listview'
 Vue.component(ListView.name, ListView)
 ```
 
-#### 引入数据源
+#### Import vuex
 ```javascript
 // store.js
 import Vue from 'vue'
@@ -34,10 +34,10 @@ export default new Vuex.Store({
 })
 ```
 
-1. `strict`必须设为`false`，因为这个包在`action`里调用了`commit`
-2. `list`是命名空间，可搭配`ListView`的`props：namespace`自定义
+1. `strict = false` is required
+2. `list` is `namespace`，you can custom it with `ListView props namespace`
 
-#### 如果你使用了`nuxt`
+#### if you use `nuxt`
 `store --> index.js`
 ```javascript
 export const strict = false
