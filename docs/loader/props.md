@@ -1,14 +1,14 @@
 ### Props
 
 
-| name | type | default | required? | 作用 |
+| Name | Type | Default | Required? | Description |
 | --- | --- | --- | --- | ---- |
 | func | string | - | Y | API 列表中的某个函数名，将会被调用 |
 | type | string | - | Y | 场景值的类型 |
 | query | object | - | N | 透传给 API 层的参数 |
 | auto | number | -1 | N | 触底自动请求的次数，-1 代表无限请求 |
 | preload | number | 200 | N | 距离底部多少 px 触发预加载 |
-| namespace | string | flow | N | store 模块的命名空间 |
+| namespace | string | list | N | store 模块的命名空间 |
 | uniqueKey | string | id | N | item 的 key |
 | cacheTimeout | number | 0 | N | 数据缓存的秒数，0 默认不缓存 |
 | displayNoMore | boolean | false | N | 当已经加载了所有数据后，是否展示文案提示 |

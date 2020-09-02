@@ -1,4 +1,4 @@
-### Dependencies
+### Installation
 
 #### Import package
 ```shell script

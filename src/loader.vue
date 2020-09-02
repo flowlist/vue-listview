@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flow-loader"
+    class="list-view"
     style="position:relative"
   >
     <template v-if="source">
@@ -11,7 +11,7 @@
       />
       <!--  flow list  -->
       <slot
-        :flow="source.result"
+        :list="source.result"
         :total="source.total"
         :count="source.result.length"
         :extra="source.extra"
@@ -22,11 +22,11 @@
         name="footer"
       />
       <!--  flow state  -->
-      <div class="flow-loader__state">
+      <div class="list-view__state">
         <!--   error   -->
         <div
           v-if="source.error"
-          class="flow-loader__state--error"
+          class="list-view__state--error"
           @click="_retryData"
         >
           <slot
@@ -47,7 +47,7 @@
         <!--   loading   -->
         <div
           v-else-if="source.loading"
-          class="flow-loader__state--loading"
+          class="list-view__state--loading"
         >
           <slot
             v-if="useFirstLoading && !source.result.length"
@@ -65,7 +65,7 @@
         <!--   nothing   -->
         <div
           v-else-if="source.nothing"
-          class="flow-loader__state--nothing"
+          class="list-view__state--nothing"
         >
           <slot name="nothing">
             <span>这里什么都没有</span>
@@ -74,7 +74,7 @@
         <!--   no-more   -->
         <div
           v-else-if="source.noMore"
-          class="flow-loader__state--no-more"
+          class="list-view__state--no-more"
         >
           <slot
             v-if="displayNoMore"
@@ -86,7 +86,7 @@
         <!--   normal   -->
         <div
           v-else-if="!isPagination"
-          class="flow-loader__state--load"
+          class="list-view__state--load"
           @click="loadMore()"
         >
           <div v-if="!isAuto">
@@ -100,7 +100,7 @@
     <div
       ref="shim"
       :style="shimStyle"
-      class="flow-loader__shim"
+      class="list-view__shim"
     />
   </div>
 </template>

@@ -209,6 +209,10 @@ export default {
 </script>
 ```
 
+### one app has many page
+
+> You want repeat the same code again and again?
+
 ## Usage
 
 [document](https://flowlist.github.io/vue-listview/guide/install.html)

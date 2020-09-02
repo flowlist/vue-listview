@@ -1,7 +1,7 @@
 ### Slots
 
 #### 头部
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | header | source |
 ```vue
@@ -11,17 +11,17 @@
 ```
 
 #### 列表
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
-| default | flow, total, count, extra |
+| default | list, total, count, extra |
 ```vue
 <ListView>
-  <ul slot-scope="{ flow, total, count, extra }" />
+  <ul slot-scope="{ list, total, count, extra }" />
 </ListView>
 ```
 
 #### 底部
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | footer | source |
 ```vue
@@ -31,36 +31,36 @@
 ```
 
 #### 首次接口返回错误
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | first-error | error |
 
 #### 接口返回错误
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | error | error |
 
 #### 首次正在加载
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | first-loading | - |
 
 #### 正在加载
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | loading | - |
 
 #### 列表为空
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | nothing | - |
 
 #### 没有更多数据了
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | no-more | - |
 
 #### 点击加载模块
-| 名称 | 参数 |
+| Name | Scope |
 | --- | --- |
 | load | - |

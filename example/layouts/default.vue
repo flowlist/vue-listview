@@ -170,7 +170,7 @@ a {
   border-radius: 5px;
 }
 
-.flow-loader {
+.list-view {
   padding: 0 15px;
 
   &__state--load,

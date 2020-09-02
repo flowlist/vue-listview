@@ -1,4 +1,4 @@
-### 方法
+### Ref Methods
 
 <Phone page="method" />
 

@@ -1,7 +1,7 @@
-### 接口层
+### API definition
 
 
-#### 接口导出
+#### Export API
 ```javascript
 // api.js
 export const getListByPage = ({ page, count }) => {
@@ -24,7 +24,7 @@ export const getListBySeenIds = ({ seen_ids, count }) => {
 ```
 
 
-#### 返回格式
+#### API Schema
 ```javascript
 export const getListByPage = ({ page, count }) => {
   return new Promise((resolve, reject) => {

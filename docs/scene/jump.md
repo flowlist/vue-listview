@@ -1,4 +1,4 @@
-### 静态分页列表
+### Static Pagination List
 
 <Phone page="jump" />
 

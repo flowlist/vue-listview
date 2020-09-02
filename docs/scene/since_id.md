@@ -1,4 +1,4 @@
-### 动态有序列表
+### Dynamic Ordered List
 
 <Phone page="since_id" />
 

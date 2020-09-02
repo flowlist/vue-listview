@@ -9,11 +9,11 @@
       :query="query"
     >
       <ul
-        slot-scope="{ flow }"
+        slot-scope="{ list }"
         class="demo-list"
       >
         <li
-          v-for="item in flow"
+          v-for="item in list"
           :key="item.id"
           :style="{ backgroundColor: item.style.color }"
           class="demo-item"

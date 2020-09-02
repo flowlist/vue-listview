@@ -37,9 +37,8 @@ module.exports = {
       { text: 'Github', link: 'https://github.com/flowlist/vue-listview' },
     ],
     sidebar: [
-      '/guide/start',
       {
-        title: '安装',
+        title: 'Usage',
         collapsable: false,
         children: [
           '/guide/install',
@@ -47,7 +46,7 @@ module.exports = {
         ]
       },
       {
-        title: '场景',
+        title: 'ListType',
         collapsable: false,
         children: [
           'scene/jump',
@@ -56,9 +55,8 @@ module.exports = {
           'scene/seen_ids'
         ]
       },
-      '/guide/store',
       {
-        title: '容器',
+        title: 'Component',
         collapsable: false,
         children: [
           '/loader/props',

@@ -1,4 +1,4 @@
-### 静态滚动列表
+### Static Scroll List
 
 <Phone page="page" />
 
