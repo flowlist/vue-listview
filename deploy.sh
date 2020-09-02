@@ -23,5 +23,5 @@ git push -f git@github.com:flowlist/vue-listview.git master:gh-pages
 
 cd -
 git add -A
-git commit -m 'update'
+git commit -m 'update doc'
 git push origin master

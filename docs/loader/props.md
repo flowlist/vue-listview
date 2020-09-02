@@ -1,15 +1,39 @@
 ### Props
 
+```vue
+<template>
+  <ListView
+    func="required.call.function.name.string"
+    type="required.list.type.string"
+    namespace="list"
+    unique-key="id"
+    :query="{}"
+    :auto="-1"
+    :preload="200"
+    :cache-timeout="0"
+    :display-no-more="false"
+    :use-first-error="false"
+    :use-first-loading="false"
+    :error-client-retry="true"
+    :scroll-x="false"
+    :success-callback="() => {}"
+    :error-callback="() => {}"
+  >
+    <!-- slot  -->
+  </ListView>
+</template>
+```
+
 
 | Name | Type | Default | Required? | Description |
 | --- | --- | --- | --- | ---- |
 | func | string | - | Y | API 列表中的某个函数名，将会被调用 |
 | type | string | - | Y | 场景值的类型 |
+| namespace | string | list | N | store 模块的命名空间 |
+| uniqueKey | string | id | N | item 的 key |
 | query | object | - | N | 透传给 API 层的参数 |
 | auto | number | -1 | N | 触底自动请求的次数，-1 代表无限请求 |
 | preload | number | 200 | N | 距离底部多少 px 触发预加载 |
-| namespace | string | list | N | store 模块的命名空间 |
-| uniqueKey | string | id | N | item 的 key |
 | cacheTimeout | number | 0 | N | 数据缓存的秒数，0 默认不缓存 |
 | displayNoMore | boolean | false | N | 当已经加载了所有数据后，是否展示文案提示 |
 | useFirstError | boolean | false | N | 第一屏数据返回 error 后，是否展示特殊提示 | 

@@ -89,11 +89,12 @@
           class="list-view__state--load"
           @click="loadMore()"
         >
-          <div v-if="!isAuto">
-            <slot name="load">
-              点击加载更多
-            </slot>
-          </div>
+          <slot
+            v-if="!isAuto"
+            name="load"
+          >
+            点击加载更多
+          </slot>
         </div>
       </div>
     </template>

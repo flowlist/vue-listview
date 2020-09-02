@@ -215,6 +215,45 @@ export default {
 
 ## Usage
 
+```vue
+<template>
+  <tab-container>
+    <template #tab-1>
+      <ListView
+        func="fetchList1"
+        type="page"
+      >
+        <ul slot-scope="{ list }">
+          <li v-for="user in list">{{ user.name }}</li>
+        </ul>
+      </ListView>
+    </template>
+
+    <template #tab-2>
+      <ListView
+        func="fetchList2"
+        type="page"
+      >
+        <ul slot-scope="{ list }">
+          <li v-for="user in list">{{ user.name }}</li>
+        </ul>
+      </ListView>
+    </template>
+  </tab-container>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    // no data...
+  }),
+  methods: {
+    // no code...
+  }
+}
+</script>
+```
+
 [document](https://flowlist.github.io/vue-listview/guide/install.html)
 
 ## API Reference
