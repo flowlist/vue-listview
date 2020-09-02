@@ -16,8 +16,8 @@
     :use-first-loading="false"
     :error-client-retry="true"
     :scroll-x="false"
-    :success-callback="() => {}"
-    :error-callback="() => {}"
+    :success-callback="null"
+    :error-callback="null"
   >
     <!-- slot  -->
   </ListView>
@@ -25,23 +25,23 @@
 ```
 
 
-| Name | Type | Default | Required? | Description |
-| --- | --- | --- | --- | ---- |
-| func | string | - | Y | API 列表中的某个函数名，将会被调用 |
-| type | string | - | Y | 场景值的类型 |
-| namespace | string | list | N | store 模块的命名空间 |
-| uniqueKey | string | id | N | item 的 key |
-| query | object | - | N | 透传给 API 层的参数 |
-| auto | number | -1 | N | 触底自动请求的次数，-1 代表无限请求 |
-| preload | number | 200 | N | 距离底部多少 px 触发预加载 |
-| cacheTimeout | number | 0 | N | 数据缓存的秒数，0 默认不缓存 |
-| displayNoMore | boolean | false | N | 当已经加载了所有数据后，是否展示文案提示 |
-| useFirstError | boolean | false | N | 第一屏数据返回 error 后，是否展示特殊提示 | 
-| useFirstLoading | boolean | false | N | 第一屏数据 loading 时，是否展示特殊提示 |
-| errorClickRetry | boolean | true | N | 当接口返回异常后，是否点击提示区域就自动重试 |
-| scrollX | boolean | false | N | 默认列表为纵向滚动 |
-| successCallback | function | - | N | 请求成功后的 callback |
-| errorCallback | function | - | N | 请求失败后的 callback |
+| Name | Type | Default | Description |
+| --- | --- | --- | ---- |
+| *func | string | - | A defined function name, injected from `vuex` |
+| *type | string | - | ListType |
+| namespace | string | list | If you want to have multiple data store |
+| uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
+| query | object | - | 透传给 API 层的参数 |
+| auto | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |
+| preload | number | 200 | How many pixels from the bottom begins loading the next page of data |
+| cacheTimeout | number | 0 | You can set a number(seconds) value to cache data at client side `LocalStorage` |
+| displayNoMore | boolean | false | When all data fetched, can show a bottom tips <br> set true `no-more` slot can display |
+| useFirstError | boolean | false | When you want display special tips on first screen rejected <br> set true `first-error` slot can display | 
+| useFirstLoading | boolean | false | When you want display special tips on first screen loading <br> set true `first-loading` slot can display |
+| errorClickRetry | boolean | true | When request is rejected <br> set true click `error` or `first-error` slot to retry |
+| scrollX | boolean | false | Horizontal list view set true  |
+| successCallback | function | - | Request is resolved call at client side |
+| errorCallback | function | - | Client side request is rejected |
 
 #### query
 最终透传给 API 的参数包括 query 以及 listview 自己维护的参数
@@ -74,7 +74,7 @@
 {
   "params": "<object> | 本次请求携带的参数",
   "data": "<object> | API 层 resolve 的数据",
-  "refresh": "<boolean> | 是否是下拉刷洗"
+  "refresh": "<boolean> | 是否是下拉刷刷新"
 }
 ```
 
