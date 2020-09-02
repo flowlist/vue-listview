@@ -3,7 +3,7 @@
 
 <template>
   <div id="page">
-    <FlowLoader
+    <ListView
       func="getListByPage"
       type="page"
       :query="query"
@@ -23,7 +23,7 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

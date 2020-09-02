@@ -34,7 +34,7 @@ module.exports = {
   ],
   themeConfig: {
     nav: [
-      { text: 'Github', link: 'https://github.com/flowlist/vue-flowlist' },
+      { text: 'Github', link: 'https://github.com/listview/vue-listview' },
     ],
     sidebar: [
       '/guide/start',

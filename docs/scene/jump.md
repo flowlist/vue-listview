@@ -8,13 +8,13 @@
 
 ```vue
 <template>
-  <FlowLader
+  <ListView
     ref="loader"
     func="getListByPage"
     type="jump"
     :query="requestParams"
   >
-  </FlowLader>
+  </ListView>
 </template>
 
 <script>

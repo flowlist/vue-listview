@@ -20,7 +20,7 @@
 | errorCallback | function | - | N | 请求失败后的 callback |
 
 #### query
-最终透传给 API 的参数包括 query 以及 flowlist 自己维护的参数
+最终透传给 API 的参数包括 query 以及 listview 自己维护的参数
 - 当 type 为 jump 时，无额外参数
 - 当 type 为 page 的时候，会自动维护 `page` 参数
 - 当 type 为 seenIds 时，自动维护 `seen_ids` 参数

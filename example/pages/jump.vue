@@ -3,7 +3,7 @@
 
 <template>
   <div id="jump">
-    <FlowLoader
+    <ListView
       ref="loader"
       func="getListByJump"
       type="jump"
@@ -33,7 +33,7 @@
           page-9
         </button>
       </div>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

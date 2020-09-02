@@ -3,7 +3,7 @@
 
 <template>
   <div id="first-loading">
-    <FlowLoader
+    <ListView
       func="getListByFirstLoading"
       type="page"
       :query="query"
@@ -25,7 +25,7 @@
       <div slot="first-loading">
         第一次加载，可以设置独特的 loading…
       </div>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

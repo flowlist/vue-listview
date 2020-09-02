@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import FlowLoader from '../../src/loader'
+import ListView from '../../src/loader'
 
-Vue.component(FlowLoader.name, FlowLoader)
+Vue.component(ListView.name, ListView)

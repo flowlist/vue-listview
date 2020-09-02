@@ -3,7 +3,7 @@
 
 <template>
   <div id="seen_ids">
-    <FlowLoader
+    <ListView
       func="getListBySeenIds"
       type="seenIds"
       :query="query"
@@ -22,7 +22,7 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

@@ -5,9 +5,9 @@
 | --- | --- |
 | header | source |
 ```vue
-<FlowLoader>
+<ListView>
   <header slot="header" slot-scope="{ source }" />
-</FlowLoader>
+</ListView>
 ```
 
 #### 列表
@@ -15,9 +15,9 @@
 | --- | --- |
 | default | flow, total, count, extra |
 ```vue
-<FlowLoader>
+<ListView>
   <ul slot-scope="{ flow, total, count, extra }" />
-</FlowLoader>
+</ListView>
 ```
 
 #### 底部
@@ -25,9 +25,9 @@
 | --- | --- |
 | footer | source |
 ```vue
-<FlowLoader>
+<ListView>
   <footer slot="footer" slot-scope="{ source }" />
-</FlowLoader>
+</ListView>
 ```
 
 #### 首次接口返回错误

@@ -53,7 +53,7 @@ export const cache = {
   },
 
   key(key, expired = false) {
-    return `flow-vuex-${key}${expired ? '-t' : ''}`
+    return `listview-${key}${expired ? '-t' : ''}`
   }
 }
 

@@ -2,7 +2,7 @@
 </style>
 
 <template>
-  <FlowLoader
+  <ListView
     ref="loader"
     func="getListByPage"
     type="page"
@@ -67,7 +67,7 @@
         reset - {{ source.total }}
       </button>
     </template>
-  </FlowLoader>
+  </ListView>
 </template>
 
 <script>

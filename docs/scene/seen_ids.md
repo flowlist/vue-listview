@@ -4,14 +4,14 @@
 
 ```vue
 <template>
-  <FlowLader
+  <ListView
     ref="loader"
     func="getListBySeenIds"
     type="seenIds"
     :query="requestParams"
     unique-key="data.number_id"
   >
-  </FlowLader>
+  </ListView>
 </template>
 
 <script>

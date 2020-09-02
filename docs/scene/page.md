@@ -4,14 +4,14 @@
 
 ```vue
 <template>
-  <FlowLader
+  <ListView
     ref="loader"
     func="getListByPage"
     type="page"
     :auto="3"
     :query="requestParams"
   >
-  </FlowLader>
+  </ListView>
 </template>
 
 <script>

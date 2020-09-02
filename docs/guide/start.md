@@ -6,7 +6,7 @@
 #### 常见信息流场景
 <img src="../images/flowlist.png"> 
 
-#### vue-flowlist 就是对信息流场景的抽象
+#### vue-listview 就是对信息流场景的抽象
 - 无需后端改动，对前端的约束可以提高代码的可维护性
 - 自动维护列表状态：`loading`、`error`等
 - 支持各种翻页方式，自动加载下一页

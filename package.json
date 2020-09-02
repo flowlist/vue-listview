@@ -1,10 +1,10 @@
 {
-  "name": "@flowlist/vue-flowlist",
-  "version": "1.0.3",
+  "name": "@flowlist/vue-listview",
+  "version": "1.0.0",
   "deploy_url": "https://flowlist.github.io",
-  "project_base_url": "/vue-flowlist/",
+  "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
-  "main": "dist/flowlist.umd.min.js",
+  "main": "dist/listview.umd.min.js",
   "files": [
     "dist"
   ],
@@ -14,7 +14,7 @@
     "doc:build": "cross-env NODE_ENV=production vuepress build docs",
     "doc:generate": "nuxt generate",
     "pkg:dev": "cross-env NODE_ENV=development nodemon example/server/index.js --watch server",
-    "pkg:build": "vue-cli-service build --target lib --name flowlist src/index.js",
+    "pkg:build": "vue-cli-service build --target lib --name listview src/index.js",
     "test:unit": "echo 1",
     "deploy": "bash deploy.sh",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
@@ -39,7 +39,7 @@
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "faker": "^5.1.0",
@@ -55,6 +55,6 @@
     "vue-template-compiler": "2.6.12",
     "vuepress": "^1.5.4",
     "vuepress-plugin-code-gen-box": "^0.0.9",
-    "vuepress-plugin-dehydrate": "^1.1.4"
+    "vuepress-plugin-dehydrate": "^1.1.5"
   }
 }

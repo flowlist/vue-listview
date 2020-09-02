@@ -3,7 +3,7 @@
 
 <template>
   <div id="first-error">
-    <FlowLoader
+    <ListView
       func="getListByFirstError"
       type="page"
       :query="query"
@@ -29,7 +29,7 @@
         {{ error }}
         <p>第一次加载就 error，可以设置独特的 error（点击重试3次）…</p>
       </div>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

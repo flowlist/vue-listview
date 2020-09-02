@@ -3,7 +3,7 @@
 
 <template>
   <div id="error">
-    <FlowLoader
+    <ListView
       func="getListWithError"
       type="page"
       :query="query"
@@ -21,7 +21,7 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 

@@ -19,7 +19,7 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:flowlist/vue-flowlist.git master:gh-pages
+git push -f git@github.com:flowlist/vue-listview.git master:gh-pages
 
 cd -
 git add -A

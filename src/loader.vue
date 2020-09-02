@@ -111,7 +111,7 @@ import { checkInView, getObserver } from './utils'
 import './polyfill'
 
 export default {
-  name: 'FlowLoader',
+  name: 'ListView',
   props: {
     func: {
       required: true,
@@ -169,7 +169,7 @@ export default {
     },
     namespace: {
       type: String,
-      default: 'flow'
+      default: 'list'
     },
     uniqueKey: {
       type: String,

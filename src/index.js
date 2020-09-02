@@ -1,7 +1,7 @@
-import flowStore from './store'
-import flowLoader from './loader'
+import ListStore from './store'
+import ListView from './loader'
 
 export default {
-  flowStore,
-  flowLoader
+  ListStore,
+  ListView
 }

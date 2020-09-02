@@ -11,7 +11,7 @@
         刷新页面
       </button>
     </div>
-    <FlowLoader
+    <ListView
       ref="loader"
       func="getListBySinceId"
       type="sinceId"
@@ -31,7 +31,7 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
-    </FlowLoader>
+    </ListView>
   </div>
 </template>
 
