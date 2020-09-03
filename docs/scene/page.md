@@ -3,7 +3,7 @@
 <Phone page="page" />
 
 :::tip
-TODO
+Static scroll list appear primarily on the mobile side to show data that doesn't change frequently, such as my follow list
 :::
 
 ```vue

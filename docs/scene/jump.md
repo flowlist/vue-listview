@@ -3,7 +3,7 @@
 <Phone page="jump" />
 
 :::tip
-TODO
+Static paging lists appear primarily on the PC side to show data that doesn't change frequently, such as company announcements
 :::
 
 ```vue
