@@ -37,7 +37,7 @@ module.exports = {
     repo: 'flowlist/vue-listview',
     // Customising the header label
     // Defaults to "GitHub"/"GitLab"/"Bitbucket" depending on `themeConfig.repo`
-    repoLabel: 'Contribute!',
+    repoLabel: 'Github',
     // if your docs are not at the root of the repo:
     docsDir: 'docs',
     // if your docs are in a specific branch (defaults to 'master'):
@@ -47,9 +47,6 @@ module.exports = {
     // custom text for edit link. Defaults to "Edit this page"
     editLinkText: 'Help us improve this page!',
     lastUpdated: 'Last Updated',
-    nav: [
-      { text: 'Github', link: 'https://github.com/flowlist/vue-listview' },
-    ],
     sidebar: [
       {
         title: 'Usage',
