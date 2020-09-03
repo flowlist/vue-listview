@@ -7,7 +7,7 @@
     type="page"
     query="{ count: 10 }"
   >
-    <-- data -->
+    <!--  data  -->
   </ListView>
 </template>
 

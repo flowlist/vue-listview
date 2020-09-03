@@ -31,14 +31,13 @@ export default {
       const { query } = this.$route
       return {
         id: query.id,
-        count: 10,
-        page: query.page || 1 // 设置请求第一页
+        page: query.page || 1,
+        count: 10
       }
     }
   },
   methods: {
     handlePaginationClick(page) {
-      // 后续只需要传入 page 就行了，id 等其他参数不需要再传
       this.$refs.loader.jump(page)
     }
   }

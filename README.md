@@ -218,6 +218,7 @@ export default {
 ```vue
 <template>
   <tab-container>
+
     <template #tab-1>
       <ListView
         func="fetchList1"
@@ -239,6 +240,7 @@ export default {
         </ul>
       </ListView>
     </template>
+
   </tab-container>
 </template>
 

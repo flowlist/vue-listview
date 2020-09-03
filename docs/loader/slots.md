@@ -55,8 +55,6 @@
       When you want custom load next page btn text
       and
       not auto load mode
-      and
-      props type not jump
       -->
     </template>
   </ListView>
