@@ -997,10 +997,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flowlist/js-core@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.npm.taobao.org/@flowlist/js-core/download/@flowlist/js-core-1.0.6.tgz?cache=0&sync_timestamp=1598853592088&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40listview%2Fjs-core%2Fdownload%2F%40listview%2Fjs-core-1.0.6.tgz#ad3de647ecea160da9f605d444ed563208ceac9d"
-  integrity sha1-rT3mR+zqFg2p9gXURO1WMgjOrJ0=
+"@flowlist/js-core@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.0.7.tgz#afc424008228437a4762c1853b9f302ae05c5fb4"
+  integrity sha512-6o0eFxfDF9ZXqQhYj7TY3dsHYKiYg3WPbe+8yES87iuYjsUu94PZfo31wKxQQ2nytFn7ZO2bUlKoZ0s3m+tY1A==
 
 "@hapi/address@2.x.x":
   version "2.1.4"

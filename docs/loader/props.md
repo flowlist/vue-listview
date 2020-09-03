@@ -19,7 +19,7 @@
     :success-callback="null"
     :error-callback="null"
   >
-    <!-- slot  -->
+    <!--  slot  -->
   </ListView>
 </template>
 ```

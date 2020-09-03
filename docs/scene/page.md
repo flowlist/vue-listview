@@ -4,6 +4,8 @@
 
 :::tip
 Static scroll list appear primarily on the mobile side to show data that doesn't change frequently, such as my follow list
+
+- The parameter automatically carries **`page`**, start from `1`
 :::
 
 ```vue
