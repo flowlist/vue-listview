@@ -109,7 +109,6 @@
 <script>
 import { utils, ENUM } from '@flowlist/js-core'
 import { checkInView, getObserver } from './utils'
-import './polyfill'
 
 export default {
   name: 'ListView',

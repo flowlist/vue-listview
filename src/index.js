@@ -1,3 +1,4 @@
+import 'intersection-observer'
 import ListStore from './store'
 import ListView from './loader'
 

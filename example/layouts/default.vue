@@ -12,6 +12,10 @@
 * {
   box-sizing: border-box;
   user-select: none;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 ul {

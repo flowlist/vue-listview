@@ -7,6 +7,7 @@
       func="getListBySeenIds"
       type="seenIds"
       :query="query"
+      display-no-more
       unique-key="data.number_id"
     >
       <ul
@@ -22,6 +23,13 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
+
+      <template #no-more>
+        <p style="text-align: center">
+          custom no more text
+        </p>
+        <br>
+      </template>
     </ListView>
   </div>
 </template>
