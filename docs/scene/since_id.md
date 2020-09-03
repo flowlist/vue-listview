@@ -13,8 +13,15 @@ TODO
     func="getListBySeenIds"
     type="sinceId"
     :query="requestParams"
-    unique-key="data.number_id"
   >
+    <template #header>
+      <button @click="fetchUp">向上获取</button>
+      <button @click="refresh">刷新页面</button>
+    </template>
+
+    <ul slot-scope="{ list }">
+      <item v-for="item in list" :key="item.id" :item="item" />
+    </ul>
   </ListView>
 </template>
 
@@ -27,6 +34,14 @@ export default {
         id: query.id,
         count: 10
       }
+    }
+  },
+  methods: {
+    fetchUp() {
+      this.$refs.loader.loadBefore()
+    },
+    refresh() {
+      this.$refs.loader.refresh()
     }
   }
 }

@@ -14,6 +14,13 @@ TODO
     type="jump"
     :query="requestParams"
   >
+    <ul slot-scope="{ list }">
+      <item v-for="item in list" :key="item.id" :item="item" />
+    </ul>
+    
+    <template #footer>
+       <Pagination @change="handlePaginationClick" />
+    </template>
   </ListView>
 </template>
 

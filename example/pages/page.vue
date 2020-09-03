@@ -23,6 +23,14 @@
           <span>order：{{ item.id }}，id：{{ item.data.number_id }}</span>
         </li>
       </ul>
+
+      <template #loading>
+        custom loading text
+      </template>
+
+      <template #load>
+        click load next page
+      </template>
     </ListView>
   </div>
 </template>

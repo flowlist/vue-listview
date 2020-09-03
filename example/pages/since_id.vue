@@ -3,14 +3,6 @@
 
 <template>
   <div id="since_id">
-    <div>
-      <button @click="fetchUp">
-        向上获取
-      </button>
-      <button @click="refresh">
-        刷新页面
-      </button>
-    </div>
     <ListView
       ref="loader"
       func="getListBySinceId"
@@ -18,6 +10,16 @@
       :query="query"
       unique-key="data.number_id"
     >
+      <template #header>
+        <br>
+        <button @click="fetchUp">
+          向上获取
+        </button>
+        <button @click="refresh">
+          刷新页面
+        </button>
+      </template>
+
       <ul
         slot-scope="{ list }"
         class="demo-list"

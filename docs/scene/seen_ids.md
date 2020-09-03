@@ -15,6 +15,9 @@ TODO
     :query="requestParams"
     unique-key="data.number_id"
   >
+    <ul slot-scope="{ list }">
+      <item v-for="item in list" :key="item.data.number_id" :item="item" />
+    </ul>
   </ListView>
 </template>
 

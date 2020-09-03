@@ -29,9 +29,14 @@
         <button @click="load(2)">
           page-2
         </button>
+        <button @click="load(4)">
+          page-4
+        </button>
         <button @click="load(9)">
           page-9
         </button>
+        <br>
+        <br>
       </div>
     </ListView>
   </div>

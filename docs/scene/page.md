@@ -15,6 +15,17 @@ TODO
     :auto="3"
     :query="requestParams"
   >
+    <ul slot-scope="{ list }">
+      <item v-for="item in list" :key="item.id" :item="item" />
+    </ul>
+
+    <template #loading>
+      custom loading text
+    </template>
+    
+    <template #load>
+      click load next page
+    </template>
   </ListView>
 </template>
 
