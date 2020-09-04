@@ -8,6 +8,23 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowlist/vue-listview.git"
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "promise",
+    "listview",
+    "flowlist"
+  ],
+  "author": "falstack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flowlist/vue-listview/issues"
+  },
+  "homepage": "https://github.com/flowlist/vue-listview#readme",
   "scripts": {
     "doc:dev": "npm run doc:run",
     "doc:run": "cross-env NODE_ENV=development vuepress dev docs",

@@ -1,4 +1,4 @@
-# vue-listview [![npm package](https://badge.fury.io/js/%40flowlist%2Fvue-listview.svg)](https://www.npmjs.com/package/@flowlist/vue-listview)  [![License](https://gitlicense.com/badge/flowlist/vue-listview)](https://github.com/flowlist/vue-listview/blob/master/LICENSE)
+# vue-listview [![npm package](https://badge.fury.io/js/%40flowlist%2Fvue-listview.svg)](https://www.npmjs.com/package/@flowlist/vue-listview)  [![License](https://gitlicense.com/badge/flowlist/vue-listview)](https://github.com/flowlist/vue-listview/blob/master/LICENSE) [![Coverage](https://codecov.io/gh/flowlist/js-core/branch/master/graph/badge.svg)](https://github.com/flowlist/js-core)
 
 > todo
 
