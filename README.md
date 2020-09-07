@@ -57,12 +57,12 @@ export default {
 ```vue
 <template>
   <div>
-    <p v-if="error">Error: {{ error.message }}</p>
-    <p v-else-if="loading">Loading...</p>
-    <p v-else-if="nothing">Nothing...</p>
+    <p v-if="nothing">Nothing...</p>
     <ul v-else>
       <li v-for="user in users">{{ user.name }}</li>
     </ul>
+    <p v-if="error">Error: {{ error.message }}</p>
+    <p v-if="loading">Loading...</p>
     <p v-if="noMore">End...</p>
     <button @click="fetchUsers" v-else>click load next page</button>
   </div>
@@ -115,23 +115,23 @@ export default {
 <template>
   <tab-container>
     <template #tab-1>
-      <p v-if="state1.error">Error: {{ state1.error.message }}</p>
-      <p v-else-if="state1.loading">Loading...</p>
-      <p v-else-if="state1.nothing">Nothing...</p>
+      <p v-if="state1.nothing">Nothing...</p>
       <ul v-else>
         <li v-for="user in state1.users">{{ user.name }}</li>
       </ul>
+      <p v-if="state1.error">Error: {{ state1.error.message }}</p>
+      <p v-if="state1.loading">Loading...</p>
       <p v-if="state1.noMore">End...</p>
       <button @click="fetchList1" v-else>click load next page</button>
     </template>
 
     <template #tab-2>
-      <p v-if="state2.error">Error: {{ state2.error.message }}</p>
-      <p v-else-if="state2.loading">Loading...</p>
-      <p v-else-if="state2.nothing">Nothing...</p>
+      <p v-if="state2.nothing">Nothing...</p>
       <ul v-else>
         <li v-for="user in state2.users">{{ user.name }}</li>
       </ul>
+      <p v-if="state2.error">Error: {{ state2.error.message }}</p>
+      <p v-if="state1.loading">Loading...</p>
       <p v-if="state2.noMore">End...</p>
       <button @click="fetchList2" v-else>click load next page</button>
     </template>
