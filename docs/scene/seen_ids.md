@@ -5,8 +5,8 @@
 :::tip
 Dynamic unordered lists often appear in lists sorted by heat, such as HackerNews
 
-- The parameter automatically carries **`seen_ids`**
-- Which is the id of all items that have been fetched, such as seen_ids：'1,2,3,4,5'
+- The parameter automatically carries **`seen_ids`**, 
+which is the id of all items that have been fetched, such as seen_ids：'1,2,3,4,5'
 :::
 
 ```vue
