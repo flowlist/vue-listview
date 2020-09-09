@@ -108,7 +108,11 @@
 
 <script>
 import { utils, ENUM } from '@flowlist/js-core'
-import { checkInView, getObserver } from './utils'
+import { throttle } from 'throttle-debounce'
+import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom } from './utils'
+
+const LAZY_MODE_OBSERVE = 'observe'
+const LAZY_MODE_SCROLL = 'scroll'
 
 export default {
   name: 'ListView',
@@ -178,6 +182,11 @@ export default {
     scrollX: {
       type: Boolean,
       default: false
+    },
+    lazyMode: {
+      type: String,
+      default: LAZY_MODE_OBSERVE,
+      validator: val => ~[LAZY_MODE_OBSERVE, LAZY_MODE_SCROLL].indexOf(val)
     }
   },
   data() {
@@ -209,7 +218,7 @@ export default {
       return this.type === ENUM.FETCH_TYPE.PAGINATION
     },
     observer() {
-      return getObserver
+      return this.lazyMode === LAZY_MODE_OBSERVE ? getObserver : null
     },
     shimStyle() {
       const result = {
@@ -259,8 +268,12 @@ export default {
     this._initFlowLoader()
   },
   beforeDestroy() {
-    this.observer.unobserve(this.$refs && this.$refs.shim)
-    this.observer.disconnect()
+    if (this.observer) {
+      this.observer.unobserve(this.$refs && this.$refs.shim)
+      this.observer.disconnect()
+    } else {
+      offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
+    }
   },
   methods: {
     reset(key, value) {
@@ -394,14 +407,14 @@ export default {
       this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
     },
     _detectLoadMore() {
-      if (this.source.nothing || this.source.noMore || this.source.error) {
+      if (!this.source || this.source.nothing || this.source.noMore || this.source.error) {
         return
       }
       // 如果列表的数据没有撑满页面，就继续请求更多
       if (
         this.isAuto &&
         this.$refs.shim &&
-        checkInView(this.$refs.shim, this.preload)
+        checkInView(this.$refs.shim)
       ) {
         this.loadMore()
       }
@@ -419,11 +432,15 @@ export default {
         }
         return
       }
-      if (checkInView(shimDom, this.preload)) {
+      if (checkInView(shimDom)) {
         this.initData()
       }
-      shimDom.__lazy_handler__ = this._fetchDataFunc.bind(this)
-      this.observer.observe(shimDom)
+      if (this.observer) {
+        shimDom.__lazy_handler__ = this._fetchDataFn.bind(this)
+        this.observer.observe(shimDom)
+      } else {
+        addEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
+      }
     },
     _retryData() {
       if (!this.errorClickRetry) {
@@ -461,7 +478,7 @@ export default {
         refresh: false
       })
     },
-    _fetchDataFunc() {
+    _fetchDataFn() {
       if (!this.source) {
         return
       }
@@ -475,17 +492,31 @@ export default {
       }
 
       if (this.source.noMore || this.source.nothing || (this.isPagination && this.source.fetched)) {
-        const shimDom = this.$refs.shim
-        if (!shimDom) {
-          return
+        if (this.observer) {
+          const shimDom = this.$refs.shim
+          if (!shimDom) {
+            return
+          }
+          this.observer.unobserve(shimDom)
+          shimDom.__lazy_handler__ = undefined
+        } else {
+          offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
         }
-        this.observer.unobserve(shimDom)
-        shimDom.__lazy_handler__ = undefined
         return
       }
 
       this.source.fetched ? this.loadMore() : this.initData()
     },
+    _scrollFn: throttle(250, function () {
+      const shimDom = this.$refs.shim
+      if (!shimDom) {
+        return
+      }
+      if (!checkInView(shimDom)) {
+        return
+      }
+      this._fetchDataFn()
+    }),
     _handleAsyncError(error) {
       if (!this.errorCallback) {
         return

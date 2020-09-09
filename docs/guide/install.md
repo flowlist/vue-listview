@@ -21,7 +21,7 @@ Vue.component(ListView.name, ListView)
 // store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ListStore } from '@fliwlist/vue-listview'
+import { ListStore } from '@flowlist/vue-listview'
 import * as api from '~/api'
 
 Vue.use(Vuex)
@@ -44,7 +44,7 @@ export const strict = false
 ```
 `store --> list.js`
 ```javascript
-import { ListStore } from '@fliwlist/vue-listview'
+import { ListStore } from '@flowlist/vue-listview'
 import * as api from '~/api'
 
 const list = ListStore({ api })

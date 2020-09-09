@@ -68,7 +68,7 @@ export const getObserver = isServer ? null :
     })
   })
 
-export const checkInView = (dom, preload) => {
+export const checkInView = dom => {
   if (!dom || isServer) {
     return false
   }
@@ -77,9 +77,58 @@ export const checkInView = (dom, preload) => {
     return false
   }
   return (
-    rect.top < window.innerHeight + preload &&
-    rect.bottom + preload > 0 &&
-    rect.left < window.innerWidth + preload &&
-    rect.right + preload > 0
+    rect.top < window.innerHeight &&
+    rect.bottom > 0 &&
+    rect.left < window.innerWidth &&
+    rect.right > 0
   )
+}
+
+export const getScrollParentDom = (dom, scrollX) => {
+  let el = dom
+  if (!el) {
+    return null
+  }
+  while (
+    el &&
+    el.tagName !== 'HTML' &&
+    el.tagName !== 'BOYD' &&
+    el.nodeType === 1
+    ) {
+    const style = window.getComputedStyle(el)[`overflow${scrollX ? 'X' : 'Y'}`]
+    if (style === 'scroll' || style === 'auto') {
+      if (el.tagName === 'HTML' || el.tagName === 'BODY') {
+        return document
+      }
+      return el
+    }
+    el = el.parentNode
+  }
+  return document
+}
+
+/**
+ * 事件绑定
+ * @param elm
+ * @param {string} type
+ * @param {function} listener
+ */
+export const addEvent = (elm, type, listener) => {
+  elm.addEventListener(type, listener, {
+    capture: false,
+    passive: true
+  })
+}
+
+/**
+ * 事件解绑
+ * @param elm
+ * @param {string} type
+ * @param {function} listener
+ */
+export const offEvent = (elm, type, listener) => {
+  elm.removeEventListener(type, listener, {
+    capture: false,
+    passive: true
+  })
 }

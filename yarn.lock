@@ -997,10 +997,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flowlist/js-core@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.0.9.tgz#eb44c3aea30b9c085054f4335890f00c18f44d2e"
-  integrity sha512-qxtXQdivd7IbjEnTleOPYi57CHX1guTLoALftd7Il1BblGjWFrda2H7X5JLAkK8F8fNDB6flVZPblUmz6qaOqA==
+"@flowlist/js-core@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.0.10.tgz#4b9ef3d82c4b3f21d362832f684e8b591f484ca6"
+  integrity sha512-dEBh7jhmWet8b6aEW7YiCdgMf6U76FyaHBHODN4+Ho9FnfRv7NLGOby4p7c2y0cQV4EbwF3nmUe3UnXUZotb/A==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -13159,6 +13159,11 @@ throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
   integrity sha1-iQN8vJLFarGJJua6TLsgDhVnKmo=
+
+throttle-debounce@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-2.3.0.tgz?cache=0&sync_timestamp=1597223460291&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthrottle-debounce%2Fdownload%2Fthrottle-debounce-2.3.0.tgz#fd31865e66502071e411817e241465b3e9c372e2"
+  integrity sha1-/TGGXmZQIHHkEYF+JBRls+nDcuI=
 
 through2@^2.0.0:
   version "2.0.5"

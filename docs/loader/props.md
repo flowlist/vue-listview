@@ -42,6 +42,7 @@
 | scrollX | boolean | false | Horizontal list view set true  |
 | successCallback | function | - | Called at a client side, when request is resolved |
 | errorCallback | function | - | Called when a client side request is rejected |
+| lazyMode | String | observe | use IntersectionObserver or getBoundingClientRect to lazy load，opt: `observe`、`scroll` |
 
 #### uniqueKey
 Support for nested key names，eg：
