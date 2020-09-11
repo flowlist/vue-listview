@@ -1,10 +1,10 @@
 # vue-listview [![npm package](https://badge.fury.io/js/%40flowlist%2Fvue-listview.svg)](https://www.npmjs.com/package/@flowlist/vue-listview)  [![License](https://gitlicense.com/badge/flowlist/vue-listview)](https://github.com/flowlist/vue-listview/blob/master/LICENSE)
 
-<p align="center">
-    <img width="400" height="200" alt="Logo" src="https://github.com/flowlist/vue-listview/blob/master/logo.jpg?raw=true" />
-</p>
-
 > 没什么好解释的，[中文文档](https://flowlist.github.io/vue-listview/zh/)
+
+<p align="center">
+    <img width="400" height="200" alt="Logo" src="https://raw.githubusercontent.com/flowlist/vue-listview/master/logo.jpg" />
+</p>
 
 ---
 
