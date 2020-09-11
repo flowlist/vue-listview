@@ -1,58 +1,56 @@
-### Ref Methods
+### 方法
 
 <Phone page="method" />
 
 :::tip
-All of following methods called through $refs
+下面所有的函数都需要通过`$refs`来调用
 :::
 
 #### initData(\<object\>)
-- The data initialization method called manually
-- Manual triggering is generally not required
-- The parameters assigned into the request query
+- 手动请求第一页数据，一般不需要手动
+- 参数会透传给 API 层
 
 #### loadMore(\<object\>)
-- Manually get the data for the next page
-- When in infinite scrolling mode, no need to call
-- The parameters assigned into the request query
+- 请求下一页的数据，当无限滚动时无需调用
+- T参数会透传给 API 层
 
 #### loadBefore(\<object\>)
-- Manually get the data from the previous page
-- The parameters assigned into the request query
+- 请求上一页的数据
+- 参数会透传给 API 层
 
 #### refresh(\<boolean\>)
-- Refresh the list
-- When the parameter is false, loading state will not be displayed at refreshing
-- default `true`
+- 刷新整个列表
+- 当参数设置为`false`，在刷新时就不会展示`loading`
+- 默认是 `true`
 
 #### retry(\<boolean\>)
-- When the API request rejected，called to retry
-- When the parameter is false, loading state will not be displayed at refreshing
-- default `true`
+- 当接口异常返回时，手动调用来重试
+- 当参数设置为`false`，在重试时就不会展示`loading`
+- 默认是 `true`
 
 #### jump(\<number\>)
-- When the `ListType` is `jump`, called to jump to the page
+- 当`type`是`jump`时, 手动调用来跳转至指定页面
 
 #### push(\<object|array\>)
-- Appends one or more data to the **end** of the list
+- 在列表尾部追加数据
 
 #### unshift(\<object|array\>)
-- Appends one or more data to the **head** of the list
+- 在列表顶部追加数据
 
 #### insertBefore(id, value)
-- Insert an item **before** a certain item
+- 在某个元素之前插入一条数据
 
 #### insertAfter(id, value)
-- Insert an item **after** a certain item
+- 在某个元素之后插入一条数据
 
 #### delete(id)
-- delete item by `id`，The index is `unique-key`
+- 删除某个元素，索引是 `unique-key`
 
 #### search(id)
-- search item by `id`, return result value，The index is `unique-key`
+- 搜索某个元素, 返回值是结果或`null`，索引是 `unique-key`
 
 #### reset(key, value)
-- Override any field in the data store
+- 重写列表的任意一个字段
 ```json
 {
   "result": [],
@@ -71,7 +69,7 @@ this.$refs.loader.reset('total', 1)
 ```
 
 #### patch(\<object|array\>)
-- Patch the data in the list
+- 给数据打补丁
 ```json
 [
   {
@@ -116,7 +114,7 @@ this.$refs.loader.patch({
 ```
 
 #### update(id, key, value)
-- Update a field of an item. eg:
+- 更新某个元素的值. 如:
 ```json
 [
   {

@@ -79,9 +79,7 @@
           <slot
             v-if="displayNoMore"
             name="no-more"
-          >
-            <span>没有更多了</span>
-          </slot>
+          />
         </div>
         <!--   normal   -->
         <div
@@ -144,18 +142,6 @@ export default {
       type: Function,
       default: undefined,
       validator: val => val === undefined || typeof val === 'function'
-    },
-    displayNoMore: {
-      type: Boolean,
-      default: false
-    },
-    useFirstError: {
-      type: Boolean,
-      default: false
-    },
-    useFirstLoading: {
-      type: Boolean,
-      default: false
     },
     errorClickRetry: {
       type: Boolean,
@@ -244,6 +230,15 @@ export default {
       }
 
       return result
+    },
+    useFirstLoading() {
+      return !!this.$scopedSlots['first-loading']
+    },
+    useFirstError() {
+      return !!this.$scopedSlots['first-error']
+    },
+    displayNoMore() {
+      return !!this.$scopedSlots['no-more']
     }
   },
   watch: {

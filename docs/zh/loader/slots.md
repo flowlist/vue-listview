@@ -7,49 +7,49 @@
     type="listType"
   >
     <header slot="header" slot-scope="{ source }">
-      <!--   You can render list header at here. eg：title、total   -->
+      <!--   你可以在这里渲染列表的头部. 如：标题、总数   -->
     </header>
 
     <ul slot-scope="{ list, total, count, extra }">
-      <!--   You can use v-for="item in list" to render items   -->
+      <!--   你可以通过 v-for="item in list" 来渲染列表   -->
     </ul>
 
     <footer slot="footer" slot-scope="{ source }">
-      <!--   You can render list footer at here. eg：Pagination  -->
+      <!--   你可以在这里渲染列表的地步. 如：分页器组件  -->
     </footer>
     
     <template #first-error="{ error }">
-      <!--   first request rejected  -->
+      <!--   当你想为首屏的接口异常设置特殊提示时  -->
     </template>
 
     <template #error="{ error }">
-      <!--   When request rejected and not display first error   -->
+      <!--   当接口响应错误时   -->
     </template>
 
     <template #first-loading>
-      <!--   first request pending  -->
+      <!--    当你想为首屏的接口等待设置特殊提示时  -->
     </template>
 
     <template #loading>
-      <!--   When request pending and not display first loading   -->
+      <!--   当列表正在等待接口响应时   -->
     </template>
   
     <template #nothing>
-      <!--   When first request resolved but no data response  -->
+      <!--   当列表为空列表时  -->
     </template>
 
     <template #no-more>
-      <!--   When not first request resolved but no data response  -->
+      <!--   当列表已经完全加载没有更多数据时  -->
     </template>
     
     <template #load>
-      <!--   When you want custom load next page btn text  -->
+      <!--    当你想自定义加载下一页的文案时（自动加载模式下无效） -->
     </template>
   </ListView>
 </template>
 ```
 
-#### default source schema
+#### 默认`source`的格式
 ```json
 {
   "result": [],

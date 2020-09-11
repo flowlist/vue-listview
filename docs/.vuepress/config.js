@@ -18,6 +18,14 @@ module.exports = {
   title: pkg.name + ' ' + pkg.version,
   base: isProd ? pkg.project_base_url : '/',
   evergreen: true,
+  locales: {
+    '/': {
+      lang: 'en-US',
+    },
+    '/zh/': {
+      lang: 'zh-CN',
+    }
+  },
   define: {
     'process.env.LOCAL_IP': getLocalIP(),
   },
@@ -33,49 +41,86 @@ module.exports = {
     ]
   ],
   themeConfig: {
-    // Assumes GitHub. Can also be a full GitLab url.
     repo: 'flowlist/vue-listview',
-    // Customising the header label
-    // Defaults to "GitHub"/"GitLab"/"Bitbucket" depending on `themeConfig.repo`
     repoLabel: 'Github',
-    // if your docs are not at the root of the repo:
     docsDir: 'docs',
-    // if your docs are in a specific branch (defaults to 'master'):
     docsBranch: 'master',
-    // defaults to false, set to true to enable
     editLinks: true,
-    // custom text for edit link. Defaults to "Edit this page"
-    editLinkText: 'Help us improve this page!',
-    lastUpdated: 'Last Updated',
-    sidebar: [
-      {
-        title: 'Usage',
-        collapsable: false,
-        children: [
-          '/guide/install',
-          '/guide/api'
+    locales: {
+      '/': {
+        label: 'English',
+        selectText: 'Languages',
+        ariaLabel: 'Select language',
+        editLinkText: 'Help us improve this page!',
+        lastUpdated: 'Last Updated',
+        sidebar: [
+          {
+            title: 'Usage',
+            collapsable: false,
+            children: [
+              '/guide/install',
+              '/guide/api'
+            ]
+          },
+          {
+            title: 'ListType',
+            collapsable: false,
+            children: [
+              'scene/jump',
+              'scene/page',
+              'scene/since_id',
+              'scene/seen_ids'
+            ]
+          },
+          {
+            title: 'Component',
+            collapsable: false,
+            children: [
+              '/loader/props',
+              '/loader/slots',
+              '/loader/ssr'
+            ]
+          },
+          '/loader/methods'
         ]
       },
-      {
-        title: 'ListType',
-        collapsable: false,
-        children: [
-          'scene/jump',
-          'scene/page',
-          'scene/since_id',
-          'scene/seen_ids'
+      '/zh/': {
+        label: '简体中文',
+        selectText: '选择语言',
+        ariaLabel: '选择语言',
+        editLinkText: '在 GitHub 上编辑此页',
+        lastUpdated: '上次更新',
+        sidebar: [
+          {
+            title: '开始',
+            collapsable: false,
+            children: [
+              '/zh/guide/install',
+              '/zh/guide/api'
+            ]
+          },
+          {
+            title: '场景',
+            collapsable: false,
+            children: [
+              '/zh/scene/jump',
+              '/zh/scene/page',
+              '/zh/scene/since_id',
+              '/zh/scene/seen_ids'
+            ]
+          },
+          {
+            title: '组件',
+            collapsable: false,
+            children: [
+              '/zh/loader/props',
+              '/zh/loader/slots',
+              '/zh/loader/ssr'
+            ]
+          },
+          '/zh/loader/methods'
         ]
-      },
-      {
-        title: 'Component',
-        collapsable: false,
-        children: [
-          '/loader/props',
-          '/loader/slots',
-          '/loader/ssr'
-        ]
-      },
-      '/loader/methods'
-    ]
+      }
+    }
   }
 }
