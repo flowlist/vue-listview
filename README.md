@@ -1,7 +1,7 @@
-# vue-listview [![npm package](https://badge.fury.io/js/%40flowlist%2Fvue-listview.svg)](https://www.npmjs.com/package/@flowlist/vue-listview)  [![License](https://gitlicense.com/badge/flowlist/vue-listview)](https://github.com/flowlist/vue-listview/blob/master/LICENSE) [![Coverage](https://codecov.io/gh/flowlist/js-core/branch/master/graph/badge.svg)](https://github.com/flowlist/js-core)
+# vue-listview [![npm package](https://badge.fury.io/js/%40flowlist%2Fvue-listview.svg)](https://www.npmjs.com/package/@flowlist/vue-listview)  [![License](https://gitlicense.com/badge/flowlist/vue-listview)](https://github.com/flowlist/vue-listview/blob/master/LICENSE)
 
 <p align="center">
-    <img width="400" height="200" alt="Logo" src="./logo.jpg" />
+    <img width="400" height="200" alt="Logo" src="https://github.com/flowlist/vue-listview/blob/master/logo.jpg?raw=true" />
 </p>
 
 > 没什么好解释的，[中文文档](https://flowlist.github.io/vue-listview/zh/)
@@ -267,6 +267,9 @@ export default {
 [props document](https://flowlist.github.io/vue-listview/loader/props.html)
 
 [slots document](https://flowlist.github.io/vue-listview/loader/slots.html)
+
+## Test
+see：[@flowlist/js-core](https://github.com/flowlist/js-core)
 
 ## License
 
