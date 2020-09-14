@@ -106,7 +106,6 @@
 
 <script>
 import { utils, ENUM } from '@flowlist/js-core'
-import { throttle } from 'throttle-debounce'
 import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom } from './utils'
 
 const LAZY_MODE_OBSERVE = 'observe'
@@ -177,7 +176,8 @@ export default {
   },
   data() {
     return {
-      firstBind: true
+      firstBind: true,
+      throttle: false
     }
   },
   computed: {
@@ -502,7 +502,18 @@ export default {
 
       this.source.fetched ? this.loadMore() : this.initData()
     },
-    _scrollFn: throttle(250, function () {
+    _scrollFn(event, force = false) {
+      if (!force) {
+        if (this.throttle) {
+          return
+        }
+        this.throttle = true
+        setTimeout(() => {
+          this.throttle = false
+          this._scrollFn(null, true)
+        }, 250)
+        return
+      }
       const shimDom = this.$refs.shim
       if (!shimDom) {
         return
@@ -511,7 +522,7 @@ export default {
         return
       }
       this._fetchDataFn()
-    }),
+    },
     _handleAsyncError(error) {
       if (!this.errorCallback) {
         return
