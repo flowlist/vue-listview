@@ -220,13 +220,11 @@ export default {
         result.top = 0
         result.width = `${this.preload}px`
         result.height = '100%'
-        result.maxWidth = '100%'
       } else {
         result.left = 0
         result.bottom = 0
         result.width = '100%'
         result.height = `${this.preload}px`
-        result.maxHeight = '100%'
       }
 
       return result
