@@ -108,8 +108,8 @@
 import { utils, ENUM } from '@flowlist/js-core'
 import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom } from './utils'
 
-const LAZY_MODE_OBSERVE = 'observe'
 const LAZY_MODE_SCROLL = 'scroll'
+const NAMESPACE = 'list'
 
 export default {
   name: 'ListView',
@@ -156,10 +156,6 @@ export default {
       default: 0,
       validator: val => val >= 0
     },
-    namespace: {
-      type: String,
-      default: 'list'
-    },
     uniqueKey: {
       type: String,
       default: ENUM.DEFAULT_UNIQUE_KEY_NAME
@@ -167,11 +163,6 @@ export default {
     scrollX: {
       type: Boolean,
       default: false
-    },
-    lazyMode: {
-      type: String,
-      default: LAZY_MODE_OBSERVE,
-      validator: val => ~[LAZY_MODE_OBSERVE, LAZY_MODE_SCROLL].indexOf(val)
     }
   },
   data() {
@@ -182,7 +173,7 @@ export default {
   },
   computed: {
     source() {
-      return this.$store.getters[`${this.namespace}/getFlow`](this.params)
+      return this.$store.getters[`${NAMESPACE}/getFlow`](this.params)
     },
     params() {
       return {
@@ -204,7 +195,7 @@ export default {
       return this.type === ENUM.FETCH_TYPE.PAGINATION
     },
     observer() {
-      return this.lazyMode === LAZY_MODE_OBSERVE ? getObserver : null
+      return getObserver
     },
     shimStyle() {
       const result = {
@@ -264,9 +255,8 @@ export default {
     if (this.observer) {
       this.observer.unobserve(this.$refs && this.$refs.shim)
       this.observer.disconnect()
-    } else {
-      offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
     }
+    offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
   },
   methods: {
     reset(key, value) {
@@ -301,7 +291,7 @@ export default {
     },
     jump(page) {
       return this.$store.dispatch(
-        `${this.namespace}/loadMore`,
+        `${NAMESPACE}/loadMore`,
         {
           ...this.params,
           query: { ...this.query, page }
@@ -312,7 +302,7 @@ export default {
       return new Promise(async (resolve) => {
         try {
           await this.$store.dispatch(
-            `${this.namespace}/initData`,
+            `${NAMESPACE}/initData`,
             {
               ...this.params,
               query: { ...this.query, ...obj }
@@ -333,7 +323,7 @@ export default {
         const query = { ...this.query, is_up: 0, ...obj }
         try {
           await this.$store.dispatch(
-            `${this.namespace}/loadMore`,
+            `${NAMESPACE}/loadMore`,
             {
               ...this.params,
               query
@@ -356,7 +346,7 @@ export default {
         query.__reload__ = !showLoading
         try {
           await this.$store.dispatch(
-            `${this.namespace}/initData`,
+            `${NAMESPACE}/initData`,
             {
               ...this.params,
               query
@@ -382,7 +372,7 @@ export default {
     },
     _callMethod({ method, id, key, value }) {
       this.$store.commit(
-        `${this.namespace}/UPDATE_DATA`,
+        `${NAMESPACE}/UPDATE_DATA`,
         {
           ...this.params,
           id,
@@ -397,7 +387,7 @@ export default {
       if (this.source) {
         return
       }
-      this.$store.commit(`${this.namespace}/INIT_STATE`, this.params)
+      this.$store.commit(`${NAMESPACE}/INIT_STATE`, this.params)
     },
     _detectLoadMore() {
       if (!this.source || this.source.nothing || this.source.noMore || this.source.error) {
@@ -431,9 +421,8 @@ export default {
       if (this.observer) {
         shimDom.__lazy_handler__ = this._fetchDataFn.bind(this)
         this.observer.observe(shimDom)
-      } else {
-        addEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
       }
+      addEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
     },
     _retryData() {
       if (!this.errorClickRetry) {
@@ -492,9 +481,8 @@ export default {
           }
           this.observer.unobserve(shimDom)
           shimDom.__lazy_handler__ = undefined
-        } else {
-          offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
         }
+        offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
         return
       }
 
@@ -509,7 +497,7 @@ export default {
         setTimeout(() => {
           this.throttle = false
           this._scrollFn(null, true)
-        }, 250)
+        }, 500)
         return
       }
       const shimDom = this.$refs.shim

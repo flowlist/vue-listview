@@ -28,9 +28,7 @@
 | `*`func | string | - | 从 `vuex` 注入的 API 列表中的某个函数名 |
 | `*`type | string | - | `场景`值中的 type：`jump`、`page`、`sinceId`、`seenIds` |
 | query | object | - | 需要透传到 API 层的数据 |
-| namespace | string | list | 命名空间，如果你想分割多个 store，可搭配`vuex`设置 |
 | uniqueKey | string | id | 每个元素在 v-for 的时候都需要一个 key，这个参数是 key 的键名 |
-| lazyMode | String | observe | 使用 `IntersectionObserver` 或 `getBoundingClientRect` 来懒加载，可选值: `observe`、`scroll` |
 | auto | number | -1 | 是否当列表滚动到底部时自动加载下一页，`-1` 代表无限加载 |
 | preload | number | 200 | 列表底部距离可视窗口多少`px`时就触发网络请求 |
 | cacheTimeout | number | 0 | 你可以设置一个`秒`数把数据存储到`LocalStorage` |

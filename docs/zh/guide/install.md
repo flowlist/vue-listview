@@ -35,7 +35,7 @@ export default new Vuex.Store({
 ```
 
 1. `strict = false` 是必选项
-2. `list` 是命名空间，你可以配合 `ListView` 的 props `namespace` 来自定义它
+2. `list` 是命名空间，不能修改
 
 #### 如果你使用了 `nuxt`
 `store --> index.js`

@@ -28,9 +28,7 @@
 | `*`func | string | - | A defined function name, injected from `vuex` |
 | `*`type | string | - | `ListType` |
 | query | object | - | The parameters here will be passed to the API |
-| namespace | string | list | If you want to have multiple data store |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
-| lazyMode | String | observe | use IntersectionObserver or getBoundingClientRect to lazy load，opt: `observe`、`scroll` |
 | auto | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |
 | preload | number | 200 | How many pixels from the bottom begins loading the next page of data |
 | cacheTimeout | number | 0 | You can set a number(seconds) value to cache data at client side `LocalStorage` |

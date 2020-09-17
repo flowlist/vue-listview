@@ -35,7 +35,7 @@ export default new Vuex.Store({
 ```
 
 1. `strict = false` is required
-2. `list` is `namespace`，you can custom it with `ListView props namespace`
+2. `list` is `namespace`
 
 #### if you use `nuxt`
 `store --> index.js`
