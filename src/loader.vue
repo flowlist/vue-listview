@@ -24,51 +24,57 @@
       <!--  flow state  -->
       <div class="list-view__state">
         <!--   error   -->
-        <div
-          v-if="source.error"
-          class="list-view__state--error"
-          @click="_retryData"
-        >
-          <slot
+        <template v-if="source.error">
+          <div
             v-if="useFirstError && !source.result.length"
-            name="first-error"
-            :error="source.error"
+            class="list-view__state--first-error"
           >
-            <span>出错了，点击重试</span>
-          </slot>
-          <slot
+            <slot
+              name="first-error"
+              :error="source.error"
+            >
+              出错了
+            </slot>
+          </div>
+          <div
             v-else
-            name="error"
-            :error="source.error"
+            class="list-view__state--error"
+            @click="retry"
           >
-            <span>出错了，点击重试</span>
-          </slot>
-        </div>
+            <slot
+              name="error"
+              :error="source.error"
+            >
+              出错了，点击重试
+            </slot>
+          </div>
+        </template>
         <!--   loading   -->
-        <div
-          v-else-if="source.loading"
-          class="list-view__state--loading"
-        >
-          <slot
+        <template v-else-if="source.loading">
+          <div
             v-if="useFirstLoading && !source.result.length"
-            name="first-loading"
+            class="list-view__state--first-loading"
           >
-            <span>加载中…</span>
-          </slot>
-          <slot
+            <slot name="first-loading">
+              加载中…
+            </slot>
+          </div>
+          <div
             v-else
-            name="loading"
+            class="list-view__state--loading"
           >
-            <span>加载中…</span>
-          </slot>
-        </div>
+            <slot name="loading">
+              加载中…
+            </slot>
+          </div>
+        </template>
         <!--   nothing   -->
         <div
           v-else-if="source.nothing"
           class="list-view__state--nothing"
         >
           <slot name="nothing">
-            <span>这里什么都没有</span>
+            这里什么都没有
           </slot>
         </div>
         <!--   no-more   -->
@@ -132,20 +138,6 @@ export default {
       default: -1,
       validator: val => val >= -1
     },
-    successCallback: {
-      type: Function,
-      default: undefined,
-      validator: val => val === undefined || typeof val === 'function'
-    },
-    errorCallback: {
-      type: Function,
-      default: undefined,
-      validator: val => val === undefined || typeof val === 'function'
-    },
-    errorClickRetry: {
-      type: Boolean,
-      default: true
-    },
     preload: {
       type: Number,
       default: 200,
@@ -180,7 +172,7 @@ export default {
         func: this.func,
         type: this.type,
         query: this.query,
-        callback: this.successCallback,
+        callback: this._successCallback,
         uniqueKey: this.uniqueKey,
         cacheTimeout: this.$isServer ? 0 : this.cacheTimeout
       }
@@ -424,15 +416,6 @@ export default {
       }
       addEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
     },
-    _retryData() {
-      if (!this.errorClickRetry) {
-        return
-      }
-
-      this.source.fetched ? this.loadMore() : this.initData({
-        __refresh__: true
-      })
-    },
     _fireSSRCallback() {
       if (!this.firstBind) {
         return
@@ -440,11 +423,11 @@ export default {
 
       this.firstBind = false
 
-      if (!this.source || !this.source.fetched || !this.successCallback) {
+      if (!this.source || !this.source.fetched) {
         return
       }
 
-      this.successCallback({
+      this._successCallback({
         params: utils.generateRequestParams({
           field: { fetched: false },
           uniqueKey: this.uniqueKey,
@@ -510,12 +493,10 @@ export default {
       this._fetchDataFn()
     },
     _handleAsyncError(error) {
-      if (!this.errorCallback) {
-        return
-      }
-      this.errorCallback({
-        error
-      })
+      this.$emit('error', { error })
+    },
+    _successCallback(data) {
+      this.$emit('success', data)
     }
   }
 }

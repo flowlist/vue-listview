@@ -8,8 +8,8 @@
     type="page"
     :query="query"
     :auto="1"
-    :success-callback="handleSuccess"
     unique-key="data.number_id"
+    @success="handleSuccess"
   >
     <template #header>
       <br>

@@ -4,6 +4,7 @@
 <template>
   <div id="first-error">
     <ListView
+      ref="loader"
       func="getListByFirstError"
       type="page"
       :query="query"
@@ -25,6 +26,7 @@
       <div
         slot="first-error"
         slot-scope="{ error }"
+        @click="handleClick"
       >
         {{ error }}
         <p>第一次加载就 error，可以设置独特的 error（点击重试3次）…</p>
@@ -40,6 +42,11 @@ export default {
       query: {
         count: 10
       }
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$refs.loader.retry()
     }
   }
 }

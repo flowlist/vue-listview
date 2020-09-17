@@ -7,8 +7,8 @@
       func="getListByPage"
       type="page"
       :query="query"
-      :success-callback="handlePageLoaded"
       :auto="3"
+      @success="handlePageLoaded"
     >
       <ul
         slot-scope="{ list }"

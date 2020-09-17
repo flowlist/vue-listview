@@ -5,17 +5,12 @@
   <ListView
     func="required.call.function.name.string"
     type="required.list.type.string"
-    namespace="list"
     unique-key="id"
-    lazy-mode="observe"
     :query="{}"
     :auto="-1"
     :preload="200"
     :cache-timeout="0"
-    :error-client-retry="true"
     :scroll-x="false"
-    :success-callback="null"
-    :error-callback="null"
   >
     <!--  slot  -->
   </ListView>
@@ -26,16 +21,13 @@
 | Name | Type | Default | Description |
 | --- | --- | --- | ---- |
 | `*`func | string | - | A defined function name, injected from `vuex` |
-| `*`type | string | - | `ListType` |
+| `*`type | string | - | `ListType`：`jump`、`page`、`sinceId`、`seenIds` |
 | query | object | - | The parameters here will be passed to the API |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
 | auto | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |
 | preload | number | 200 | How many pixels from the bottom begins loading the next page of data |
 | cacheTimeout | number | 0 | You can set a number(seconds) value to cache data at client side `LocalStorage` |
-| errorClickRetry | boolean | true | When request is rejected <br> set true click `error` or `first-error` slot to retry |
 | scrollX | boolean | false | Horizontal list view set true  |
-| successCallback | function | - | Called at a client side, when request is resolved |
-| errorCallback | function | - | Called when a client side request is rejected |
 
 #### uniqueKey
 Support for nested key names，eg：
@@ -59,7 +51,14 @@ Support for nested key names，eg：
 ```
 `uniqueKey` is `data.id`
 
-#### successCallback
+### Events
+
+| Name | Type | Default | Description |
+| --- | --- | --- | ---- |
+| success | function | - | Called at a client side, when request is resolved |
+| error | function | - | Called when a client side request is rejected |
+
+#### success
 Will only be invoked on the client side， if it's SSR it will be called in the `mounted`，params：
 ```json
 {
@@ -69,7 +68,7 @@ Will only be invoked on the client side， if it's SSR it will be called in the 
 }
 ```
 
-#### errorCallback
+#### error
 params：
 ```json
 {
