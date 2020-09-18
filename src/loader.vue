@@ -133,7 +133,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    auto: {
+    autoload: {
       type: Number,
       default: -1,
       validator: val => val >= -1
@@ -179,9 +179,9 @@ export default {
     },
     isAuto() {
       if (!this.source) {
-        return this.auto === -1
+        return this.autoload === -1
       }
-      return this.auto === -1 || this.auto > this.source.page
+      return this.autoload === -1 || this.autoload > this.source.page
     },
     isPagination() {
       return this.type === ENUM.FETCH_TYPE.PAGINATION
@@ -395,7 +395,7 @@ export default {
       }
     },
     _initFlowLoader(loop = 0) {
-      if (this.auto === 0) {
+      if (this.autoload === 0) {
         return
       }
       const shimDom = this.$refs.shim

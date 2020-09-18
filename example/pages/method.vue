@@ -7,7 +7,7 @@
     func="getListByPage"
     type="page"
     :query="query"
-    :auto="1"
+    :autoload="1"
     unique-key="data.number_id"
     @success="handleSuccess"
   >

@@ -7,7 +7,7 @@
     type="required.list.type.string"
     unique-key="id"
     :query="{}"
-    :auto="-1"
+    :autoload="-1"
     :preload="200"
     :cache-timeout="0"
     :scroll-x="false"
@@ -24,7 +24,7 @@
 | `*`type | string | - | `ListType`：`jump`、`page`、`sinceId`、`seenIds` |
 | query | object | - | The parameters here will be passed to the API |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
-| auto | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |
+| autoload | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |
 | preload | number | 200 | How many pixels from the bottom begins loading the next page of data |
 | cacheTimeout | number | 0 | You can set a number(seconds) value to cache data at client side `LocalStorage` |
 | scrollX | boolean | false | Horizontal list view set true  |
