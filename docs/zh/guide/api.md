@@ -26,7 +26,7 @@ export const getListBySeenIds = ({ seen_ids, count }) => {
 
 #### API 范式
 ```javascript
-export const getListByPage = ({ page, count }) => {
+export const getListByPage = ({ extra, page, count }) => {
   return new Promise((resolve, reject) => {
     axios.get('...', { params: { page, count } })
       .then(data => {
@@ -49,4 +49,4 @@ export const getListByPage = ({ page, count }) => {
 | `*`result | Array | 接口返回的列表数据 |
 | no_more | Boolean | 是否还有下一页 |
 | total | Number | 列表的总数 |
-| extra | Any | 需要存储的额外信息 |
+| extra | Any | 需要存储的额外信息，会携带到下一次请求的参数中 |
