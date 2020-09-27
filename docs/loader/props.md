@@ -20,7 +20,7 @@
 
 | Name | Type | Default | Description |
 | --- | --- | --- | ---- |
-| `*`func | string | - | A defined function name, injected from `vuex` |
+| `*`func | string \ function | - | A defined function name, injected from `vuex`, or function\<Promise\> |
 | type | string | auto | `ListType`：`jump`、`page`、`sinceId`、`seenIds` |
 | query | object | - | The parameters here will be passed to the API |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |

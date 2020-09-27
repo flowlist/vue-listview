@@ -122,7 +122,7 @@ export default {
   props: {
     func: {
       required: true,
-      type: String
+      type: [String, Function]
     },
     type: {
       type: String,

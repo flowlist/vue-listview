@@ -82,6 +82,10 @@ export default {
         {
           name: '方法列表',
           route: '/method'
+        },
+        {
+          name: '自定义函数',
+          route: '/custom'
         }
       ]
     }
