@@ -5,7 +5,6 @@
   <div id="nothing">
     <ListView
       func="getListByNothing"
-      type="page"
       :query="query"
     >
       <ul

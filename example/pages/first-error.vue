@@ -6,7 +6,6 @@
     <ListView
       ref="loader"
       func="getListByFirstError"
-      type="page"
       :query="query"
       :use-first-error="true"
     >

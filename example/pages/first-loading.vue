@@ -5,7 +5,6 @@
   <div id="first-loading">
     <ListView
       func="getListByFirstLoading"
-      type="page"
       :query="query"
       :use-first-loading="true"
     >

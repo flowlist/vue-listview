@@ -6,7 +6,6 @@
     <ListView
       ref="loader"
       func="getListBySinceId"
-      type="sinceId"
       :query="query"
       unique-key="data.number_id"
     >

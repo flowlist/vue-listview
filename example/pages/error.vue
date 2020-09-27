@@ -5,7 +5,6 @@
   <div id="error">
     <ListView
       func="getListWithError"
-      type="page"
       :query="query"
     >
       <ul

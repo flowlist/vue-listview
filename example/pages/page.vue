@@ -5,7 +5,6 @@
   <div id="page">
     <ListView
       func="getListByPage"
-      type="page"
       :query="query"
       :autoload="3"
       @success="handlePageLoaded"

@@ -4,7 +4,7 @@
 <template>
   <ListView
     func="required.call.function.name.string"
-    type="required.list.type.string"
+    type="auto"
     unique-key="id"
     :query="{}"
     :autoload="-1"
@@ -21,7 +21,7 @@
 | Name | Type | Default | Description |
 | --- | --- | --- | ---- |
 | `*`func | string | - | A defined function name, injected from `vuex` |
-| `*`type | string | - | `ListType`：`jump`、`page`、`sinceId`、`seenIds` |
+| type | string | auto | `ListType`：`jump`、`page`、`sinceId`、`seenIds` |
 | query | object | - | The parameters here will be passed to the API |
 | uniqueKey | string | id | Each item of the list has a unique key（value），Fill in the key name |
 | autoload | number | -1 | The number of pages automatically sent for the request, -1 for infinite scrolling |

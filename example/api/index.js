@@ -1,11 +1,11 @@
 import ItemFactory from './item-factory'
 
-export const getListByPage = ({ page, count }) => {
-  console.log('page', page)
+export const getListByPage = (query) => {
+  console.log(query)
   return new Promise(resolve => {
     const total = 87
-    const hasFetch = (page - 1) * count
-    const getLength = total - hasFetch >= count ? count : total - hasFetch
+    const hasFetch = (query.page - 1) * query.count
+    const getLength = total - hasFetch >= query.count ? query.count : total - hasFetch
     const no_more = getLength + hasFetch >= total
     setTimeout(() => {
       const result = ItemFactory.get(getLength)

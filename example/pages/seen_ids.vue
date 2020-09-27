@@ -5,7 +5,6 @@
   <div id="seen_ids">
     <ListView
       func="getListBySeenIds"
-      type="seenIds"
       :query="query"
       display-no-more
       unique-key="data.number_id"

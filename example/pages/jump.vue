@@ -6,7 +6,6 @@
     <ListView
       ref="loader"
       func="getListByJump"
-      type="jump"
       :query="query"
     >
       <ul

@@ -125,8 +125,8 @@ export default {
       type: String
     },
     type: {
-      required: true,
       type: String,
+      default: ENUM.FETCH_TYPE.AUTO,
       validator: val => ~ENUM.FETCH_TYPE_ARRAY.indexOf(val)
     },
     query: {
