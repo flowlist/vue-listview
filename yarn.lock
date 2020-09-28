@@ -1086,10 +1086,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flowlist/js-core@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.3.0.tgz#4da887f1767db04fa8232b87d23fe39b0593c143"
-  integrity sha512-5dTGN/P8SgD1mP7QhKcaY6x2YzMHyDWWluwXaAxspwQiALD8D8GuIpOxYk9aH1ZJEUUSc3rg5NVAlhoeivVCzg==
+"@flowlist/js-core@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.3.1.tgz#a1dd738e02ddbe25c312dce5fa65f6b2281866c8"
+  integrity sha512-xIGn2i1S7K0HJs0zg1qy0m+7ScPTJa6V7yDDdjRQPCSl+aTXtOKHT6vKzUK0yqeFkGfWrFxoGyFRLDraAzzM0Q==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
