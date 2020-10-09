@@ -456,7 +456,7 @@ export default {
         return
       }
 
-      if (this.source.noMore || this.source.nothing || (this.isPagination && this.source.fetched)) {
+      if (this.source.fetched && (this.source.noMore || this.source.nothing || this.isPagination)) {
         if (this.observer) {
           const shimDom = this.$refs.shim
           if (!shimDom) {
