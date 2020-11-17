@@ -60,8 +60,8 @@ export const cache = {
 export const getObserver = isServer ? null :
   window.IntersectionObserver &&
   new window.IntersectionObserver((entries) => {
-    entries.forEach(({ intersectionRatio, target }) => {
-      if (intersectionRatio <= 0 || !target) {
+    entries.forEach(({ intersectionRatio, target, isIntersecting }) => {
+      if (intersectionRatio <= 0 || !target || !isIntersecting) {
         return
       }
       target.__lazy_handler__ && target.__lazy_handler__()
