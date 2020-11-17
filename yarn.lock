@@ -1086,10 +1086,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flowlist/js-core@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.npm.taobao.org/@flowlist/js-core/download/@flowlist/js-core-1.4.0.tgz#163b652dad5d4d4a8bd840422e2098f0a2a84f18"
-  integrity sha1-FjtlLa1dTUqL2EBCLiCY8KKoTxg=
+"@flowlist/js-core@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.4.4.tgz#419226e2deb98222783d889c63f0e4c94ac50b1e"
+  integrity sha512-b5thCbpxr3EIvZYKCygGBjrIA2TvfY6T17PPauQmEBgjXWQzXIb4Qbhu6LB/Hye801iiRloNJjyKZTFhlExfxg==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
