@@ -112,7 +112,7 @@
 
 <script>
 import { utils, ENUM } from '@flowlist/js-core'
-import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom } from './utils'
+import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom, isServer } from './utils'
 
 const LAZY_MODE_SCROLL = 'scroll'
 const NAMESPACE = 'list'
@@ -174,7 +174,7 @@ export default {
         query: this.query,
         callback: this._successCallback,
         uniqueKey: this.uniqueKey,
-        cacheTimeout: this.$isServer ? 0 : this.cacheTimeout
+        cacheTimeout: isServer ? 0 : this.cacheTimeout
       }
     },
     isAuto() {
