@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
@@ -37,7 +37,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.4.5"
+    "@flowlist/js-core": "^1.5.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
@@ -59,18 +59,18 @@
     "faker": "^5.4.0",
     "koa": "^2.13.1",
     "nodemon": "^2.0.7",
-    "nuxt": "^2.15.2",
+    "nuxt": "^2.15.3",
     "os": "^0.1.1",
     "qrcode": "^1.4.4",
     "sass": "^1.32.8",
     "sass-loader": "^10.0.2",
     "vue": "2.6.12",
-    "vuex": "^3.6.2",
     "vue-router": "^3.5.1",
     "vue-server-renderer": "2.6.12",
     "vue-template-compiler": "2.6.12",
     "vuepress": "^1.8.2",
     "vuepress-plugin-code-gen-box": "^0.0.9",
-    "vuepress-plugin-dehydrate": "^1.1.5"
+    "vuepress-plugin-dehydrate": "^1.1.5",
+    "vuex": "^3.6.2"
   }
 }

@@ -250,13 +250,6 @@ export default {
     }
     offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
   },
-  beforeUnmount() {
-    if (this.observer) {
-      this.observer.unobserve(this.$refs && this.$refs.shim)
-      this.observer.disconnect()
-    }
-    offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
-  },
   methods: {
     reset(key, value) {
       this._callMethod({ key, value, method: ENUM.CHANGE_TYPE.RESET_FIELD })
