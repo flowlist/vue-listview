@@ -213,13 +213,13 @@ export default {
       return result
     },
     useFirstLoading() {
-      return !!this.$scopedSlots['first-loading']
+      return !!this.$slots['first-loading']
     },
     useFirstError() {
-      return !!this.$scopedSlots['first-error']
+      return !!this.$slots['first-error']
     },
     displayNoMore() {
-      return !!this.$scopedSlots['no-more']
+      return !!this.$slots['no-more']
     }
   },
   watch: {
@@ -243,7 +243,7 @@ export default {
     this._initState()
     this._initFlowLoader()
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.observer) {
       this.observer.unobserve(this.$refs && this.$refs.shim)
       this.observer.disconnect()

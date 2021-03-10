@@ -1,17 +1,15 @@
-import Vue from 'vue'
-
 export const isServer = typeof window === 'undefined'
 
 export const getter = state => name => state[name]
 
 export const setter = state => ({ key, type, value, callback }) => {
   if (type === 0) {
-    Vue.set(state, key, value)
+    state[key] = value
   } else if (type === 1) {
-    Vue.set(state, key, {
+    state[key] = {
       ...(state[key] || {}),
       ...value
-    })
+    }
   }
   callback && callback()
 }
