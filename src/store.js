@@ -33,6 +33,7 @@ export default ({ api }) => ({
     }
   },
   getters: {
+    get: state => ({ func, type, query }) => state[utils.generateFieldName({ func, type, query })],
     getFlow: state => ({ func, type, query }) => state[utils.generateFieldName({ func, type, query })]
   }
 })

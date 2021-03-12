@@ -15,7 +15,7 @@ const getLocalIP = () => {
 }
 
 module.exports = {
-  title: pkg.name + ' ' + pkg.version,
+  title: pkg.name,
   base: isProd ? pkg.project_base_url : '/',
   evergreen: true,
   locales: {
@@ -78,7 +78,8 @@ module.exports = {
             children: [
               '/loader/props',
               '/loader/slots',
-              '/loader/ssr'
+              '/loader/ssr',
+              '/loader/getters'
             ]
           },
           '/loader/methods'
@@ -115,7 +116,8 @@ module.exports = {
             children: [
               '/zh/loader/props',
               '/zh/loader/slots',
-              '/zh/loader/ssr'
+              '/zh/loader/ssr',
+              '/zh/loader/getters'
             ]
           },
           '/zh/loader/methods'
