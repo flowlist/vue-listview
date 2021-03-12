@@ -281,6 +281,9 @@ export default {
     update(id, key, value) {
       this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
     },
+    merge(id, value) {
+      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_ITEM_MERGE })
+    },
     jump(page) {
       return this.$store.dispatch(
         `${NAMESPACE}/loadMore`,
