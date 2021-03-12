@@ -165,7 +165,7 @@ export default {
   },
   computed: {
     source() {
-      return this.$store.getters[`${NAMESPACE}/getFlow`](this.params)
+      return this.$store.getters[`${NAMESPACE}/get`](this.params)
     },
     params() {
       return {
