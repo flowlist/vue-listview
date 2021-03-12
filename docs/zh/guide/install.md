@@ -1,10 +1,13 @@
 ### 安装
 
-#### 下载包
+#### 下载包（Vue2.x）
 ```shell script
-yarn add @flowlist/vue-listview
-// or
-npm i @flowlist/vue-listview
+yarn add @flowlist/vue-listview@2
+```
+
+#### 下载包（Vue3.x）
+```shell script
+yarn add @flowlist/vue-listview@3
 ```
 
 #### 引入组件
@@ -16,7 +19,7 @@ import { ListView } from '@flowlist/vue-listview'
 Vue.component(ListView.name, ListView)
 ```
 
-#### 连接Vuex
+#### 连接（Vuex - Vue2.x）
 ```javascript
 // store.js
 import Vue from 'vue'
@@ -32,6 +35,21 @@ export default new Vuex.Store({
     list: ListStore({ api })
   }
 })
+```
+
+#### 连接（Vuex - Vue3.x）
+```javascript
+import { createStore } from 'vuex'
+import { ListStore } from '@flowlist/vue-listview'
+import * as api from '~/api'
+
+export default createStore({
+  strict: false, // required
+  modules: {
+    list: ListStore({ api })
+  }
+})
+
 ```
 
 1. `strict = false` 是必选项
