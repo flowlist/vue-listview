@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
