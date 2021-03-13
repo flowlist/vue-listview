@@ -8,7 +8,6 @@ const banner = [
 ].join('\n')
 
 module.exports = {
-  productionSourceMap: false,
   pages: {
     index: {
       entry: 'example/main.js',
