@@ -6,10 +6,11 @@ export const setter = state => ({ key, type, value, callback }) => {
   if (type === 0) {
     state[key] = value
   } else if (type === 1) {
-    state[key] = {
-      ...(state[key] || {}),
-      ...value
-    }
+    Object.keys(value).forEach(id => {
+      if (value.hasOwnProperty(id)) {
+        state[key][id] = value[id]
+      }
+    })
   }
   callback && callback()
 }
