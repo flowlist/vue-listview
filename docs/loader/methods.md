@@ -139,3 +139,30 @@ this.$refs.loader.patch({
 // unique-key：data.id
 this.$refs.loader.update(2, 'data.followed', false)
 ```
+
+#### merge(id, value)
+- Merge a object to field of item. eg:
+```json
+[
+  {
+    "type": "xxx",
+    "data": {
+      "id": 1,
+      "followed": false
+    }
+  },
+  {
+    "type": "xxx",
+    "data": {
+      "id": 2,
+      "followed": true
+    }
+  }
+]
+```
+```javascript
+// unique-key：data.id
+this.$refs.loader.merge(2, {
+  followed: false
+})
+```
