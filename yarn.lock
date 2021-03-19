@@ -1043,9 +1043,9 @@
     strip-json-comments "^3.1.1"
 
 "@flowlist/js-core@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-1.5.0.tgz#4b6bb6d8901be09eb7b6ab8f8efb8ace4870c0d5"
-  integrity sha512-O8kpNd3nB5ra/sKlrnCVAbLA4Zt4hq/PYHiuzUZ762yiFNvjZ+RAzzwUVIvmcMenkh9b98b+lrAL0SyrZW3mzg==
+  version "1.6.3"
+  resolved "https://registry.npm.taobao.org/@flowlist/js-core/download/@flowlist/js-core-1.6.3.tgz#7f8a37c82138e17716604fdf4a1d8ec7cf83f8a4"
+  integrity sha1-f4o3yCE44XcWYE/fSh2Ox8+D+KQ=
 
 "@hapi/address@2.x.x":
   version "2.1.4"

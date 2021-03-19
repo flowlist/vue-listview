@@ -279,7 +279,7 @@ export default {
       return utils.searchValueByKey(this.source.result, id, this.uniqueKey)
     },
     update(id, key, value) {
-      this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.UPDATE_RESULT })
+      this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_UPDATE_KV })
     },
     jump(page) {
       return this.$store.dispatch(
