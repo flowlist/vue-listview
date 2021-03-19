@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>方法 | @flowlist/vue-listview</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <meta name="description" content="">
+    <link rel="preload" href="/vue-listview/assets/css/0.styles.69fc69f5.css" as="style"><link rel="preload" href="/vue-listview/assets/js/app.4e75f91e.js" as="script"><link rel="preload" href="/vue-listview/assets/js/2.2021055b.js" as="script"><link rel="preload" href="/vue-listview/assets/js/25.b31e1cd5.js" as="script"><link rel="preload" href="/vue-listview/assets/js/3.c1905b0b.js" as="script"><link rel="prefetch" href="/vue-listview/assets/js/10.02df5e42.js"><link rel="prefetch" href="/vue-listview/assets/js/11.db6ae34b.js"><link rel="prefetch" href="/vue-listview/assets/js/12.5771ed31.js"><link rel="prefetch" href="/vue-listview/assets/js/13.c8713e22.js"><link rel="prefetch" href="/vue-listview/assets/js/14.fe37256d.js"><link rel="prefetch" href="/vue-listview/assets/js/15.3d178bbe.js"><link rel="prefetch" href="/vue-listview/assets/js/16.8f62d221.js"><link rel="prefetch" href="/vue-listview/assets/js/17.57846f34.js"><link rel="prefetch" href="/vue-listview/assets/js/18.690ad671.js"><link rel="prefetch" href="/vue-listview/assets/js/19.cd31cd1e.js"><link rel="prefetch" href="/vue-listview/assets/js/20.70af7fa8.js"><link rel="prefetch" href="/vue-listview/assets/js/21.ece0f382.js"><link rel="prefetch" href="/vue-listview/assets/js/22.4ace33e9.js"><link rel="prefetch" href="/vue-listview/assets/js/23.9339848b.js"><link rel="prefetch" href="/vue-listview/assets/js/24.5abdd471.js"><link rel="prefetch" href="/vue-listview/assets/js/26.560599e7.js"><link rel="prefetch" href="/vue-listview/assets/js/27.89483913.js"><link rel="prefetch" href="/vue-listview/assets/js/28.968f952a.js"><link rel="prefetch" href="/vue-listview/assets/js/29.99437b93.js"><link rel="prefetch" href="/vue-listview/assets/js/30.6c361176.js"><link rel="prefetch" href="/vue-listview/assets/js/31.34ea59a2.js"><link rel="prefetch" href="/vue-listview/assets/js/32.7e51178b.js"><link rel="prefetch" href="/vue-listview/assets/js/33.cc9851e9.js"><link rel="prefetch" href="/vue-listview/assets/js/4.0f941809.js"><link rel="prefetch" href="/vue-listview/assets/js/5.02ae83fa.js"><link rel="prefetch" href="/vue-listview/assets/js/6.01b3b39c.js"><link rel="prefetch" href="/vue-listview/assets/js/7.dce6b220.js"><link rel="prefetch" href="/vue-listview/assets/js/8.95a3ac5d.js"><link rel="prefetch" href="/vue-listview/assets/js/9.2697449c.js">
+    <link rel="stylesheet" href="/vue-listview/assets/css/0.styles.69fc69f5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-listview/zh/" class="home-link router-link-active"><!----> <span class="site-name">@flowlist/vue-listview</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="选择语言" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="选择语言" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-listview/loader/methods.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/zh/loader/methods.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <a href="https://github.com/flowlist/vue-listview" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="选择语言" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="选择语言" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-listview/loader/methods.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/zh/loader/methods.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <a href="https://github.com/flowlist/vue-listview" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>开始</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-listview/zh/guide/install.html" class="sidebar-link">安装</a></li><li><a href="/vue-listview/zh/guide/api.html" class="sidebar-link">定义 API 层</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>场景</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-listview/zh/scene/jump.html" class="sidebar-link">静态分页列表</a></li><li><a href="/vue-listview/zh/scene/page.html" class="sidebar-link">静态滚动列表</a></li><li><a href="/vue-listview/zh/scene/since_id.html" class="sidebar-link">动态有序列表</a></li><li><a href="/vue-listview/zh/scene/seen_ids.html" class="sidebar-link">动态无序列表</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-listview/zh/loader/props.html" class="sidebar-link">Props</a></li><li><a href="/vue-listview/zh/loader/slots.html" class="sidebar-link">Slots</a></li><li><a href="/vue-listview/zh/loader/ssr.html" class="sidebar-link">SSR</a></li><li><a href="/vue-listview/zh/loader/getters.html" class="sidebar-link">Getters</a></li></ul></section></li><li><a href="/vue-listview/zh/loader/methods.html" aria-current="page" class="active sidebar-link">方法</a><ul class="sidebar-sub-headers"></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="方法"><a href="#方法" class="header-anchor">#</a> 方法</h3> <div class="phone-wrap"><div class="box"><div class="figure ios"><div class="header"><svg viewBox="0 0 219 31" class="ios-notch"><path d="M0 1V0h219v1a5 5 0 0 0-5 5v3c0 12.15-9.85 22-22 22H27C14.85 31 5 21.15 5 9V6a5 5 0 0 0-5-5z" fill-rule="evenodd"></path></svg></div> <div class="frame-wrap"><iframe src="/vue-listview/code-gen/method" scrolling="no" border="0" frameborder="no" framespacing="0" allowtransparency="true"></iframe></div></div></div></div> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>下面所有的函数都需要通过<code>$refs</code>来调用</p></div> <h4 id="initdata-object"><a href="#initdata-object" class="header-anchor">#</a> initData(&lt;object&gt;)</h4> <ul><li>手动请求第一页数据，一般不需要手动</li> <li>参数会透传给 API 层</li></ul> <h4 id="loadmore-object"><a href="#loadmore-object" class="header-anchor">#</a> loadMore(&lt;object&gt;)</h4> <ul><li>请求下一页的数据，当无限滚动时无需调用</li> <li>T参数会透传给 API 层</li></ul> <h4 id="loadbefore-object"><a href="#loadbefore-object" class="header-anchor">#</a> loadBefore(&lt;object&gt;)</h4> <ul><li>请求上一页的数据</li> <li>参数会透传给 API 层</li></ul> <h4 id="refresh-boolean"><a href="#refresh-boolean" class="header-anchor">#</a> refresh(&lt;boolean&gt;)</h4> <ul><li>刷新整个列表</li> <li>当参数设置为<code>false</code>，在刷新时就不会展示<code>loading</code></li> <li>默认是 <code>true</code></li></ul> <h4 id="retry-boolean"><a href="#retry-boolean" class="header-anchor">#</a> retry(&lt;boolean&gt;)</h4> <ul><li>当接口异常返回时，手动调用来重试</li> <li>当参数设置为<code>false</code>，在重试时就不会展示<code>loading</code></li> <li>默认是 <code>true</code></li></ul> <h4 id="jump-number"><a href="#jump-number" class="header-anchor">#</a> jump(&lt;number&gt;)</h4> <ul><li>当<code>type</code>是<code>jump</code>时, 手动调用来跳转至指定页面</li></ul> <h4 id="push-object-array"><a href="#push-object-array" class="header-anchor">#</a> push(&lt;object|array&gt;)</h4> <ul><li>在列表尾部追加数据</li></ul> <h4 id="unshift-object-array"><a href="#unshift-object-array" class="header-anchor">#</a> unshift(&lt;object|array&gt;)</h4> <ul><li>在列表顶部追加数据</li></ul> <h4 id="insertbefore-id-value"><a href="#insertbefore-id-value" class="header-anchor">#</a> insertBefore(id, value)</h4> <ul><li>在某个元素之前插入一条数据</li></ul> <h4 id="insertafter-id-value"><a href="#insertafter-id-value" class="header-anchor">#</a> insertAfter(id, value)</h4> <ul><li>在某个元素之后插入一条数据</li></ul> <h4 id="delete-id"><a href="#delete-id" class="header-anchor">#</a> delete(id)</h4> <ul><li>删除某个元素，索引是 <code>unique-key</code></li></ul> <h4 id="search-id"><a href="#search-id" class="header-anchor">#</a> search(id)</h4> <ul><li>搜索某个元素, 返回值是结果或<code>null</code>，索引是 <code>unique-key</code></li></ul> <h4 id="reset-key-value"><a href="#reset-key-value" class="header-anchor">#</a> reset(key, value)</h4> <ul><li>重写列表的任意一个字段</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;result&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;noMore&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;nothing&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;error&quot;</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;extra&quot;</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;fetched&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;page&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loader<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token string">'total'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+</code></pre></div><h4 id="patch-object-array"><a href="#patch-object-array" class="header-anchor">#</a> patch(&lt;object|array&gt;)</h4> <ul><li>给数据打补丁</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;count_followers&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;count_following&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;count_followers&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;count_following&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// array</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loader<span class="token punctuation">.</span><span class="token function">patch</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    count_followers<span class="token operator">:</span> <span class="token number">233</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    count_followers<span class="token operator">:</span> <span class="token number">666</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">// object</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loader<span class="token punctuation">.</span><span class="token function">patch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token number">1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    count_following<span class="token operator">:</span> <span class="token number">486</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token number">2</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    count_following<span class="token operator">:</span> <span class="token number">996</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h4 id="update-id-key-value"><a href="#update-id-key-value" class="header-anchor">#</a> update(id, key, value)</h4> <ul><li>更新某个元素的值. 如:</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;xxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;followed&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;xxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;followed&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// unique-key：data.id</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loader<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'data.followed'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre></div><h4 id="merge-id-value"><a href="#merge-id-value" class="header-anchor">#</a> merge(id, value)</h4> <ul><li>合并对象到某个元素中. 如：</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;xxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;followed&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;xxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;followed&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// unique-key：data.id</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>loader<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  followed<span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/flowlist/vue-listview/edit/master/docs/zh/loader/methods.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2021/3/14 上午8:45:56</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-listview/zh/loader/getters.html" class="prev">
+        Getters
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-listview/assets/js/app.4e75f91e.js" defer></script><script src="/vue-listview/assets/js/2.2021055b.js" defer></script><script src="/vue-listview/assets/js/25.b31e1cd5.js" defer></script><script src="/vue-listview/assets/js/3.c1905b0b.js" defer></script>
+  </body>
+</html>
