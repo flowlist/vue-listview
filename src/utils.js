@@ -61,7 +61,10 @@ export const getObserver = isServer ? null :
   window.IntersectionObserver &&
   new window.IntersectionObserver((entries) => {
     entries.forEach(({ intersectionRatio, target, isIntersecting }) => {
-      if (intersectionRatio <= 0 || !target || !isIntersecting) {
+      if (intersectionRatio <= 0 && !isIntersecting) {
+        return
+      }
+      if (!target) {
         return
       }
       target.__lazy_handler__ && target.__lazy_handler__()
