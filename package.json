@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.2.7",
+  "version": "3.2.8",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/flowlist/vue-listview#readme",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name listview src/index.js",
+    "build": "vue-cli-service build --target lib --name Flowlist src/index.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
