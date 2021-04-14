@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
@@ -35,7 +35,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.6.3"
+    "@flowlist/js-core": "^1.6.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
