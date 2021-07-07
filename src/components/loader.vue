@@ -1,14 +1,8 @@
 <template>
-  <div
-    class="list-view"
-    style="position:relative"
-  >
+  <div class="list-view" style="position:relative">
     <template v-if="source">
       <!--  flow header  -->
-      <slot
-        :source="source"
-        name="header"
-      />
+      <slot :source="source" name="header" />
       <!--  flow list  -->
       <slot
         :list="source.result"
@@ -17,10 +11,7 @@
         :extra="source.extra"
       />
       <!--  flow footer  -->
-      <slot
-        :source="source"
-        name="footer"
-      />
+      <slot :source="source" name="footer" />
       <!--  flow state  -->
       <div class="list-view__state">
         <!--   error   -->
@@ -29,22 +20,12 @@
             v-if="useFirstError && !source.result.length"
             class="list-view__state--first-error"
           >
-            <slot
-              name="first-error"
-              :error="source.error"
-            >
+            <slot name="first-error" :error="source.error">
               出错了
             </slot>
           </div>
-          <div
-            v-else
-            class="list-view__state--error"
-            @click="retry"
-          >
-            <slot
-              name="error"
-              :error="source.error"
-            >
+          <div v-else class="list-view__state--error" @click="retry">
+            <slot name="error" :error="source.error">
               出错了，点击重试
             </slot>
           </div>
@@ -59,33 +40,21 @@
               加载中…
             </slot>
           </div>
-          <div
-            v-else
-            class="list-view__state--loading"
-          >
+          <div v-else class="list-view__state--loading">
             <slot name="loading">
               加载中…
             </slot>
           </div>
         </template>
         <!--   nothing   -->
-        <div
-          v-else-if="source.nothing"
-          class="list-view__state--nothing"
-        >
+        <div v-else-if="source.nothing" class="list-view__state--nothing">
           <slot name="nothing">
             这里什么都没有
           </slot>
         </div>
         <!--   no-more   -->
-        <div
-          v-else-if="source.noMore"
-          class="list-view__state--no-more"
-        >
-          <slot
-            v-if="displayNoMore"
-            name="no-more"
-          />
+        <div v-else-if="source.noMore" class="list-view__state--no-more">
+          <slot v-if="displayNoMore" name="no-more" />
         </div>
         <!--   normal   -->
         <div
@@ -93,70 +62,76 @@
           class="list-view__state--load"
           @click="loadMore()"
         >
-          <slot
-            v-if="!isAuto"
-            name="load"
-          >
+          <slot v-if="!isAuto" name="load">
             点击加载更多
           </slot>
         </div>
       </div>
     </template>
-    <div
-      ref="shim"
-      :style="shimStyle"
-      class="list-view__shim"
-    />
+    <div ref="shim" :style="shimStyle" class="list-view__shim" />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+// @ts-nocheck
+import { defineComponent, ExtractPropTypes } from 'vue'
 import { utils, ENUM } from '@flowlist/js-core'
-import { checkInView, getObserver, addEvent, offEvent, getScrollParentDom, isServer } from './utils'
+import {
+  checkInView,
+  getObserver,
+  addEvent,
+  offEvent,
+  getScrollParentDom,
+  isServer
+} from './utils'
 
 const LAZY_MODE_SCROLL = 'scroll'
 const NAMESPACE = 'list'
-
-export default {
-  name: 'ListView',
-  props: {
-    func: {
-      required: true,
-      type: [String, Function]
-    },
-    type: {
-      type: String,
-      default: ENUM.FETCH_TYPE.AUTO,
-      validator: val => ~ENUM.FETCH_TYPE_ARRAY.indexOf(val)
-    },
-    query: {
-      type: Object,
-      default: () => {}
-    },
-    autoload: {
-      type: Number,
-      default: -1,
-      validator: val => val >= -1
-    },
-    preload: {
-      type: Number,
-      default: 200,
-      validator: val => val >= 0
-    },
-    cacheTimeout: {
-      type: Number,
-      default: 0,
-      validator: val => val >= 0
-    },
-    uniqueKey: {
-      type: String,
-      default: ENUM.DEFAULT_UNIQUE_KEY_NAME
-    },
-    scrollX: {
-      type: Boolean,
-      default: false
-    }
+const listViewProps = {
+  func: {
+    required: true,
+    type: [String, Function]
   },
+  type: {
+    type: String,
+    default: ENUM.FETCH_TYPE.AUTO,
+    validator: (val) => ~ENUM.FETCH_TYPE_ARRAY.indexOf(val)
+  },
+  query: {
+    type: Object,
+    default: () => {}
+  },
+  autoload: {
+    type: Number,
+    default: -1,
+    validator: (val: any) => val >= -1
+  },
+  preload: {
+    type: Number,
+    default: 200,
+    validator: (val: any) => val >= 0
+  },
+  cacheTimeout: {
+    type: Number,
+    default: 0,
+    validator: (val: any) => val >= 0
+  },
+  uniqueKey: {
+    type: String,
+    default: ENUM.DEFAULT_UNIQUE_KEY_NAME
+  },
+  scrollX: {
+    type: Boolean,
+    default: false
+  }
+}
+
+export type ListViewProps = ExtractPropTypes<typeof listViewProps>
+
+export default defineComponent({
+  name: 'ListView',
+  props: listViewProps,
+  emits: ['success', 'error'],
   data() {
     return {
       firstBind: true,
@@ -197,7 +172,6 @@ export default {
         pointerEvents: 'none',
         background: 'transparent'
       }
-
       if (this.scrollX) {
         result.right = 0
         result.top = 0
@@ -209,7 +183,6 @@ export default {
         result.width = '100%'
         result.height = `${this.preload}px`
       }
-
       return result
     },
     useFirstLoading() {
@@ -224,7 +197,7 @@ export default {
   },
   watch: {
     query: {
-      handler: function () {
+      handler: function() {
         if (this.source) {
           return
         }
@@ -248,7 +221,11 @@ export default {
       this.observer.unobserve(this.$refs && this.$refs.shim)
       this.observer.disconnect()
     }
-    offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
+    offEvent(
+      getScrollParentDom(this.$el, this.scrollX),
+      LAZY_MODE_SCROLL,
+      this._scrollFn
+    )
   },
   methods: {
     reset(key, value) {
@@ -264,10 +241,18 @@ export default {
       this._callMethod({ value, method: ENUM.CHANGE_TYPE.RESULT_LIST_MERGE })
     },
     insertBefore(id, value) {
-      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE })
+      this._callMethod({
+        id,
+        value,
+        method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_BEFORE
+      })
     },
     insertAfter(id, value) {
-      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER })
+      this._callMethod({
+        id,
+        value,
+        method: ENUM.CHANGE_TYPE.RESULT_INSERT_TO_AFTER
+      })
     },
     delete(id) {
       this._callMethod({ id, method: ENUM.CHANGE_TYPE.RESULT_REMOVE_BY_ID })
@@ -279,30 +264,33 @@ export default {
       return utils.searchValueByKey(this.source.result, id, this.uniqueKey)
     },
     update(id, key, value) {
-      this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_UPDATE_KV })
+      this._callMethod({
+        id,
+        key,
+        value,
+        method: ENUM.CHANGE_TYPE.RESULT_UPDATE_KV
+      })
     },
     merge(id, value) {
-      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_ITEM_MERGE })
+      this._callMethod({
+        id,
+        value,
+        method: ENUM.CHANGE_TYPE.RESULT_ITEM_MERGE
+      })
     },
     jump(page) {
-      return this.$store.dispatch(
-        `${NAMESPACE}/loadMore`,
-        {
-          ...this.params,
-          query: { ...this.query, page }
-        }
-      )
+      return this.$store.dispatch(`${NAMESPACE}/loadMore`, {
+        ...this.params,
+        query: { ...this.query, page }
+      })
     },
     initData(obj = {}) {
       return new Promise(async (resolve) => {
         try {
-          await this.$store.dispatch(
-            `${NAMESPACE}/initData`,
-            {
-              ...this.params,
-              query: { ...this.query, ...obj }
-            }
-          )
+          await this.$store.dispatch(`${NAMESPACE}/initData`, {
+            ...this.params,
+            query: { ...this.query, ...obj }
+          })
           this.$nextTick(() => {
             this._detectLoadMore()
           })
@@ -317,13 +305,10 @@ export default {
       return new Promise(async (resolve) => {
         const query = { ...this.query, is_up: 0, ...obj }
         try {
-          await this.$store.dispatch(
-            `${NAMESPACE}/loadMore`,
-            {
-              ...this.params,
-              query
-            }
-          )
+          await this.$store.dispatch(`${NAMESPACE}/loadMore`, {
+            ...this.params,
+            query
+          })
           resolve()
         } catch (e) {
           this._handleAsyncError(e)
@@ -340,13 +325,10 @@ export default {
         query.__refresh__ = true
         query.__reload__ = !showLoading
         try {
-          await this.$store.dispatch(
-            `${NAMESPACE}/initData`,
-            {
-              ...this.params,
-              query
-            }
-          )
+          await this.$store.dispatch(`${NAMESPACE}/initData`, {
+            ...this.params,
+            query
+          })
           this._initFlowLoader()
           resolve()
         } catch (e) {
@@ -366,17 +348,14 @@ export default {
       }
     },
     _callMethod({ method, id, key, value }) {
-      this.$store.commit(
-        `${NAMESPACE}/UPDATE_DATA`,
-        {
-          ...this.params,
-          id,
-          value,
-          method,
-          changeKey: key,
-          uniqueKey: this.uniqueKey
-        }
-      )
+      this.$store.commit(`${NAMESPACE}/UPDATE_DATA`, {
+        ...this.params,
+        id,
+        value,
+        method,
+        changeKey: key,
+        uniqueKey: this.uniqueKey
+      })
     },
     _initState() {
       if (this.source) {
@@ -385,15 +364,16 @@ export default {
       this.$store.commit(`${NAMESPACE}/INIT_STATE`, this.params)
     },
     _detectLoadMore() {
-      if (!this.source || this.source.nothing || this.source.noMore || this.source.error) {
+      if (
+        !this.source ||
+        this.source.nothing ||
+        this.source.noMore ||
+        this.source.error
+      ) {
         return
       }
       // 如果列表的数据没有撑满页面，就继续请求更多
-      if (
-        this.isAuto &&
-        this.$refs.shim &&
-        checkInView(this.$refs.shim)
-      ) {
+      if (this.isAuto && this.$refs.shim && checkInView(this.$refs.shim)) {
         this.loadMore()
       }
     },
@@ -417,19 +397,20 @@ export default {
         shimDom.__lazy_handler__ = this._fetchDataFn.bind(this)
         this.observer.observe(shimDom)
       }
-      addEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
+      addEvent(
+        getScrollParentDom(this.$el, this.scrollX),
+        LAZY_MODE_SCROLL,
+        this._scrollFn
+      )
     },
     _fireSSRCallback() {
       if (!this.firstBind) {
         return
       }
-
       this.firstBind = false
-
       if (!this.source || !this.source.fetched) {
         return
       }
-
       this._successCallback({
         params: utils.generateRequestParams({
           field: { fetched: false },
@@ -450,16 +431,16 @@ export default {
       if (!this.source) {
         return
       }
-
       if (!this.isAuto) {
         return
       }
-
       if (this.source.loading || this.source.error) {
         return
       }
-
-      if (this.source.fetched && (this.source.noMore || this.source.nothing || this.isPagination)) {
+      if (
+        this.source.fetched &&
+        (this.source.noMore || this.source.nothing || this.isPagination)
+      ) {
         if (this.observer) {
           const shimDom = this.$refs.shim
           if (!shimDom) {
@@ -468,10 +449,13 @@ export default {
           this.observer.unobserve(shimDom)
           shimDom.__lazy_handler__ = undefined
         }
-        offEvent(getScrollParentDom(this.$el, this.scrollX), LAZY_MODE_SCROLL, this._scrollFn)
+        offEvent(
+          getScrollParentDom(this.$el, this.scrollX),
+          LAZY_MODE_SCROLL,
+          this._scrollFn
+        )
         return
       }
-
       this.source.fetched ? this.loadMore() : this.initData()
     },
     _scrollFn(event, force = false) {
@@ -502,5 +486,5 @@ export default {
       this.$emit('success', data)
     }
   }
-}
+})
 </script>

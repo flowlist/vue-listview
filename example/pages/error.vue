@@ -1,16 +1,9 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="error">
-    <ListView
-      func="getListWithError"
-      :query="query"
-    >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+    <ListView func="getListWithError" :query="query">
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"

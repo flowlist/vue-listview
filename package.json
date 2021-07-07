@@ -1,70 +1,37 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.2.10",
-  "deploy_url": "https://flowlist.github.io",
-  "project_base_url": "/vue-listview/",
-  "code_gen_prefix": "code-gen/",
-  "main": "./dist/Flowlist.umd.js",
+  "version": "3.3.0-beta",
+  "main": "dist/listview.umd.js",
+  "module": "dist/listview.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/flowlist/vue-listview.git"
-  },
-  "keywords": [
-    "vue",
-    "vuex",
-    "promise",
-    "listview",
-    "flowlist"
-  ],
-  "author": "falstack",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/flowlist/vue-listview/issues"
-  },
-  "homepage": "https://github.com/flowlist/vue-listview#readme",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name Flowlist src/index.js",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
-  },
-  "dependencies": {
-    "@flowlist/js-core": "1.6.3"
+    "dev": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint --ext js,jsx,ts,tsx,vue . --fix"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^6.0.0",
-    "@nuxtjs/eslint-module": "^3.0.2",
-    "@nuxtjs/style-resources": "^1.0.0",
-    "@vant/touch-emulator": "^1.2.0",
-    "@vue/cli-plugin-babel": "~4.5.12",
-    "@vue/cli-plugin-eslint": "~4.5.12",
-    "@vue/cli-plugin-unit-jest": "~4.5.12",
-    "@vue/cli-plugin-vuex": "~4.5.12",
-    "@vue/cli-service": "^4.5.12",
-    "@vue/compiler-sfc": "^3.0.11",
-    "@vue/test-utils": "^1.1.3",
-    "babel-eslint": "^10.1.0",
-    "core-js": "^3.9.1",
-    "cross-env": "^7.0.3",
-    "eslint": "^7.21.0",
-    "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.7.0",
-    "faker": "^5.4.0",
-    "koa": "^2.13.1",
-    "nodemon": "^2.0.7",
-    "nuxt": "^2.15.3",
-    "os": "^0.1.1",
-    "qrcode": "^1.4.4",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue": "^3.0.11",
-    "vue-router": "^3.5.1",
-    "vue-server-renderer": "2.6.12",
-    "vue-template-compiler": "2.6.12",
-    "vuepress": "^1.8.2",
-    "vuepress-plugin-code-gen-box": "^0.0.9",
-    "vuepress-plugin-dehydrate": "^1.1.5",
-    "vuex": "^4.0.0"
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vitejs/plugin-vue": "^1.2.4",
+    "@vue/compiler-sfc": "^3.1.4",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.3.8",
+    "vite-plugin-dts": "^0.5.2",
+    "vue-tsc": "^0.2.0"
+  },
+  "dependencies": {
+    "@flowlist/js-core": "^1.7.6"
+  },
+  "peerDependencies": {
+    "vue": "^3.1.4"
   }
 }

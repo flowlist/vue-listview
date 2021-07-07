@@ -1,5 +1,4 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="first-loading">
@@ -8,10 +7,7 @@
       :query="query"
       :use-first-loading="true"
     >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"

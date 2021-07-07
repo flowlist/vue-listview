@@ -2,10 +2,11 @@ import ItemFactory from './item-factory'
 
 export const getListByPage = (query) => {
   console.log(query)
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = (query.page - 1) * query.count
-    const getLength = total - hasFetch >= query.count ? query.count : total - hasFetch
+    const getLength =
+      total - hasFetch >= query.count ? query.count : total - hasFetch
     const no_more = getLength + hasFetch >= total
     setTimeout(() => {
       const result = ItemFactory.get(getLength)
@@ -20,7 +21,7 @@ export const getListByPage = (query) => {
 
 export const getObjectByPage = ({ page, count }) => {
   console.log('page', page)
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = (page - 1) * count
     const getLength = total - hasFetch >= count ? count : total - hasFetch
@@ -48,7 +49,7 @@ export const getListBySinceId = ({ since_id, is_up, count }) => {
   console.log('since_id', since_id)
   console.log('is_up', is_up)
   console.log('count', count)
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = SINCE_HAS_FETCHED
     const getLength = total - hasFetch >= count ? count : total - hasFetch
@@ -70,7 +71,7 @@ export const getListBySinceId = ({ since_id, is_up, count }) => {
 
 export const getListByJump = ({ page, count }) => {
   console.log('page', page)
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = (page - 1) * count
     const getLength = total - hasFetch >= count ? count : total - hasFetch
@@ -109,7 +110,7 @@ export const getListWithError = ({ page, count }) => {
 }
 
 export const getListByFirstLoading = ({ page, count }) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = (page - 1) * count
     const getLength = total - hasFetch >= count ? count : total - hasFetch
@@ -157,7 +158,7 @@ export const getListByLastId = ({ last_id, count }) => {
   if (!last_id) {
     LAST_FETCHED_COUNT = 0
   }
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const beginId = 0
     const total = 87
     const hasFetch = LAST_FETCHED_COUNT - beginId
@@ -177,7 +178,7 @@ export const getListByLastId = ({ last_id, count }) => {
 
 export const getListBySeenIds = ({ seen_ids, count }) => {
   console.log('seen_ids', seen_ids)
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 87
     const hasFetch = seen_ids.split(',').length
     const getLength = total - hasFetch >= count ? count : total - hasFetch
@@ -195,7 +196,7 @@ export const getListBySeenIds = ({ seen_ids, count }) => {
 }
 
 export const getListByNothing = ({ page, count }) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const total = 0
     const hasFetch = (page - 1) * count
     const getLength = total - hasFetch >= count ? count : total - hasFetch

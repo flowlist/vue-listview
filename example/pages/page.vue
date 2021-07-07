@@ -1,5 +1,4 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="page">
@@ -9,10 +8,7 @@
       :autoload="3"
       @success="handlePageLoaded"
     >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"

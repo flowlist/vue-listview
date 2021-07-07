@@ -1,14 +1,7 @@
 <template>
   <div id="custom-api">
-    <ListView
-      :func="getListByPage"
-      :query="query"
-      @success="handlePageLoaded"
-    >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+    <ListView :func="getListByPage" :query="query" @success="handlePageLoaded">
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"

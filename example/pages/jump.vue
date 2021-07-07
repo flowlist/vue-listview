@@ -1,17 +1,9 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="jump">
-    <ListView
-      ref="loader"
-      func="getListByJump"
-      :query="query"
-    >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+    <ListView ref="loader" func="getListByJump" :query="query">
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"
@@ -34,8 +26,8 @@
         <button @click="load(9)">
           page-9
         </button>
-        <br>
-        <br>
+        <br />
+        <br />
       </div>
     </ListView>
   </div>

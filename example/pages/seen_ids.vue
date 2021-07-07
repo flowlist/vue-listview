@@ -1,5 +1,4 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="seen_ids">
@@ -9,10 +8,7 @@
       display-no-more
       unique-key="data.number_id"
     >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"
@@ -27,7 +23,7 @@
         <p style="text-align: center">
           custom no more text
         </p>
-        <br>
+        <br />
       </template>
     </ListView>
   </div>

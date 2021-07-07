@@ -195,25 +195,10 @@ a {
 <template>
   <div>
     <div class="header-bar ios">
-      <div
-        v-if="showBack"
-        class="back"
-        @click="back"
-      />
-      <span
-        class="text"
-        v-text="title"
-      />
-      <div
-        v-if="showQRIcon"
-        class="qr"
-        @click.stop="showQR = !showQR"
-      >
-        <canvas
-          v-show="showQR"
-          ref="qrcode"
-          class="qrcode"
-        />
+      <div v-if="showBack" class="back" @click="back" />
+      <span class="text" v-text="title" />
+      <div v-if="showQRIcon" class="qr" @click.stop="showQR = !showQR">
+        <canvas v-show="showQR" ref="qrcode" class="qrcode" />
       </div>
     </div>
     <div class="header-shim" />
@@ -229,7 +214,7 @@ export default {
   data() {
     return {
       showQR: false,
-      title: '',
+      title: ''
     }
   },
   computed: {
@@ -251,7 +236,7 @@ export default {
     this.$watch('$route', () => {
       this.generateQR()
     })
-    document.addEventListener('touchstart', function () {}, false)
+    document.addEventListener('touchstart', function() {}, false)
   },
   methods: {
     back() {
@@ -276,11 +261,11 @@ export default {
           this.$refs.qrcode,
           `${window.location.origin}${window.location.pathname}`,
           {
-            width: 250,
+            width: 250
           }
         )
       })
-    },
-  },
+    }
+  }
 }
 </script>

@@ -1,16 +1,9 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="nothing">
-    <ListView
-      func="getListByNothing"
-      :query="query"
-    >
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+    <ListView func="getListByNothing" :query="query">
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"

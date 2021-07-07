@@ -1,5 +1,4 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <ListView
@@ -11,7 +10,7 @@
     @success="handleSuccess"
   >
     <template #header>
-      <br>
+      <br />
       <button @click="unshift(1)">
         unshift - object
       </button>
@@ -22,10 +21,7 @@
         search
       </button>
     </template>
-    <ul
-      slot-scope="{ list }"
-      class="demo-list"
-    >
+    <ul slot-scope="{ list }" class="demo-list">
       <li
         v-for="item in list"
         :key="item.id"
@@ -62,9 +58,7 @@
       <button @click="patch(2)">
         patch - array
       </button>
-      <button @click="reset">
-        reset - {{ source.total }}
-      </button>
+      <button @click="reset">reset - {{ source.total }}</button>
     </template>
   </ListView>
 </template>
@@ -83,7 +77,7 @@ export default {
   },
   methods: {
     handleSuccess({ data }) {
-      this.loadedIds = data.result.map(_ => _.data.number_id)
+      this.loadedIds = data.result.map((_) => _.data.number_id)
     },
     insertBefore(item) {
       this.$refs.loader.insertBefore(item.data.number_id, ItemFactory.get(1))
@@ -95,7 +89,11 @@ export default {
       this.$refs.loader.delete(item.data.number_id)
     },
     updateItem(item) {
-      this.$refs.loader.update(item.data.number_id, 'style.color', ItemFactory.getRandomColor())
+      this.$refs.loader.update(
+        item.data.number_id,
+        'style.color',
+        ItemFactory.getRandomColor()
+      )
     },
     unshift(count) {
       this.$refs.loader.unshift(ItemFactory.get(count))
@@ -107,7 +105,7 @@ export default {
       let data
       if (type === 1) {
         data = {}
-        this.loadedIds.forEach(id => {
+        this.loadedIds.forEach((id) => {
           data[id] = {
             style: {
               color: ItemFactory.getRandomColor()
@@ -115,7 +113,7 @@ export default {
           }
         })
       } else {
-        data = this.loadedIds.map(id => {
+        data = this.loadedIds.map((id) => {
           return {
             data: {
               number_id: id

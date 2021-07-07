@@ -26,14 +26,8 @@
 
 <template>
   <ul id="homepage">
-    <li
-      v-for="(item, index) in headers"
-      :key="index"
-    >
-      <NLink
-        :to="item.route"
-        v-text="item.name"
-      />
+    <li v-for="(item, index) in headers" :key="index">
+      <NLink :to="item.route" v-text="item.name" />
     </li>
   </ul>
 </template>

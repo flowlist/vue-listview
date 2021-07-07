@@ -1,5 +1,4 @@
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <template>
   <div id="since_id">
@@ -10,7 +9,7 @@
       unique-key="data.number_id"
     >
       <template #header>
-        <br>
+        <br />
         <button @click="fetchUp">
           向上获取
         </button>
@@ -19,10 +18,7 @@
         </button>
       </template>
 
-      <ul
-        slot-scope="{ list }"
-        class="demo-list"
-      >
+      <ul slot-scope="{ list }" class="demo-list">
         <li
           v-for="item in list"
           :key="item.id"
