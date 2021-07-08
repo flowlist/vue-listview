@@ -51,7 +51,7 @@ export default ({ api }: { api: any[] }): any => ({
     }
   },
   mutations: {
-    INIT_STATE(state: any, { func, type, query }: generateFieldProps): void {
+    initState(state: any, { func, type, query }: generateFieldProps): void {
       initState({
         getter: getter(state),
         setter: setter(state),
@@ -60,7 +60,7 @@ export default ({ api }: { api: any[] }): any => ({
         query
       })
     },
-    UPDATE_DATA(
+    updateState(
       state: any,
       {
         type,

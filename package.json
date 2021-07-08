@@ -1,8 +1,8 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.3.0-beta",
-  "main": "dist/listview.umd.js",
-  "module": "dist/listview.es.js",
+  "version": "3.3.3-beta",
+  "main": "dist/vue-listview.umd.js",
+  "module": "dist/vue-listview.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -29,9 +29,8 @@
     "vue-tsc": "^0.2.0"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.7.6"
-  },
-  "peerDependencies": {
-    "vue": "^3.1.4"
+    "@flowlist/js-core": "^1.7.6",
+    "vue": "^3.1.4",
+    "vuex": "^4.0.2"
   }
 }

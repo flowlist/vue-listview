@@ -1,4 +1,4 @@
-import ListStore from './components/store'
-import ListView from './components/loader.vue'
+import ListStore from './list-store'
+import ListView from './list-view.vue'
 
 export { ListStore, ListView }

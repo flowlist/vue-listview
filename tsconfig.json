@@ -14,7 +14,7 @@
     "paths": {}
   },
   "include": [
-    "src/components/*"
+    "src/*"
   ],
   "exclude": [
     "node_modules",

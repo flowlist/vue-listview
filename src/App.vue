@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ListView from './components/index.vue'
+import ListView from './index.vue'
 
 export default defineComponent({
   name: 'App',
