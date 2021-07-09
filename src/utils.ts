@@ -82,7 +82,7 @@ export const cache = {
   }
 }
 
-export const getObserver = isServer
+export const getObserver = () => isServer
   ? null
   : window.IntersectionObserver &&
     new window.IntersectionObserver((entries) => {
