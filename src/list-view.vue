@@ -137,10 +137,6 @@ const listViewProps = {
   scrollX: {
     type: Boolean,
     default: false
-  },
-  useLocal: {
-    type: Boolean,
-    default: false
   }
 }
 
@@ -150,7 +146,7 @@ export default defineComponent({
   name: 'ListView',
   props: listViewProps,
   emits: ['success', 'error'],
-  setup(props: ListViewProps, ctx) {
+  async setup(props: ListViewProps, ctx) {
     const store = useStore()
     const throttle = ref(false)
     const shimRef = ref(null)
@@ -163,8 +159,9 @@ export default defineComponent({
       uniqueKey: props.uniqueKey,
       cacheTimeout: isServer ? 0 : props.cacheTimeout
     }))
+    const useLocal = typeof store?.getters?.[`${NAMESPACE}/get`] !== 'function'
 
-    const source = props.useLocal
+    const source = useLocal
       ? reactive(jsCore.utils.generateDefaultField())
       : store.getters[`${NAMESPACE}/get`](params)
 
@@ -210,18 +207,11 @@ export default defineComponent({
     const displayNoMore = computed(() => !!ctx.slots['no-more'])
 
     const _initState = () => {
-      if (source) {
-        return
-      }
       _dataReducer(STORE_COMMIT, 'initState', params)
     }
 
     const _initFlowLoader = (loop = 0) => {
       if (props.autoload === 0) {
-        return
-      }
-      if (isServer) {
-        initData()
         return
       }
       if (!shimRef.value) {
@@ -279,7 +269,7 @@ export default defineComponent({
     }
 
     const _dataReducer = (type, name, data) => {
-      if (props.useLocal) {
+      if (useLocal) {
         return jsCore[name]({
           getter: () => source,
           setter: ({ value, callback }) => {
@@ -473,7 +463,7 @@ export default defineComponent({
     }
 
     const retry = (showLoading = true) => {
-      if (source.fetched) {
+      if (source && source.fetched) {
         return loadMore()
       } else {
         return initData({
@@ -486,9 +476,6 @@ export default defineComponent({
     watch(
       () => props.query,
       async () => {
-        if (source) {
-          return
-        }
         await nextTick()
         _initState()
         _initFlowLoader()
@@ -509,7 +496,11 @@ export default defineComponent({
     })
 
     _initState()
-    _initFlowLoader()
+    if (isServer) {
+      await initData()
+    } else {
+      _initFlowLoader()
+    }
 
     return {
       elRef,
