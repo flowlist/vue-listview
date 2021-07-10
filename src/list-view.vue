@@ -145,8 +145,8 @@ export type ListViewProps = ExtractPropTypes<typeof listViewProps>
 export default defineComponent({
   name: 'ListView',
   props: listViewProps,
-  emits: ['success', 'error'],
-  async setup(props: ListViewProps, ctx) {
+  emits: ['success'],
+  async setup(props: ListViewProps, { slots, emit }) {
     const store = useStore()
     const throttle = ref(false)
     const shimRef = ref(null)
@@ -200,11 +200,11 @@ export default defineComponent({
       return result
     })
 
-    const useFirstLoading = computed(() => !!ctx.slots['first-loading'])
+    const useFirstLoading = computed(() => !!slots['first-loading'])
 
-    const useFirstError = computed(() => !!ctx.slots['first-error'])
+    const useFirstError = computed(() => !!slots['first-error'])
 
-    const displayNoMore = computed(() => !!ctx.slots['no-more'])
+    const displayNoMore = computed(() => !!slots['no-more'])
 
     const _initState = () => {
       _dataReducer(STORE_COMMIT, 'initState', params)
@@ -326,12 +326,11 @@ export default defineComponent({
       source.fetched ? loadMore() : initData()
     }
 
-    const _handleAsyncError = (error) => {
-      ctx.emit('error', { error })
-    }
-
     const _successCallback = (data) => {
-      ctx.emit('success', data)
+      if (isServer) {
+        return
+      }
+      emit('success', data)
     }
 
     const reset = (key, value) => {
@@ -402,7 +401,8 @@ export default defineComponent({
     }
 
     const initData = (obj = {}) => {
-      return new Promise(async (resolve) => {
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async (resolve, reject) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'initData', {
             ...params.value,
@@ -418,14 +418,14 @@ export default defineComponent({
 
           resolve()
         } catch (e) {
-          _handleAsyncError(e)
-          resolve()
+          reject(e)
         }
       })
     }
 
     const loadMore = (obj = {}) => {
-      return new Promise(async (resolve) => {
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async (resolve, reject) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'loadMore', {
             ...params.value,
@@ -433,8 +433,7 @@ export default defineComponent({
           })
           resolve()
         } catch (e) {
-          _handleAsyncError(e)
-          resolve()
+          reject(e)
         }
       })
     }
@@ -444,20 +443,21 @@ export default defineComponent({
     }
 
     const refresh = (showLoading = true) => {
-      return new Promise(async (resolve) => {
-        const query = { ...props.query }
-        query.__refresh__ = true
-        query.__reload__ = !showLoading
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise(async (resolve, reject) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'initData', {
             ...params.value,
-            query
+            query: {
+              ...props.query,
+              __refresh__: true,
+              __reload__: !showLoading
+            }
           })
           _initFlowLoader()
           resolve()
         } catch (e) {
-          _handleAsyncError(e)
-          resolve()
+          reject(e)
         }
       })
     }
