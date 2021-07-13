@@ -1,5 +1,5 @@
 <template>
-  <template v-if="canRender">
+  <template v-if="source">
     <!--  flow header  -->
     <slot :source="source" name="header" />
     <!--  flow list  -->
@@ -7,9 +7,7 @@
     <!--  flow footer  -->
     <slot :source="source" name="footer" />
     <!--  flow listener    -->
-    <template v-if="!isServer">
-      <div ref="shimRef" :style="shimStyle" />
-    </template>
+    <div ref="shimRef" :style="shimStyle" />
     <!--  flow state： error   -->
     <template v-if="source.error">
       <slot
@@ -186,8 +184,6 @@ export default defineComponent({
       }
       return result
     })
-
-    const canRender = computed(() => (isServer ? props.ssr : true) && source)
 
     const useFirstLoading = computed(() => !!slots['first-loading'])
 
@@ -404,6 +400,7 @@ export default defineComponent({
             ...params.value,
             query: { ...props.query, ...obj }
           })
+
           if (isServer) {
             resolve()
             return
@@ -504,8 +501,6 @@ export default defineComponent({
     }
 
     return {
-      canRender,
-      isServer,
       shimRef,
       source,
       useFirstLoading,
