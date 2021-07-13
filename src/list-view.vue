@@ -1,62 +1,57 @@
 <template>
-  <div ref="elRef" style="position:relative">
-    <template v-if="source">
-      <!--  flow header  -->
-      <slot :source="source" name="header" />
-      <!--  flow list  -->
-      <slot
-        :list="source.result"
-        :result="source.result"
-        :total="source.total"
-        :count="source.result.length"
-        :extra="source.extra"
-      />
-      <!--  flow footer  -->
-      <slot :source="source" name="footer" />
-      <!--  flow state： error   -->
-      <template v-if="source.error">
-        <slot
-          v-if="useFirstError && !source.result.length"
-          name="first-error"
-          :error="source.error"
-        >
-          出错了
-        </slot>
-        <slot v-else name="error" :error="source.error">
-          <button @click="retry">
-            出错了，点击重试
-          </button>
-        </slot>
-      </template>
-      <!--  flow state： loading   -->
-      <template v-else-if="source.loading">
-        <slot
-          v-if="useFirstLoading && !source.result.length"
-          name="first-loading"
-        >
-          加载中…
-        </slot>
-        <slot v-else name="loading">
-          加载中…
-        </slot>
-      </template>
-      <!--  flow state： nothing   -->
-      <template v-else-if="source.nothing">
-        <slot name="nothing">这里什么都没有</slot>
-      </template>
-      <!--  flow state： no-more   -->
-      <template v-else-if="source.noMore">
-        <slot v-if="displayNoMore" name="no-more" />
-      </template>
-      <!--  flow state： normal   -->
-      <template v-else-if="!isPagination">
-        <slot v-if="!isAuto" name="load">
-          <button @click="loadMore()">点击加载更多</button>
-        </slot>
-      </template>
+  <template v-if="canRender">
+    <!--  flow header  -->
+    <slot :source="source" name="header" />
+    <!--  flow list  -->
+    <slot :result="source.result" :total="source.total" :extra="source.extra" />
+    <!--  flow footer  -->
+    <slot :source="source" name="footer" />
+    <!--  flow listener    -->
+    <template v-if="!isServer">
+      <div ref="shimRef" :style="shimStyle" />
     </template>
-    <div ref="shimRef" :style="shimStyle" />
-  </div>
+    <!--  flow state： error   -->
+    <template v-if="source.error">
+      <slot
+        v-if="useFirstError && !source.result.length"
+        name="first-error"
+        :error="source.error"
+      >
+        出错了
+      </slot>
+      <slot v-else name="error" :error="source.error">
+        <button @click="retry">
+          出错了，点击重试
+        </button>
+      </slot>
+    </template>
+    <!--  flow state： loading   -->
+    <template v-else-if="source.loading">
+      <slot
+        v-if="useFirstLoading && !source.result.length"
+        name="first-loading"
+      >
+        加载中…
+      </slot>
+      <slot v-else name="loading">
+        加载中…
+      </slot>
+    </template>
+    <!--  flow state： nothing   -->
+    <template v-else-if="source.nothing">
+      <slot name="nothing">这里什么都没有</slot>
+    </template>
+    <!--  flow state： no-more   -->
+    <template v-else-if="source.noMore">
+      <slot v-if="displayNoMore" name="no-more" />
+    </template>
+    <!--  flow state： normal   -->
+    <template v-else-if="!isPagination">
+      <slot v-if="!isAuto" name="load">
+        <button @click="loadMore()">点击加载更多</button>
+      </slot>
+    </template>
+  </template>
 </template>
 
 <script lang="ts">
@@ -142,7 +137,6 @@ export default defineComponent({
     const store = useStore()
     const throttle = ref(false)
     const shimRef = ref(null)
-    const elRef = ref(null)
     const params = computed(() => ({
       func: props.func,
       type: props.type,
@@ -173,6 +167,7 @@ export default defineComponent({
     const shimStyle = computed(() => {
       const result = {
         zIndex: -1,
+        display: 'block !important',
         userSelect: 'none',
         position: 'absolute',
         pointerEvents: 'none',
@@ -191,6 +186,8 @@ export default defineComponent({
       }
       return result
     })
+
+    const canRender = computed(() => (isServer ? props.ssr : true) && source)
 
     const useFirstLoading = computed(() => !!slots['first-loading'])
 
@@ -222,7 +219,7 @@ export default defineComponent({
         observer.observe(shimRef.value)
       }
       addEvent(
-        getScrollParentDom(elRef, props.scrollX),
+        getScrollParentDom(shimRef.value, props.scrollX),
         LAZY_MODE_SCROLL,
         _scrollFn
       )
@@ -309,7 +306,7 @@ export default defineComponent({
           shimRef.value.__lazy_handler__ = undefined
         }
         offEvent(
-          getScrollParentDom(elRef.value, props.scrollX),
+          getScrollParentDom(shimRef.value, props.scrollX),
           LAZY_MODE_SCROLL,
           _scrollFn
         )
@@ -496,7 +493,7 @@ export default defineComponent({
         observer.disconnect()
       }
       offEvent(
-        getScrollParentDom(elRef.value, props.scrollX),
+        getScrollParentDom(shimRef.value, props.scrollX),
         LAZY_MODE_SCROLL,
         _scrollFn
       )
@@ -507,7 +504,8 @@ export default defineComponent({
     }
 
     return {
-      elRef,
+      canRender,
+      isServer,
       shimRef,
       source,
       useFirstLoading,
