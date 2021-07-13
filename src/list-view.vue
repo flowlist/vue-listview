@@ -1,74 +1,61 @@
 <template>
-  <div ref="elRef" class="list-view" style="position:relative">
+  <div ref="elRef" style="position:relative">
     <template v-if="source">
       <!--  flow header  -->
       <slot :source="source" name="header" />
       <!--  flow list  -->
       <slot
         :list="source.result"
+        :result="source.result"
         :total="source.total"
         :count="source.result.length"
         :extra="source.extra"
       />
       <!--  flow footer  -->
       <slot :source="source" name="footer" />
-      <!--  flow state  -->
-      <div class="list-view__state">
-        <!--   error   -->
-        <template v-if="source.error">
-          <div
-            v-if="useFirstError && !source.result.length"
-            class="list-view__state--first-error"
-          >
-            <slot name="first-error" :error="source.error">
-              出错了
-            </slot>
-          </div>
-          <div v-else class="list-view__state--error" @click="retry">
-            <slot name="error" :error="source.error">
-              出错了，点击重试
-            </slot>
-          </div>
-        </template>
-        <!--   loading   -->
-        <template v-else-if="source.loading">
-          <div
-            v-if="useFirstLoading && !source.result.length"
-            class="list-view__state--first-loading"
-          >
-            <slot name="first-loading">
-              加载中…
-            </slot>
-          </div>
-          <div v-else class="list-view__state--loading">
-            <slot name="loading">
-              加载中…
-            </slot>
-          </div>
-        </template>
-        <!--   nothing   -->
-        <div v-else-if="source.nothing" class="list-view__state--nothing">
-          <slot name="nothing">
-            这里什么都没有
-          </slot>
-        </div>
-        <!--   no-more   -->
-        <div v-else-if="source.noMore" class="list-view__state--no-more">
-          <slot v-if="displayNoMore" name="no-more" />
-        </div>
-        <!--   normal   -->
-        <div
-          v-else-if="!isPagination"
-          class="list-view__state--load"
-          @click="loadMore()"
+      <!--  flow state： error   -->
+      <template v-if="source.error">
+        <slot
+          v-if="useFirstError && !source.result.length"
+          name="first-error"
+          :error="source.error"
         >
-          <slot v-if="!isAuto" name="load">
-            点击加载更多
-          </slot>
-        </div>
-      </div>
+          出错了
+        </slot>
+        <slot v-else name="error" :error="source.error">
+          <button @click="retry">
+            出错了，点击重试
+          </button>
+        </slot>
+      </template>
+      <!--  flow state： loading   -->
+      <template v-else-if="source.loading">
+        <slot
+          v-if="useFirstLoading && !source.result.length"
+          name="first-loading"
+        >
+          加载中…
+        </slot>
+        <slot v-else name="loading">
+          加载中…
+        </slot>
+      </template>
+      <!--  flow state： nothing   -->
+      <template v-else-if="source.nothing">
+        <slot name="nothing">这里什么都没有</slot>
+      </template>
+      <!--  flow state： no-more   -->
+      <template v-else-if="source.noMore">
+        <slot v-if="displayNoMore" name="no-more" />
+      </template>
+      <!--  flow state： normal   -->
+      <template v-else-if="!isPagination">
+        <slot v-if="!isAuto && !once" name="load">
+          <button @click="loadMore()">点击加载更多</button>
+        </slot>
+      </template>
     </template>
-    <div ref="shimRef" :style="shimStyle" class="list-view__shim" />
+    <div ref="shimRef" :style="shimStyle" />
   </div>
 </template>
 
