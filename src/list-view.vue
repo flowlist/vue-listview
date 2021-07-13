@@ -50,7 +50,7 @@
       </template>
       <!--  flow state： normal   -->
       <template v-else-if="!isPagination">
-        <slot v-if="!isAuto && !once" name="load">
+        <slot v-if="!isAuto" name="load">
           <button @click="loadMore()">点击加载更多</button>
         </slot>
       </template>
@@ -69,6 +69,7 @@ import {
   computed,
   watch,
   onBeforeUnmount,
+  onMounted,
   nextTick
 } from 'vue'
 import { useStore } from 'vuex'
@@ -124,6 +125,10 @@ const listViewProps = {
   scrollX: {
     type: Boolean,
     default: false
+  },
+  ssr: {
+    type: Boolean,
+    default: false
   }
 }
 
@@ -132,7 +137,7 @@ export type ListViewProps = ExtractPropTypes<typeof listViewProps>
 export default defineComponent({
   name: 'ListView',
   props: listViewProps,
-  emits: ['success'],
+  emits: ['success', 'error'],
   async setup(props: ListViewProps, { slots, emit }) {
     const store = useStore()
     const throttle = ref(false)
@@ -320,6 +325,13 @@ export default defineComponent({
       emit('success', data)
     }
 
+    const _handleAsyncError = (data) => {
+      if (isServer) {
+        return
+      }
+      emit('error', data)
+    }
+
     const reset = (key, value) => {
       _callMethod({ key, value, method: jsCore.ENUM.CHANGE_TYPE.RESET_FIELD })
     }
@@ -389,7 +401,7 @@ export default defineComponent({
 
     const initData = (obj = {}) => {
       // eslint-disable-next-line no-async-promise-executor
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'initData', {
             ...params.value,
@@ -405,14 +417,15 @@ export default defineComponent({
 
           resolve()
         } catch (e) {
-          reject(e)
+          _handleAsyncError(e)
+          resolve()
         }
       })
     }
 
     const loadMore = (obj = {}) => {
       // eslint-disable-next-line no-async-promise-executor
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'loadMore', {
             ...params.value,
@@ -420,7 +433,8 @@ export default defineComponent({
           })
           resolve()
         } catch (e) {
-          reject(e)
+          _handleAsyncError(e)
+          resolve()
         }
       })
     }
@@ -431,7 +445,7 @@ export default defineComponent({
 
     const refresh = (showLoading = true) => {
       // eslint-disable-next-line no-async-promise-executor
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve) => {
         try {
           await _dataReducer(STORE_DISPATCH, 'initData', {
             ...params.value,
@@ -444,7 +458,8 @@ export default defineComponent({
           _initFlowLoader()
           resolve()
         } catch (e) {
-          reject(e)
+          _handleAsyncError(e)
+          resolve()
         }
       })
     }
@@ -470,6 +485,11 @@ export default defineComponent({
       { deep: true }
     )
 
+    _initState()
+    onMounted(() => {
+      _initFlowLoader()
+    })
+
     onBeforeUnmount(() => {
       if (observer) {
         observer.unobserve(shimRef.value)
@@ -482,11 +502,8 @@ export default defineComponent({
       )
     })
 
-    _initState()
-    if (isServer) {
+    if (isServer && props.ssr) {
       await initData()
-    } else {
-      _initFlowLoader()
     }
 
     return {
