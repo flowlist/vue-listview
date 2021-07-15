@@ -118,10 +118,6 @@ const listViewProps = {
   scrollX: {
     type: Boolean,
     default: false
-  },
-  ssr: {
-    type: Boolean,
-    default: false
   }
 }
 
@@ -496,7 +492,7 @@ export default defineComponent({
       )
     })
 
-    if (isServer && props.ssr) {
+    if (isServer) {
       await initData()
     }
 
