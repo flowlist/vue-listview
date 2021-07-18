@@ -58,7 +58,6 @@ import {
   defineComponent,
   ExtractPropTypes,
   ref,
-  reactive,
   computed,
   watch,
   onBeforeUnmount,
@@ -142,14 +141,14 @@ export default defineComponent({
     const useLocal = typeof store?.getters?.[`${NAMESPACE}/get`] !== 'function'
 
     const source = useLocal
-      ? reactive(jsCore.utils.generateDefaultField())
+      ? ref(null)
       : store.getters[`${NAMESPACE}/get`](params)
 
     const isAuto = computed(() => {
-      if (!source) {
+      if (!source.value) {
         return props.autoload === -1
       }
-      return props.autoload === -1 || props.autoload > source.page
+      return props.autoload === -1 || props.autoload > source.value.page
     })
 
     const isPagination = computed(
@@ -188,6 +187,9 @@ export default defineComponent({
     const displayNoMore = computed(() => !!slots['no-more'])
 
     const _initState = () => {
+      if (useLocal) {
+        source.value = null
+      }
       _dataReducer(STORE_COMMIT, 'initState', params)
     }
 
@@ -252,11 +254,15 @@ export default defineComponent({
     const _dataReducer = (type, name, data) => {
       if (useLocal) {
         return jsCore[name]({
-          getter: () => source,
+          getter: () => source.value,
           setter: ({ value, callback }) => {
-            Object.keys(value).forEach((key) => {
-              source[key] = value[key]
-            })
+            if (source.value) {
+              Object.keys(value).forEach((key) => {
+                source.value[key] = value[key]
+              })
+            } else {
+              source.value = value
+            }
             callback && callback()
           },
           cache,
@@ -267,7 +273,12 @@ export default defineComponent({
     }
 
     const _detectLoadMore = () => {
-      if (!source || source.nothing || source.noMore || source.error) {
+      if (
+        !source.value ||
+        source.value.nothing ||
+        source.value.noMore ||
+        source.value.error
+      ) {
         return
       }
       // 如果列表的数据没有撑满页面，就继续请求更多
@@ -277,18 +288,18 @@ export default defineComponent({
     }
 
     const _fetchDataFn = () => {
-      if (!source) {
+      if (!source.value) {
         return
       }
       if (!isAuto.value) {
         return
       }
-      if (source.loading || source.error) {
+      if (source.value.loading || source.value.error) {
         return
       }
       if (
-        source.fetched &&
-        (source.noMore || source.nothing || isPagination.value)
+        source.value.fetched &&
+        (source.value.noMore || source.value.nothing || isPagination.value)
       ) {
         if (observer) {
           if (!shimRef.value) {
@@ -304,7 +315,7 @@ export default defineComponent({
         )
         return
       }
-      source.fetched ? loadMore() : initData()
+      source.value.fetched ? loadMore() : initData()
     }
 
     const _successCallback = (data) => {
@@ -358,10 +369,14 @@ export default defineComponent({
     }
 
     const search = (id) => {
-      if (!source) {
+      if (!source.value) {
         return undefined
       }
-      return jsCore.utils.searchValueByKey(source.result, id, props.uniqueKey)
+      return jsCore.utils.searchValueByKey(
+        source.value.result,
+        id,
+        props.uniqueKey
+      )
     }
 
     const update = (id, key, value) => {
@@ -455,7 +470,7 @@ export default defineComponent({
     }
 
     const retry = (showLoading = true) => {
-      if (source && source.fetched) {
+      if (source.value && source.value.fetched) {
         return loadMore()
       } else {
         return initData({
