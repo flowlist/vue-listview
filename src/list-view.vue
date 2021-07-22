@@ -7,7 +7,7 @@
     <!--  flow footer  -->
     <slot :source="source" name="footer" />
     <!--  flow listener    -->
-    <div ref="shimRef" :style="shimStyle" />
+    <div v-if="canRender" ref="shimRef" :style="shimStyle" />
     <!--  flow state： error   -->
     <template v-if="source.error">
       <slot
@@ -128,6 +128,7 @@ export default defineComponent({
   emits: ['success', 'error'],
   async setup(props: ListViewProps, { slots, emit }) {
     const store = useStore()
+    const canRender = ref(false)
     const throttle = ref(false)
     const shimRef = ref(null)
     const params = computed(() => ({
@@ -492,6 +493,7 @@ export default defineComponent({
 
     _initState()
     onMounted(() => {
+      canRender.value = true
       _initFlowLoader()
     })
 
@@ -514,6 +516,7 @@ export default defineComponent({
     return {
       shimRef,
       source,
+      canRender,
       useFirstLoading,
       useFirstError,
       displayNoMore,
