@@ -158,24 +158,12 @@ export default defineComponent({
     const observer = getObserver()
 
     const shimStyle = computed(() => {
-      const result = {
-        zIndex: -1,
-        display: 'block !important',
-        userSelect: 'none',
-        position: 'absolute',
-        pointerEvents: 'none',
-        background: 'transparent'
-      }
+      let result =
+        'z-index:-1;display:block !important;user-select:none;position:absolute;pointer-events:none;background:transparent;'
       if (props.scrollX) {
-        result.right = '0px'
-        result.top = '0px'
-        result.width = `${props.preload}px`
-        result.height = '100%'
+        result += `right:0px;top:0px;height:100%;width:${props.preload}px`
       } else {
-        result.left = '0px'
-        result.bottom = '0px'
-        result.width = '100%'
-        result.height = `${props.preload}px`
+        result += `left:0px;bottom:0px;width:100%;height:${props.preload}px`
       }
       return result
     })
