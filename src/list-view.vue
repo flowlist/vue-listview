@@ -24,7 +24,7 @@
       </slot>
     </template>
     <!--  flow state： loading   -->
-    <template v-else-if="source.loading">
+    <template v-else-if="source.loading || !source.fetched">
       <slot
         v-if="useFirstLoading && !source.result.length"
         name="first-loading"
