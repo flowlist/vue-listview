@@ -3,7 +3,12 @@
     <!--  flow header  -->
     <slot :source="source" name="header" />
     <!--  flow list  -->
-    <slot :result="source.result" :total="source.total" :extra="source.extra" />
+    <slot
+      v-if="source.fetched"
+      :result="source.result"
+      :total="source.total"
+      :extra="source.extra"
+    />
     <!--  flow footer  -->
     <slot :source="source" name="footer" />
     <!--  flow listener    -->
