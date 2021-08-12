@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.7.4",
+  "version": "3.7.5",
   "main": "dist/vue-listview.umd.js",
   "module": "dist/vue-listview.es.js",
   "types": "dist/index.d.ts",

@@ -203,18 +203,18 @@ export default defineComponent({
         }
         return
       }
-      if (checkInView(shimRef.value)) {
-        initData()
-      }
+      // if (checkInView(shimRef.value)) {
+      //   initData()
+      // }
       if (observer) {
         shimRef.value.__lazy_handler__ = _fetchDataFn
         observer.observe(shimRef.value)
       }
-      addEvent(
-        getScrollParentDom(shimRef.value, props.scrollX),
-        LAZY_MODE_SCROLL,
-        _scrollFn
-      )
+      // addEvent(
+      //   getScrollParentDom(shimRef.value, props.scrollX),
+      //   LAZY_MODE_SCROLL,
+      //   _scrollFn
+      // )
     }
 
     const _scrollFn = (event, force = false) => {
@@ -306,11 +306,11 @@ export default defineComponent({
           observer.unobserve(shimRef.value)
           shimRef.value.__lazy_handler__ = undefined
         }
-        offEvent(
-          getScrollParentDom(shimRef.value, props.scrollX),
-          LAZY_MODE_SCROLL,
-          _scrollFn
-        )
+        // offEvent(
+        //   getScrollParentDom(shimRef.value, props.scrollX),
+        //   LAZY_MODE_SCROLL,
+        //   _scrollFn
+        // )
         return
       }
       source.value.fetched ? loadMore() : initData()
@@ -415,8 +415,8 @@ export default defineComponent({
             return
           }
 
-          await nextTick()
-          _detectLoadMore()
+          // await nextTick()
+          // _detectLoadMore()
 
           resolve()
         } catch (e) {
@@ -499,11 +499,11 @@ export default defineComponent({
         observer.unobserve(shimRef.value)
         observer.disconnect()
       }
-      offEvent(
-        getScrollParentDom(shimRef.value, props.scrollX),
-        LAZY_MODE_SCROLL,
-        _scrollFn
-      )
+      // offEvent(
+      //   getScrollParentDom(shimRef.value, props.scrollX),
+      //   LAZY_MODE_SCROLL,
+      //   _scrollFn
+      // )
     })
 
     if (props.ssr) {
