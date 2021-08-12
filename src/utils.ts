@@ -175,3 +175,21 @@ export const offEvent = (
     passive: true
   })
 }
+
+export const requestIdleCallback = isServer
+    ? null
+    : (cb: any, { timeout } = { timeout: 1 }) => {
+      if ((window as any).requestIdleCallback) {
+        (window as any).requestIdleCallback(cb, { timeout })
+      } else {
+        const start = Date.now()
+        setTimeout(function () {
+          cb({
+            didTimeout: false,
+            timeRemaining: function () {
+              return Math.max(0, 50 - (Date.now() - start))
+            }
+          })
+        }, timeout)
+      }
+    }

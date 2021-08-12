@@ -78,7 +78,8 @@ import {
   offEvent,
   getScrollParentDom,
   isServer,
-  cache
+  cache,
+  requestIdleCallback
 } from './utils'
 
 const LAZY_MODE_SCROLL = 'scroll'
@@ -313,7 +314,9 @@ export default defineComponent({
         // )
         return
       }
-      source.value.fetched ? loadMore() : initData()
+      requestIdleCallback(() => {
+        source.value.fetched ? loadMore() : initData()
+      })
     }
 
     const _successCallback = (data) => {
