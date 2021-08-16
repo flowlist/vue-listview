@@ -172,9 +172,9 @@ export default defineComponent({
       let result =
         'z-index:-1;display:block !important;user-select:none;position:absolute;pointer-events:none;background:transparent;'
       if (props.scrollX) {
-        result += `right:0px;top:0px;height:100%;width:${props.preload}px`
+        result += `left:${-props.preload / 2}px;top:0px;height:100%;width:${props.preload}px`
       } else {
-        result += `left:0px;bottom:0px;width:100%;height:${props.preload}px`
+        result += `left:0px;top:${-props.preload / 2}px;width:100%;height:${props.preload}px`
       }
       return result
     })
