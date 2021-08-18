@@ -12,7 +12,7 @@
     <!--  flow footer  -->
     <slot :source="source" name="footer" />
     <!--  flow listener    -->
-    <div v-if="canRender" ref="shimRef" :style="shimStyle" />
+    <div v-if="canRender && !source.noMore" ref="shimRef" :style="shimStyle" />
     <!--  flow state： error   -->
     <template v-if="source.error">
       <slot
