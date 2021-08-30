@@ -498,9 +498,8 @@ export default defineComponent({
     })
 
     onBeforeUnmount(() => {
-      if (observer) {
+      if (observer && shimRef.value) {
         observer.unobserve(shimRef.value)
-        observer.disconnect()
       }
       // offEvent(
       //   getScrollParentDom(shimRef.value, props.scrollX),
