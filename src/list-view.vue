@@ -1,19 +1,14 @@
 <template>
   <template v-if="source">
-    <!--  flow header  -->
     <slot :source="source" name="header" />
-    <!--  flow list  -->
     <slot
       v-if="source.fetched"
       :result="source.result"
       :total="source.total"
       :extra="source.extra"
     />
-    <!--  flow footer  -->
     <slot :source="source" name="footer" />
-    <!--  flow listener    -->
     <div v-if="canRender && !source.noMore" ref="shimRef" :style="shimStyle" />
-    <!--  flow state： error   -->
     <template v-if="source.error">
       <slot
         v-if="useFirstError && !source.result.length"
@@ -28,7 +23,6 @@
         </button>
       </slot>
     </template>
-    <!--  flow state： loading   -->
     <template v-else-if="source.loading || !source.fetched">
       <slot
         v-if="useFirstLoading && !source.result.length"
@@ -40,15 +34,12 @@
         加载中…
       </slot>
     </template>
-    <!--  flow state： nothing   -->
     <template v-else-if="source.nothing">
       <slot name="nothing">这里什么都没有</slot>
     </template>
-    <!--  flow state： no-more   -->
     <template v-else-if="source.noMore">
       <slot v-if="displayNoMore" name="no-more" />
     </template>
-    <!--  flow state： normal   -->
     <template v-else-if="!isPagination">
       <slot v-if="!isAuto" name="load">
         <button @click="loadMore()">点击加载更多</button>
