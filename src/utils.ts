@@ -24,64 +24,6 @@ export const setter = (state: any) => ({
   callback && callback()
 }
 
-export const cache = {
-  set({
-    key,
-    value,
-    timeout
-  }: {
-    key: string
-    value: any
-    timeout?: number
-  }): Promise<null | Error> {
-    return new Promise((resolve, reject) => {
-      try {
-        localStorage.setItem(this.key(key), JSON.stringify(value))
-        if (timeout) {
-          localStorage.setItem(
-            this.key(key, true),
-            String(Date.now() + timeout * 1000)
-          )
-        }
-        resolve(null)
-      } catch (e) {
-        reject(e)
-      }
-    })
-  },
-
-  get({ key }: { key: string }): Promise<any> {
-    return new Promise((resolve, reject) => {
-      try {
-        const expiredAt = localStorage.getItem(this.key(key, true))
-        const cacheStr = localStorage.getItem(this.key(key))
-        if (
-          (!expiredAt && !cacheStr) ||
-          !cacheStr ||
-          Date.now() - Number(expiredAt) > 0
-        ) {
-          this.del({ key })
-          reject(null)
-          return
-        }
-        resolve(JSON.parse(cacheStr))
-      } catch (e) {
-        this.del({ key })
-        reject(e)
-      }
-    })
-  },
-
-  del({ key }: { key: string }): void {
-    localStorage.removeItem(this.key(key))
-    localStorage.removeItem(this.key(key, true))
-  },
-
-  key(key: string, expired?: boolean): string {
-    return `listview-${key}${expired ? '-t' : ''}`
-  }
-}
-
 export const getObserver = () => isServer
   ? null
   : window.IntersectionObserver &&

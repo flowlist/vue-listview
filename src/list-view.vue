@@ -69,7 +69,6 @@ import {
   offEvent,
   getScrollParentDom,
   isServer,
-  cache,
   requestIdleCallback
 } from './utils'
 
@@ -114,8 +113,7 @@ const params = computed(() => ({
   type: props.type,
   query: props.query,
   callback: _successCallback,
-  uniqueKey: props.uniqueKey,
-  cacheTimeout: 0
+  uniqueKey: props.uniqueKey
 }))
 const useLocal = typeof store?.getters?.[`${NAMESPACE}/get`] !== 'function'
 
@@ -232,7 +230,6 @@ const _dataReducer = (type, name, data) => {
         }
         callback && callback()
       },
-      cache,
       ...data
     })
   }

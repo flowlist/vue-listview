@@ -6,7 +6,7 @@ import {
   utils
 } from '@flowlist/js-core'
 import type { loadMoreType, initDataType, updateStateType, generateFieldProps, defaultField } from '@flowlist/js-core'
-import { setter, getter, cache } from './utils'
+import { setter, getter } from './utils'
 
 type vueStateType = { state: any }
 
@@ -16,37 +16,33 @@ export default ({ api }: { api: any[] }): any => ({
   actions: {
     initData(
       { state }: vueStateType,
-      { func, type, query, uniqueKey, callback, cacheTimeout }: initDataType
+      { func, type, query, uniqueKey, callback }: initDataType
     ): Promise<any> {
       return initData({
         getter: getter(state),
         setter: setter(state),
-        cache,
         api,
         func,
         type,
         query,
         uniqueKey,
-        callback,
-        cacheTimeout
+        callback
       })
     },
     loadMore(
       { state }: vueStateType,
-      { type, func, query, uniqueKey, errorRetry, callback, cacheTimeout }: loadMoreType
+      { type, func, query, uniqueKey, errorRetry, callback }: loadMoreType
     ): Promise<any> {
       return loadMore({
         getter: getter(state),
         setter: setter(state),
-        cache,
         api,
         func,
         type,
         query,
         uniqueKey,
         errorRetry,
-        callback,
-        cacheTimeout
+        callback
       })
     }
   },
@@ -70,14 +66,12 @@ export default ({ api }: { api: any[] }): any => ({
         method,
         changeKey,
         value,
-        cacheTimeout,
         uniqueKey
       }: updateStateType
     ): void {
       updateState({
         getter: getter(state),
         setter: setter(state),
-        cache,
         type,
         func,
         query,
@@ -85,8 +79,7 @@ export default ({ api }: { api: any[] }): any => ({
         value,
         id,
         uniqueKey,
-        changeKey,
-        cacheTimeout
+        changeKey
       })
     }
   },
