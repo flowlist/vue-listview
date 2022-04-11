@@ -95,10 +95,12 @@ export const addEvent = (
   type: string,
   listener: () => {}
 ): void => {
-  elm.addEventListener(type, listener, {
-    capture: false,
-    passive: true
-  })
+  if (elm instanceof Element) {
+    elm.addEventListener(type, listener, {
+      capture: false,
+      passive: true
+    })
+  }
 }
 
 /**
@@ -112,10 +114,12 @@ export const offEvent = (
   type: string,
   listener: () => {}
 ): void => {
-  ;(elm as any).removeEventListener(type, listener, {
-    capture: false,
-    passive: true
-  })
+  if (elm instanceof Element) {
+    ;(elm as any).removeEventListener(type, listener, {
+      capture: false,
+      passive: true
+    })
+  }
 }
 
 export const requestIdleCallback = isServer
