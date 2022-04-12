@@ -1,12 +1,18 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.9.2",
-  "main": "dist/vue-listview.umd.js",
-  "module": "dist/vue-listview.es.js",
+  "version": "3.9.3",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "main": "./dist/vue-listview.umd.js",
+  "module": "./dist/vue-listview.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-listview.es.js",
+      "require": "./dist/vue-listview.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
