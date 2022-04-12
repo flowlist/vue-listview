@@ -147,6 +147,7 @@ const displayNoMore = computed(() => !!slots['no-more'])
 
 const _initState = () => {
   source.value = null
+  _dataReducer(STORE_COMMIT, 'initState', params)
 }
 
 const _initFlowLoader = (loop = 0) => {
