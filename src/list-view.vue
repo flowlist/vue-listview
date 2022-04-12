@@ -60,7 +60,6 @@ import {
   nextTick,
   useSlots
 } from 'vue'
-import { useStore } from 'vuex'
 import * as jsCore from '@flowlist/js-core'
 import {
   checkInView,
@@ -75,7 +74,6 @@ import {
 const LAZY_MODE_SCROLL = 'scroll'
 const STORE_DISPATCH = 'dispatch'
 const STORE_COMMIT = 'commit'
-const NAMESPACE = 'list'
 
 interface Props {
   func: String | Function
@@ -104,7 +102,6 @@ const emit = defineEmits<{
 }>()
 
 const slots = useSlots()
-const store = useStore()
 const throttle: Ref<boolean> = ref(false)
 const canRender: Ref<boolean> = ref(false)
 const shimRef: Ref<null | Element> = ref(null)
@@ -115,11 +112,8 @@ const params = computed(() => ({
   callback: _successCallback,
   uniqueKey: props.uniqueKey
 }))
-const useLocal = typeof store?.getters?.[`${NAMESPACE}/get`] !== 'function'
 
-const source = useLocal
-  ? ref(null)
-  : store.getters[`${NAMESPACE}/get`](params)
+const source = ref(null)
 
 const isAuto = computed(() => {
   if (!source.value) {
@@ -152,10 +146,7 @@ const useFirstError = computed(() => !!slots['first-error'])
 const displayNoMore = computed(() => !!slots['no-more'])
 
 const _initState = () => {
-  if (useLocal) {
-    source.value = null
-  }
-  _dataReducer(STORE_COMMIT, 'initState', params)
+  source.value = null
 }
 
 const _initFlowLoader = (loop = 0) => {
@@ -217,23 +208,20 @@ const _callMethod = ({ method, id, key, value }) => {
 }
 
 const _dataReducer = (type, name, data) => {
-  if (useLocal) {
-    return jsCore[name]({
-      getter: () => source.value,
-      setter: ({ value, callback }) => {
-        if (source.value) {
-          Object.keys(value).forEach((key) => {
-            source.value[key] = value[key]
-          })
-        } else {
-          source.value = value
-        }
-        callback && callback()
-      },
-      ...data
-    })
-  }
-  return store[type](`${NAMESPACE}/${name}`, data)
+  return jsCore[name]({
+    getter: () => source.value,
+    setter: ({ value, callback }) => {
+      if (source.value) {
+        Object.keys(value).forEach((key) => {
+          source.value[key] = value[key]
+        })
+      } else {
+        source.value = value
+      }
+      callback && callback()
+    },
+    ...data
+  })
 }
 
 const _detectLoadMore = () => {
