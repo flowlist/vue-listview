@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.10.1",
+  "version": "3.11.0",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -20,23 +20,23 @@
     "lint": "eslint --ext js,jsx,ts,tsx,vue . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^2.0.0"
+    "@flowlist/js-core": "^2.1.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.19.0",
-    "@typescript-eslint/parser": "^5.19.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/compiler-sfc": "^3.2.33",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^8.13.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.6.0",
     "typescript": "^4.6.3",
-    "vite": "^2.9.1",
-    "vite-plugin-dts": "^1.0.5",
-    "vue": "^3.2.31",
-    "vue-tsc": "^0.34.5",
+    "vite": "^2.9.5",
+    "vite-plugin-dts": "^1.1.0",
+    "vue": "^3.2.33",
+    "vue-tsc": "^0.34.7",
     "vuex": "^4.0.2"
   }
 }
