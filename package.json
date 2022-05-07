@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "2.2.7",
+  "version": "2.3.0",
   "deploy_url": "https://flowlist.github.io",
   "project_base_url": "/vue-listview/",
   "code_gen_prefix": "code-gen/",
@@ -30,12 +30,14 @@
     "doc:run": "cross-env NODE_ENV=development vuepress dev docs",
     "doc:build": "cross-env NODE_ENV=production vuepress build docs",
     "doc:generate": "nuxt generate",
-    "build": "vue-cli-service build --target lib --name Flowlist src/index.js",
+    "pkg:dev": "cross-env NODE_ENV=development nodemon example/server/index.js --watch server",
+    "pkg:build": "vue-cli-service build --target lib --name Flowlist src/index.js",
     "test:unit": "echo 1",
+    "deploy": "bash deploy.sh",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "@flowlist/js-core": "^1.6.5"
+    "@flowlist/js-core": "^2.2.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

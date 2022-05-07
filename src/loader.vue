@@ -143,11 +143,6 @@ export default {
       default: 200,
       validator: val => val >= 0
     },
-    cacheTimeout: {
-      type: Number,
-      default: 0,
-      validator: val => val >= 0
-    },
     uniqueKey: {
       type: String,
       default: ENUM.DEFAULT_UNIQUE_KEY_NAME
@@ -173,8 +168,7 @@ export default {
         type: this.type,
         query: this.query,
         callback: this._successCallback,
-        uniqueKey: this.uniqueKey,
-        cacheTimeout: this.$isServer ? 0 : this.cacheTimeout
+        uniqueKey: this.uniqueKey
       }
     },
     isAuto() {
