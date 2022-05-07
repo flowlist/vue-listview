@@ -1,11 +1,9 @@
 <style lang="scss">
 #homepage {
   padding: 20px;
-
   li {
     margin: 12px 0;
   }
-
   a {
     display: block;
     height: 40px;
