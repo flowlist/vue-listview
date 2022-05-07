@@ -1,20 +1,20 @@
 import { initState, initData, loadMore, updateState, utils } from '@flowlist/js-core'
-import { setter, getter, cache } from './utils'
+import { setter, getter } from './utils'
 
 export default ({ api }) => ({
   namespaced: true,
   state: () => ({}),
   actions: {
-    initData({ state }, { func, type, query, uniqueKey, callback, cacheTimeout }) {
+    initData({ state }, { func, type, query, uniqueKey, callback }) {
       return initData({
-        getter: getter(state), setter: setter(state), cache,
-        api, func, type, query, uniqueKey, callback, cacheTimeout
+        getter: getter(state), setter: setter(state),
+        api, func, type, query, uniqueKey, callback
       })
     },
-    loadMore({ state }, { type, func, query, uniqueKey, errorRetry, callback, cacheTimeout }) {
+    loadMore({ state }, { type, func, query, uniqueKey, errorRetry, callback }) {
       return loadMore({
-        getter: getter(state), setter: setter(state), cache,
-        api, func, type, query, uniqueKey, errorRetry, callback, cacheTimeout
+        getter: getter(state), setter: setter(state),
+        api, func, type, query, uniqueKey, errorRetry, callback
       })
     }
   },
@@ -25,15 +25,14 @@ export default ({ api }) => ({
         func, type, query
       })
     },
-    UPDATE_DATA(state, { type, func, query, id, method, changeKey, value, cacheTimeout, uniqueKey }) {
+    UPDATE_DATA(state, { type, func, query, id, method, changeKey, value, uniqueKey }) {
       updateState({
-        getter: getter(state), setter: setter(state), cache,
-        type, func, query, method, value, id, uniqueKey, changeKey, cacheTimeout
+        getter: getter(state), setter: setter(state),
+        type, func, query, method, value, id, uniqueKey, changeKey
       })
     }
   },
   getters: {
-    get: state => ({ func, type, query }) => state[utils.generateFieldName({ func, type, query })],
-    getFlow: state => ({ func, type, query }) => state[utils.generateFieldName({ func, type, query })]
+    get: state => ({ func, type, query }) => state[utils.generateFieldName({ func, type, query })]
   }
 })

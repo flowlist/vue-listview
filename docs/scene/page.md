@@ -14,7 +14,7 @@ Static scroll list appear primarily on the mobile side to show data that doesn't
     ref="loader"
     func="getListByPage"
     type="page"
-    :auto="3"
+    :autoload="3"
     :query="requestParams"
   >
     <ul slot-scope="{ list }">

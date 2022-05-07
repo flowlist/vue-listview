@@ -15,7 +15,7 @@
     ref="loader"
     func="getListByPage"
     type="page"
-    :auto="3"
+    :autoload="3"
     :query="requestParams"
   >
     <ul slot-scope="{ list }">

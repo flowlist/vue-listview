@@ -143,11 +143,6 @@ export default {
       default: 200,
       validator: val => val >= 0
     },
-    cacheTimeout: {
-      type: Number,
-      default: 0,
-      validator: val => val >= 0
-    },
     uniqueKey: {
       type: String,
       default: ENUM.DEFAULT_UNIQUE_KEY_NAME
@@ -165,7 +160,7 @@ export default {
   },
   computed: {
     source() {
-      return this.$store.getters[`${NAMESPACE}/getFlow`](this.params)
+      return this.$store.getters[`${NAMESPACE}/get`](this.params)
     },
     params() {
       return {
@@ -173,8 +168,7 @@ export default {
         type: this.type,
         query: this.query,
         callback: this._successCallback,
-        uniqueKey: this.uniqueKey,
-        cacheTimeout: this.$isServer ? 0 : this.cacheTimeout
+        uniqueKey: this.uniqueKey
       }
     },
     isAuto() {
@@ -277,6 +271,9 @@ export default {
         return undefined
       }
       return utils.searchValueByKey(this.source.result, id, this.uniqueKey)
+    },
+    merge(id, value) {
+      this._callMethod({ id, value, method: ENUM.CHANGE_TYPE.RESULT_ITEM_MERGE })
     },
     update(id, key, value) {
       this._callMethod({ id, key, value, method: ENUM.CHANGE_TYPE.RESULT_UPDATE_KV })
