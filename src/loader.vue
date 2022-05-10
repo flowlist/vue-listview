@@ -50,7 +50,7 @@
           </div>
         </template>
         <!--   loading   -->
-        <template v-else-if="source.loading">
+        <template v-else-if="source.loading || !source.fetched">
           <div
             v-if="useFirstLoading && !source.result.length"
             class="list-view__state--first-loading"
