@@ -119,9 +119,9 @@ const shimStyle = computed(() => {
     let result =
       'z-index:-1;display:block !important;user-select:none;position:absolute;pointer-events:none;background:transparent;'
     if (props.scrollX) {
-      result += `height:100%;width:${props.preload * 2};right:${-props.preload}px;top:0px;bottom:0px`
+      result += `height:100%;width:${props.preload * 2}px;right:${-props.preload}px;top:0px;bottom:0px`
     } else {
-      result += `width:100%;height:${props.preload * 2};bottom:${-props.preload}px;left:0px;right:0px`
+      result += `width:100%;height:${props.preload * 2}px;bottom:${-props.preload}px;left:0px;right:0px`
     }
     return result
   }

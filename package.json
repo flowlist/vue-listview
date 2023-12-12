@@ -1,6 +1,6 @@
 {
   "name": "@flowlist/vue-listview",
-  "version": "3.12.3",
+  "version": "3.12.4",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
