@@ -1,20 +1,11 @@
 <template>
   <template v-if="source">
     <slot :source="source" name="header" />
-    <slot
-      v-if="source.fetched"
-      :result="source.result"
-      :total="source.total"
-      :extra="source.extra"
-    />
-    <slot :source="source" name="footer" />
+    <slot v-if="source.fetched" :result="source.result" :total="source.total" :extra="source.extra" />
     <div v-if="canRender && !source.noMore" ref="shimRef" :style="shimStyle" />
+    <slot :source="source" name="footer" />
     <template v-if="source.error">
-      <slot
-        v-if="useFirstError && !source.result.length"
-        name="first-error"
-        :error="source.error"
-      >
+      <slot v-if="useFirstError && !source.result.length" name="first-error" :error="source.error">
         出错了
       </slot>
       <slot v-else name="error" :error="source.error">
@@ -24,10 +15,7 @@
       </slot>
     </template>
     <template v-else-if="source.loading || !source.fetched">
-      <slot
-        v-if="useFirstLoading && !source.result.length"
-        name="first-loading"
-      >
+      <slot v-if="useFirstLoading && !source.result.length" name="first-loading">
         加载中…
       </slot>
       <slot v-else name="loading">
@@ -75,7 +63,7 @@ const LAZY_MODE_SCROLL = 'scroll'
 const STORE_DISPATCH = 'dispatch'
 const STORE_COMMIT = 'commit'
 
-interface Props {
+const props = withDefaults(defineProps<{
   func: String | Function
   type?: string
   query?: Record<string, any>
@@ -84,11 +72,9 @@ interface Props {
   uniqueKey?: string
   scrollX?: boolean
   ssr?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
+}>(), {
   type: jsCore.ENUM.FETCH_TYPE.AUTO,
-  query: () => {},
+  query: {},
   autoload: -1,
   preload: 200,
   uniqueKey: jsCore.ENUM.DEFAULT_UNIQUE_KEY_NAME,
@@ -105,6 +91,10 @@ const slots = useSlots()
 const throttle: Ref<boolean> = ref(false)
 const canRender: Ref<boolean> = ref(false)
 const shimRef: Ref<null | Element> = ref(null)
+const source = ref(null)
+
+const observer = getObserver()
+
 const params = computed(() => ({
   func: props.func,
   type: props.type,
@@ -112,8 +102,6 @@ const params = computed(() => ({
   callback: _successCallback,
   uniqueKey: props.uniqueKey
 }))
-
-const source = ref(null)
 
 const isAuto = computed(() => {
   if (!source.value) {
@@ -126,9 +114,18 @@ const isPagination = computed(
   () => props.type === jsCore.ENUM.FETCH_TYPE.PAGINATION
 )
 
-const observer = getObserver()
-
 const shimStyle = computed(() => {
+  if (source.value.fetched) {
+    let result =
+      'z-index:-1;display:block !important;user-select:none;position:absolute;pointer-events:none;background:transparent;'
+    if (props.scrollX) {
+      result += `height:100%;width:${props.preload * 2};right:${-props.preload}px;top:0px;bottom:0px`
+    } else {
+      result += `width:100%;height:${props.preload * 2};bottom:${-props.preload}px;left:0px;right:0px`
+    }
+    return result
+  }
+
   let result =
     'z-index:-1;display:block !important;user-select:none;position:absolute;pointer-events:none;background:transparent;width:100%;height:100%;'
   if (props.scrollX) {
