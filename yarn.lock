@@ -154,10 +154,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.55.0.tgz#b721d52060f369aa259cf97392403cb9ce892ec6"
   integrity sha512-qQfo2mxH5yVom1kacMtZZJFVdW+E70mqHMJvVg6WTLo+VBuQJ4TojZlfWBjK0ve5BdEeNAVxOsl/nvNMpJOaJA==
 
-"@flowlist/js-core@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-2.3.0.tgz#4105d03e6ca5977d396f5b00cc72603bd78a7f29"
-  integrity sha512-0wZ6g2Vd/SdQx3pT/LPMhxVVpIn7iCIU6w0CbnjXcPHs/+P0N0K/CxzX9RuI90H1Z29LvyHV6JYSdpA8pB4scQ==
+"@flowlist/js-core@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@flowlist/js-core/-/js-core-2.3.1.tgz#8bb60cbdde32ed262ba92f8a1ba9fe07008e131f"
+  integrity sha512-QdVk92ILtFGiVpcJ3lIISmAVd+BPdQpdK5mBWF9ePedgWlGICIRwOAlh2ddqMl8V/yCnQlz1MihX0sTGWaUUwA==
 
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.13"
